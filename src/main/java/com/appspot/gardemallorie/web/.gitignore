@@ -1,3 +1,7 @@
 /ApplicationConversionServiceFactoryBean_Roo_ConversionService.aj
 /GardeController_Roo_Controller_Json.aj
 /GardeController_Roo_Controller.aj
+/BabySitterController_Roo_Controller_Json.aj
+/BabySitterController_Roo_Controller.aj
+/LocalisationController_Roo_Controller_Json.aj
+/LocalisationController_Roo_Controller.aj

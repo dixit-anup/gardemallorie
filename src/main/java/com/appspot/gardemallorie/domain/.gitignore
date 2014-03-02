@@ -5,3 +5,17 @@
 /Garde_Roo_Json.aj
 /Garde_Roo_Serializable.aj
 /Garde_Roo_ToString.aj
+/BabySitter_Roo_Configurable.aj
+/BabySitter_Roo_JavaBean.aj
+/BabySitter_Roo_Jpa_ActiveRecord.aj
+/BabySitter_Roo_Jpa_Entity.aj
+/BabySitter_Roo_Json.aj
+/BabySitter_Roo_Serializable.aj
+/BabySitter_Roo_ToString.aj
+/Localisation_Roo_Configurable.aj
+/Localisation_Roo_JavaBean.aj
+/Localisation_Roo_Jpa_ActiveRecord.aj
+/Localisation_Roo_Jpa_Entity.aj
+/Localisation_Roo_Json.aj
+/Localisation_Roo_Serializable.aj
+/Localisation_Roo_ToString.aj

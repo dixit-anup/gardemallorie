@@ -1,6 +1,7 @@
 package com.appspot.gardemallorie.domain;
 import org.springframework.roo.addon.javabean.RooJavaBean;
 import org.springframework.roo.addon.jpa.activerecord.RooJpaActiveRecord;
+import org.springframework.roo.addon.json.RooJson;
 import org.springframework.roo.addon.serializable.RooSerializable;
 import org.springframework.roo.addon.tostring.RooToString;
 import java.util.Date;
@@ -9,10 +10,8 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 import org.springframework.format.annotation.DateTimeFormat;
-import com.appspot.gardemallorie.reference.BabySitterType;
-import javax.persistence.Enumerated;
-import com.appspot.gardemallorie.reference.LocalisationType;
-import org.springframework.roo.addon.json.RooJson;
+import javax.persistence.FetchType;
+import javax.persistence.ManyToOne;
 
 @RooJavaBean
 @RooToString
@@ -30,13 +29,15 @@ public class Garde {
 
     /**
      */
-    @Enumerated
-    private BabySitterType par;
+    @NotNull
+    @ManyToOne(fetch = FetchType.LAZY)
+    private BabySitter par;
 
     /**
      */
-    @Enumerated
-    private LocalisationType a;
+    @NotNull
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Localisation a;
 
     /**
      */
@@ -79,5 +80,4 @@ public class Garde {
     @Temporal(TemporalType.TIME)
     @DateTimeFormat(pattern = "HH:mm")
     private Date factureFin;
-
 }

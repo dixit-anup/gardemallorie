@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" xmlns:table="urn:jsptagdir:/WEB-INF/tags/form/fields" version="2.0">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+    <page:list id="pl_com_appspot_gardemallorie_domain_BabySitter" items="${babysitters}" z="9f3OM0GvwEy/gh6D9WSCpJ7Rou4=">
+        <table:table data="${babysitters}" id="l_com_appspot_gardemallorie_domain_BabySitter" path="/babysitters" z="4a/lUuW5Drgir6nnE/r3I84DBDY=">
+            <table:column id="c_com_appspot_gardemallorie_domain_BabySitter_nom" property="nom" z="yIw6L86xhsTNtLxvcPuLCyfISBo="/>
+        </table:table>
+    </page:list>
+</div>
