@@ -94,7 +94,7 @@ privileged aspect GardeIntegrationTest_Roo_IntegrationTest {
         obj = Garde.findGarde(id);
         Assert.assertNotNull("Find method for 'Garde' illegally returned null for id '" + id + "'", obj);
         boolean modified =  dod.modifyGarde(obj);
-        Integer currentVersion = obj.getVersion();
+        Long currentVersion = obj.getVersion();
         obj.flush();
         Assert.assertTrue("Version for 'Garde' failed to increment on flush directive", (currentVersion != null && obj.getVersion() > currentVersion) || !modified);
     }
@@ -107,7 +107,7 @@ privileged aspect GardeIntegrationTest_Roo_IntegrationTest {
         Assert.assertNotNull("Data on demand for 'Garde' failed to provide an identifier", id);
         obj = Garde.findGarde(id);
         boolean modified =  dod.modifyGarde(obj);
-        Integer currentVersion = obj.getVersion();
+        Long currentVersion = obj.getVersion();
         Garde merged = obj.merge();
         obj.flush();
         Assert.assertEquals("Identifier of merged object not the same as identifier of original object", merged.getId(), id);
