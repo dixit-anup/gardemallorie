@@ -7,13 +7,5 @@
             <menu:item id="i_garde_new" messageCode="global_menu_new" url="/gardes?form" z="Jky9mVM5hh6HGnohnjK+wyrOZlY="/>
             <menu:item id="i_garde_list" messageCode="global_menu_list" url="/gardes?page=1&amp;size=${empty param.size ? 10 : param.size}" z="aO2JyvYAFb6Oxu8reTuKUlR1m2k="/>
         </menu:category>
-        <menu:category id="c_babysitter" z="knGcozuji7s33D5Yw204vGmdRhw=">
-            <menu:item id="i_babysitter_new" messageCode="global_menu_new" url="/babysitters?form" z="AHI6DhWnadKFI0KeUr+KYjwakpU="/>
-            <menu:item id="i_babysitter_list" messageCode="global_menu_list" url="/babysitters?page=1&amp;size=${empty param.size ? 10 : param.size}" z="mUqYIwnPFwtMyvq4SF8sJFYCAAg="/>
-        </menu:category>
-        <menu:category id="c_localisation" z="FPyVBcDfrepdsG4i7Nd4+woZ1yk=">
-            <menu:item id="i_localisation_new" messageCode="global_menu_new" url="/localisations?form" z="I96800Tv2260pD7kgU0jNelIqig="/>
-            <menu:item id="i_localisation_list" messageCode="global_menu_list" url="/localisations?page=1&amp;size=${empty param.size ? 10 : param.size}" z="g3zlXc5A9USg7uO5TaX8bZtHzCo="/>
-        </menu:category>
     </menu:menu>
 </jsp:root>

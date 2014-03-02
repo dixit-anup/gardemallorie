@@ -3,10 +3,10 @@
 
 package com.appspot.gardemallorie.domain;
 
-import com.appspot.gardemallorie.domain.BabySitter;
 import com.appspot.gardemallorie.domain.Garde;
 import com.appspot.gardemallorie.domain.GardeDataOnDemand;
-import com.appspot.gardemallorie.domain.Localisation;
+import com.appspot.gardemallorie.reference.BabySitterType;
+import com.appspot.gardemallorie.reference.LocalisationType;
 import java.security.SecureRandom;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -42,7 +42,7 @@ privileged aspect GardeDataOnDemand_Roo_DataOnDemand {
     }
     
     public void GardeDataOnDemand.setA(Garde obj, int index) {
-        Localisation a = null;
+        LocalisationType a = LocalisationType.class.getEnumConstants()[0];
         obj.setA(a);
     }
     
@@ -62,7 +62,7 @@ privileged aspect GardeDataOnDemand_Roo_DataOnDemand {
     }
     
     public void GardeDataOnDemand.setPar(Garde obj, int index) {
-        BabySitter par = null;
+        BabySitterType par = BabySitterType.class.getEnumConstants()[0];
         obj.setPar(par);
     }
     

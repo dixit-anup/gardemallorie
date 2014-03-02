@@ -12,6 +12,9 @@ import javax.validation.constraints.NotNull;
 import org.springframework.format.annotation.DateTimeFormat;
 import javax.persistence.FetchType;
 import javax.persistence.ManyToOne;
+import com.appspot.gardemallorie.reference.BabySitterType;
+import javax.persistence.Enumerated;
+import com.appspot.gardemallorie.reference.LocalisationType;
 
 @RooJavaBean
 @RooToString
@@ -29,15 +32,13 @@ public class Garde {
 
     /**
      */
-    @NotNull
-    @ManyToOne(fetch = FetchType.LAZY)
-    private BabySitter par;
+    @Enumerated
+    private BabySitterType par;
 
     /**
      */
-    @NotNull
-    @ManyToOne(fetch = FetchType.LAZY)
-    private Localisation a;
+    @Enumerated
+    private LocalisationType a;
 
     /**
      */
