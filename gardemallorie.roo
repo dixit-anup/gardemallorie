@@ -4,7 +4,7 @@ jpa setup --database GOOGLE_APP_ENGINE --provider DATANUCLEUS
 
 enum type --class ~.reference.BabySitterType
 enum constant --name "JOSEPHINE"
-enum constant --name "EMILE"
+enum constant --name "EMILIE"
 enum constant --name "BETTY"
 enum constant --name "GISELE"
 
