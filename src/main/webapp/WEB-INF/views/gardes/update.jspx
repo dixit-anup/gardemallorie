@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:form="urn:jsptagdir:/WEB-INF/tags/form" xmlns:jsp="http://java.sun.com/JSP/Page" version="2.0">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+    <form:update id="fu_com_appspot_gardemallorie_domain_Garde" modelAttribute="garde" path="/gardes" versionField="Version" z="Bv4uZRVJOe2cFmpq8iw7X74rdJM=">
+        <field:datetime dateTimePattern="${garde_le_date_format}" field="le" id="c_com_appspot_gardemallorie_domain_Garde_le" required="true" z="EgohPSVdKhvGMr1yZc1upEx3ozw="/>
+        <field:select field="par" id="c_com_appspot_gardemallorie_domain_Garde_par" items="${babysittertypes}" path="babysittertypes" z="givs8n/zZDvnvF69Jx1F+0zslYA="/>
+        <field:select field="a" id="c_com_appspot_gardemallorie_domain_Garde_a" items="${localisationtypes}" path="localisationtypes" z="95zSsXB4OmwvkLg3Uu2OcjvbdeE="/>
+        <field:datetime dateTimePattern="${garde_prevudebut_date_format}" field="prevuDebut" id="c_com_appspot_gardemallorie_domain_Garde_prevuDebut" z="dkglIIkslAi7D+KfD5K0vAxJFeU="/>
+        <field:datetime dateTimePattern="${garde_prevufin_date_format}" field="prevuFin" id="c_com_appspot_gardemallorie_domain_Garde_prevuFin" z="MISY3DLF7bF/53WIxELcxbTAjWY="/>
+        <field:datetime dateTimePattern="${garde_reeldebut_date_format}" field="reelDebut" id="c_com_appspot_gardemallorie_domain_Garde_reelDebut" z="obCEFNz29BrJnPktpeiksmsYiWw="/>
+        <field:datetime dateTimePattern="${garde_reelfin_date_format}" field="reelFin" id="c_com_appspot_gardemallorie_domain_Garde_reelFin" z="grPmibAS66ZcLj0VDGhdVNzVFeA="/>
+        <field:datetime dateTimePattern="${garde_facturedebut_date_format}" field="factureDebut" id="c_com_appspot_gardemallorie_domain_Garde_factureDebut" z="QNeL94WJCsZr5YYCYnPJb+Bsqgg="/>
+        <field:datetime dateTimePattern="${garde_facturefin_date_format}" field="factureFin" id="c_com_appspot_gardemallorie_domain_Garde_factureFin" z="RyZtBnuR9lGbGV8IoRlXTQZovd8="/>
+    </form:update>
+</div>

@@ -1,0 +1,35 @@
+project --java 7 --topLevelPackage com.appspot.gardemallorie
+
+jpa setup --database GOOGLE_APP_ENGINE --provider DATANUCLEUS
+
+enum type --class ~.reference.BabySitterType
+enum constant --name "JOSEPHINE"
+enum constant --name "EMILE"
+enum constant --name "BETTY"
+enum constant --name "GISELE"
+
+enum type --class ~.reference.LocalisationType
+enum constant --name "JANNEYRIAS"
+enum constant --name "LES_LORANCES"
+enum constant --name "LES_SAUVAGES"
+
+entity jpa --class ~.domain.Garde --serializable true --testAutomatically true
+field date --fieldName le           --type java.util.Date --persistenceType JPA_DATE --dateTimeFormatPattern "yyyy/MM/dd" --notNull true
+field enum --fieldName par          --type ~.reference.BabySitterType
+field enum --fieldName a            --type ~.reference.LocalisationType
+field date --fieldName prevuDebut   --type java.util.Date --persistenceType JPA_TIME --dateTimeFormatPattern "HH:mm"
+field date --fieldName prevuFin     --type java.util.Date --persistenceType JPA_TIME --dateTimeFormatPattern "HH:mm"
+field date --fieldName reelDebut    --type java.util.Date --persistenceType JPA_TIME --dateTimeFormatPattern "HH:mm"
+field date --fieldName reelFin      --type java.util.Date --persistenceType JPA_TIME --dateTimeFormatPattern "HH:mm"
+field date --fieldName factureDebut --type java.util.Date --persistenceType JPA_TIME --dateTimeFormatPattern "HH:mm"
+field date --fieldName factureFin   --type java.util.Date --persistenceType JPA_TIME --dateTimeFormatPattern "HH:mm"
+
+json all --deepSerialize false
+web mvc json setup
+web mvc json all --package ~.web
+
+web mvc setup
+web mvc all --package ~.web
+web mvc finder all
+
+security setup

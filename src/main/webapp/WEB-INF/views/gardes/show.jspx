@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" version="2.0">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+    <page:show id="ps_com_appspot_gardemallorie_domain_Garde" object="${garde}" path="/gardes" z="HcxfPSAadxQOxJM9EI+009x380A=">
+        <field:display date="true" dateTimePattern="${garde_le_date_format}" field="le" id="s_com_appspot_gardemallorie_domain_Garde_le" object="${garde}" z="Dp0TwkK1hH5mcpB/lSTzvSidQy8="/>
+        <field:display field="par" id="s_com_appspot_gardemallorie_domain_Garde_par" object="${garde}" z="NkUP1wuDitJ/bmJFnZGBlXeTTw0="/>
+        <field:display field="a" id="s_com_appspot_gardemallorie_domain_Garde_a" object="${garde}" z="8Rrt904sd5QD2H2f4aCPeaTsupI="/>
+        <field:display date="true" dateTimePattern="${garde_prevudebut_date_format}" field="prevuDebut" id="s_com_appspot_gardemallorie_domain_Garde_prevuDebut" object="${garde}" z="uFNUDiZZZ32cvoaUBG8MXoOu+x4="/>
+        <field:display date="true" dateTimePattern="${garde_prevufin_date_format}" field="prevuFin" id="s_com_appspot_gardemallorie_domain_Garde_prevuFin" object="${garde}" z="MgRHpromZ2mzsTUzMeNTcRNiN54="/>
+        <field:display date="true" dateTimePattern="${garde_reeldebut_date_format}" field="reelDebut" id="s_com_appspot_gardemallorie_domain_Garde_reelDebut" object="${garde}" z="Z0ImjPY+Ce46jWMRftpV+JHrHg8="/>
+        <field:display date="true" dateTimePattern="${garde_reelfin_date_format}" field="reelFin" id="s_com_appspot_gardemallorie_domain_Garde_reelFin" object="${garde}" z="lnh9Jfo9ToqjVA2VHXFb1lJOi1Q="/>
+        <field:display date="true" dateTimePattern="${garde_facturedebut_date_format}" field="factureDebut" id="s_com_appspot_gardemallorie_domain_Garde_factureDebut" object="${garde}" z="ldJ+oMBgiQUlmq4TcJgoy4lqa5Q="/>
+        <field:display date="true" dateTimePattern="${garde_facturefin_date_format}" field="factureFin" id="s_com_appspot_gardemallorie_domain_Garde_factureFin" object="${garde}" z="Kd05W/IzKs9vSDLujn/CfbKC7V0="/>
+    </page:show>
+</div>

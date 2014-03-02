@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" xmlns:table="urn:jsptagdir:/WEB-INF/tags/form/fields" version="2.0">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+    <page:list id="pl_com_appspot_gardemallorie_domain_Garde" items="${gardes}" z="yZ1OVNSyS2QM+0IRr8b7P9oRecw=">
+        <table:table data="${gardes}" id="l_com_appspot_gardemallorie_domain_Garde" path="/gardes" z="wD1hmXTMbF697CSBzKi4Qvpvqy8=">
+            <table:column date="true" dateTimePattern="${garde_le_date_format}" id="c_com_appspot_gardemallorie_domain_Garde_le" property="le" z="XAZhw2Q+AF3Y24vPK0wv9CaOfAk="/>
+            <table:column id="c_com_appspot_gardemallorie_domain_Garde_par" property="par" z="tNPA3GRGoXk/rYY8DFFH2WLeOXk="/>
+            <table:column id="c_com_appspot_gardemallorie_domain_Garde_a" property="a" z="yksmKUcQt/Vrvhc3SnfUwsa1N1E="/>
+            <table:column date="true" dateTimePattern="${garde_prevudebut_date_format}" id="c_com_appspot_gardemallorie_domain_Garde_prevuDebut" property="prevuDebut" z="tjdwzukmWRoqFrnIt9v32P2j0H8="/>
+            <table:column date="true" dateTimePattern="${garde_prevufin_date_format}" id="c_com_appspot_gardemallorie_domain_Garde_prevuFin" property="prevuFin" z="V3AhQ5Hzenf0n2JseNeM/tE0DaA="/>
+            <table:column date="true" dateTimePattern="${garde_reeldebut_date_format}" id="c_com_appspot_gardemallorie_domain_Garde_reelDebut" property="reelDebut" z="xYAspkNlxZbBjoRGkNt83Vl0sEc="/>
+        </table:table>
+    </page:list>
+</div>
