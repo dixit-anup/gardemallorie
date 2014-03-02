@@ -14,15 +14,15 @@ enum constant --name "LES_LORANCES"
 enum constant --name "LES_SAUVAGES"
 
 entity jpa --class ~.domain.Garde --serializable true --testAutomatically false
-field date      --fieldName le           --type java.util.Date        --persistenceType JPA_DATE --dateTimeFormatPattern "yyyy/MM/dd" --notNull true
-field enum      --fieldName par          --type ~.reference.BabySitterType
-field enum      --fieldName a            --type ~.reference.LocalisationType
-field date      --fieldName prevuDebut   --type java.util.Date        --persistenceType JPA_TIME --dateTimeFormatPattern "HH:mm"
-field date      --fieldName prevuFin     --type java.util.Date        --persistenceType JPA_TIME --dateTimeFormatPattern "HH:mm"
-field date      --fieldName reelDebut    --type java.util.Date        --persistenceType JPA_TIME --dateTimeFormatPattern "HH:mm"
-field date      --fieldName reelFin      --type java.util.Date        --persistenceType JPA_TIME --dateTimeFormatPattern "HH:mm"
-field date      --fieldName factureDebut --type java.util.Date        --persistenceType JPA_TIME --dateTimeFormatPattern "HH:mm"
-field date      --fieldName factureFin   --type java.util.Date        --persistenceType JPA_TIME --dateTimeFormatPattern "HH:mm"
+field date      --fieldName le           --type java.util.Date               --persistenceType JPA_DATE --dateTimeFormatPattern "yyyy/MM/dd" --notNull true
+field enum      --fieldName par          --type ~.reference.BabySitterType   --enumType STRING
+field enum      --fieldName a            --type ~.reference.LocalisationType --enumType STRING
+field date      --fieldName prevuDebut   --type java.util.Date               --persistenceType JPA_TIME --dateTimeFormatPattern "HH:mm"
+field date      --fieldName prevuFin     --type java.util.Date               --persistenceType JPA_TIME --dateTimeFormatPattern "HH:mm"
+field date      --fieldName reelDebut    --type java.util.Date               --persistenceType JPA_TIME --dateTimeFormatPattern "HH:mm"
+field date      --fieldName reelFin      --type java.util.Date               --persistenceType JPA_TIME --dateTimeFormatPattern "HH:mm"
+field date      --fieldName factureDebut --type java.util.Date               --persistenceType JPA_TIME --dateTimeFormatPattern "HH:mm"
+field date      --fieldName factureFin   --type java.util.Date               --persistenceType JPA_TIME --dateTimeFormatPattern "HH:mm"
 
 json all --deepSerialize false
 web mvc json setup
