@@ -28,7 +28,7 @@ public class Garde {
      */
     @NotNull
     @Temporal(TemporalType.DATE)
-    @DateTimeFormat(pattern = "yyyy/MM/dd, EEEE")
+    @DateTimeFormat(pattern = "yyyy/MM/dd, EEE")
     private Date le;
 
     /**
