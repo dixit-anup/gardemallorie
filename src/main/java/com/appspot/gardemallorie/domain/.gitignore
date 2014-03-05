@@ -19,3 +19,15 @@
 /Localisation_Roo_Json.aj
 /Localisation_Roo_Serializable.aj
 /Localisation_Roo_ToString.aj
+/BabySitting_Roo_Configurable.aj
+/BabySitting_Roo_JavaBean.aj
+/BabySitting_Roo_Jpa_ActiveRecord.aj
+/BabySitting_Roo_Jpa_Entity.aj
+/BabySitting_Roo_Json.aj
+/BabySitting_Roo_ToString.aj
+/Location_Roo_Configurable.aj
+/Location_Roo_JavaBean.aj
+/Location_Roo_Jpa_ActiveRecord.aj
+/Location_Roo_Jpa_Entity.aj
+/Location_Roo_Json.aj
+/Location_Roo_ToString.aj

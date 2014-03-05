@@ -5,7 +5,19 @@
     <menu:menu id="_menu" z="nZaf43BjUg1iM0v70HJVEsXDopc=">
         <menu:category id="c_garde" z="NGJL9Ky6Ph8qTzczAe/ngCpV1FM=">
             <menu:item id="i_garde_new" messageCode="global_menu_new" url="/gardes?form" z="Jky9mVM5hh6HGnohnjK+wyrOZlY="/>
-            <menu:item id="i_garde_list" messageCode="global_menu_list" url="/gardes?page=1&amp;size=${empty param.size ? 10 : param.size}&amp;sortFieldName=le" z="user-managed"/>
+            <menu:item id="i_garde_list" messageCode="global_menu_list" url="/gardes?page=1&amp;size=${empty param.size ? 100 : param.size}&amp;sortFieldName=le" z="user-managed"/>
+        </menu:category>
+        <menu:category id="c_babysitting" z="UGB9x5f6l/wVoST82mgNdd7+DaA=">
+            <menu:item id="i_babysitting_new" messageCode="global_menu_new" url="/babysittings?form" z="VcWIkNxFfmV31qSU4w/i1GSUgSo="/>
+            <menu:item id="i_babysitting_list" messageCode="global_menu_list" url="/babysittings?page=1&amp;size=${empty param.size ? 10 : param.size}" z="lQvPjK9EJkJT+8VuUEPvsMaOzNM="/>
+        </menu:category>
+        <menu:category id="c_location" z="RvMgx8apsPylYygCQ4tMBVfulVw=">
+            <menu:item id="i_location_new" messageCode="global_menu_new" url="/locations?form" z="sW8KSnwNnd9wjssI0lLV1kzOguk="/>
+            <menu:item id="i_location_list" messageCode="global_menu_list" url="/locations?page=1&amp;size=${empty param.size ? 10 : param.size}" z="VdKLEljpeTLil2W6A3GdWmSBzXI="/>
+        </menu:category>
+        <menu:category id="c_babysitter" z="knGcozuji7s33D5Yw204vGmdRhw=">
+            <menu:item id="i_babysitter_new" messageCode="global_menu_new" url="/babysitters?form" z="AHI6DhWnadKFI0KeUr+KYjwakpU="/>
+            <menu:item id="i_babysitter_list" messageCode="global_menu_list" url="/babysitters?page=1&amp;size=${empty param.size ? 10 : param.size}" z="mUqYIwnPFwtMyvq4SF8sJFYCAAg="/>
         </menu:category>
     </menu:menu>
 </jsp:root>
