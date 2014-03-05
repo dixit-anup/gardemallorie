@@ -5,12 +5,15 @@
     <page:show id="ps_com_appspot_gardemallorie_domain_Garde" object="${garde}" path="/gardes" z="HcxfPSAadxQOxJM9EI+009x380A=">
         <field:display date="true" dateTimePattern="${garde_le_date_format}" field="le" id="s_com_appspot_gardemallorie_domain_Garde_le" object="${garde}" z="Dp0TwkK1hH5mcpB/lSTzvSidQy8="/>
         <field:display field="par" id="s_com_appspot_gardemallorie_domain_Garde_par" object="${garde}" z="NkUP1wuDitJ/bmJFnZGBlXeTTw0="/>
-        <field:display field="a" id="s_com_appspot_gardemallorie_domain_Garde_a" object="${garde}" z="8Rrt904sd5QD2H2f4aCPeaTsupI="/>
         <field:display date="true" dateTimePattern="${garde_prevudebut_date_format}" field="prevuDebut" id="s_com_appspot_gardemallorie_domain_Garde_prevuDebut" object="${garde}" z="uFNUDiZZZ32cvoaUBG8MXoOu+x4="/>
+        <field:display field="aller" id="s_com_appspot_gardemallorie_domain_Garde_aller" object="${garde}" z="xVsedHe2CKazue9r2RMYug+cC4Q="/>
         <field:display date="true" dateTimePattern="${garde_prevufin_date_format}" field="prevuFin" id="s_com_appspot_gardemallorie_domain_Garde_prevuFin" object="${garde}" z="MgRHpromZ2mzsTUzMeNTcRNiN54="/>
+        <field:display field="retour" id="s_com_appspot_gardemallorie_domain_Garde_retour" object="${garde}" z="frktm/MTk9QGfyXGcBn8aO6iMw8="/>
+        <field:display field="a" id="s_com_appspot_gardemallorie_domain_Garde_a" object="${garde}" z="8Rrt904sd5QD2H2f4aCPeaTsupI="/>
         <field:display date="true" dateTimePattern="${garde_reeldebut_date_format}" field="reelDebut" id="s_com_appspot_gardemallorie_domain_Garde_reelDebut" object="${garde}" z="Z0ImjPY+Ce46jWMRftpV+JHrHg8="/>
         <field:display date="true" dateTimePattern="${garde_reelfin_date_format}" field="reelFin" id="s_com_appspot_gardemallorie_domain_Garde_reelFin" object="${garde}" z="lnh9Jfo9ToqjVA2VHXFb1lJOi1Q="/>
         <field:display date="true" dateTimePattern="${garde_facturedebut_date_format}" field="factureDebut" id="s_com_appspot_gardemallorie_domain_Garde_factureDebut" object="${garde}" z="ldJ+oMBgiQUlmq4TcJgoy4lqa5Q="/>
         <field:display date="true" dateTimePattern="${garde_facturefin_date_format}" field="factureFin" id="s_com_appspot_gardemallorie_domain_Garde_factureFin" object="${garde}" z="Kd05W/IzKs9vSDLujn/CfbKC7V0="/>
+        <field:display field="commentaire" id="s_com_appspot_gardemallorie_domain_Garde_commentaire" object="${garde}" z="3VkQRFthp4WSggHaVaqVXMlDdVE="/>
     </page:show>
 </div>
