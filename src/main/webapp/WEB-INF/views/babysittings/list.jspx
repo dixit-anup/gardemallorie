@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" xmlns:table="urn:jsptagdir:/WEB-INF/tags/form/fields" version="2.0">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+    <page:list id="pl_com_appspot_gardemallorie_domain_BabySitting" items="${babysittings}" z="JvcK8yLPa/80mcBl69ti9WqC5Is=">
+        <table:table data="${babysittings}" id="l_com_appspot_gardemallorie_domain_BabySitting" path="/babysittings" z="4ck+P7M4MCpBtzX8ryJML3S1UPA=">
+            <table:column date="true" dateTimePattern="${babySitting_day_date_format}" id="c_com_appspot_gardemallorie_domain_BabySitting_day" property="day" z="Q0yeHTUjjaolVcBW7KWfEYyuOYQ="/>
+            <table:column id="c_com_appspot_gardemallorie_domain_BabySitting_babySitter" property="babySitter" z="s58SfsqU/ojsUu9nM9dnq4uVSCo="/>
+            <table:column date="true" dateTimePattern="${babySitting_plannedbeginning_date_format}" id="c_com_appspot_gardemallorie_domain_BabySitting_plannedBeginning" property="plannedBeginning" z="HfbcHu5VkIjovADDpAHkYHWPdBE="/>
+            <table:column id="c_com_appspot_gardemallorie_domain_BabySitting_go" property="go" z="oOxcb1aPmHEuvX/kds63BcxS6QU="/>
+            <table:column date="true" dateTimePattern="${babySitting_plannedend_date_format}" id="c_com_appspot_gardemallorie_domain_BabySitting_plannedEnd" property="plannedEnd" z="jrUmmHXUeebzW9i5lbN1rFvi8Y0="/>
+            <table:column id="c_com_appspot_gardemallorie_domain_BabySitting_back" property="back" z="H/tXOrzezpVkVvJtAb2ZJKMadVw="/>
+        </table:table>
+    </page:list>
+</div>

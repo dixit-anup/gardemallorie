@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" version="2.0">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+    <page:show id="ps_com_appspot_gardemallorie_domain_BabySitting" object="${babysitting}" path="/babysittings" z="abLrDAMlMndmS1UVEQw24/55Kn0=">
+        <field:display date="true" dateTimePattern="${babySitting_day_date_format}" field="day" id="s_com_appspot_gardemallorie_domain_BabySitting_day" object="${babysitting}" z="8Cefcq3OnCQo/TboKrRvQvJlN68="/>
+        <field:display field="babySitter" id="s_com_appspot_gardemallorie_domain_BabySitting_babySitter" object="${babysitting}" z="xQmbJgQ5rOyJ4h6urRw2mT4xLbY="/>
+        <field:display date="true" dateTimePattern="${babySitting_plannedbeginning_date_format}" field="plannedBeginning" id="s_com_appspot_gardemallorie_domain_BabySitting_plannedBeginning" object="${babysitting}" z="YXUwcVJe/bvr5NRLYJNbhMffW8I="/>
+        <field:display field="go" id="s_com_appspot_gardemallorie_domain_BabySitting_go" object="${babysitting}" z="G6NI7068IMJ1BDYba0OKvh3BdZU="/>
+        <field:display date="true" dateTimePattern="${babySitting_plannedend_date_format}" field="plannedEnd" id="s_com_appspot_gardemallorie_domain_BabySitting_plannedEnd" object="${babysitting}" z="wK7f9ZRtHbz+VG5R78lZ+UZCVEw="/>
+        <field:display field="back" id="s_com_appspot_gardemallorie_domain_BabySitting_back" object="${babysitting}" z="ZsO5ZXq116xVAOTstdVLHZko+MA="/>
+        <field:display field="location" id="s_com_appspot_gardemallorie_domain_BabySitting_location" object="${babysitting}" z="B3Df+olNEeKM7e80UKLzRp+9M54="/>
+        <field:display date="true" dateTimePattern="${babySitting_declaredbeginning_date_format}" field="declaredBeginning" id="s_com_appspot_gardemallorie_domain_BabySitting_declaredBeginning" object="${babysitting}" z="n61/ZsC4h0mk+8PKnxynPdNkOYs="/>
+        <field:display date="true" dateTimePattern="${babySitting_declaredend_date_format}" field="declaredEnd" id="s_com_appspot_gardemallorie_domain_BabySitting_declaredEnd" object="${babysitting}" z="6O37oDtjeWT7SxXTSNTO3LSqgKw="/>
+        <field:display date="true" dateTimePattern="${babySitting_chargedbeginning_date_format}" field="chargedBeginning" id="s_com_appspot_gardemallorie_domain_BabySitting_chargedBeginning" object="${babysitting}" z="wNkteKgkmdMZ7JbZaWUlVPVaLHg="/>
+        <field:display date="true" dateTimePattern="${babySitting_chargedend_date_format}" field="chargedEnd" id="s_com_appspot_gardemallorie_domain_BabySitting_chargedEnd" object="${babysitting}" z="6XeNWxjNtzP3zvIWU4wfW+MfBko="/>
+        <field:display field="comment" id="s_com_appspot_gardemallorie_domain_BabySitting_comment" object="${babysitting}" z="9NrSrKFIgLunkTlNp93PitxoEiY="/>
+    </page:show>
+</div>
