@@ -62,14 +62,14 @@ public class BabySitting {
 
     /**
      */
-    @Column(nullable = true)
-    @ManyToOne()
-    private Location location;
+    @Size(max = 200)
+    private String comment;
 
     /**
      */
-    @Size(max = 200)
-    private String comment;
+    @Column(nullable = true)
+    @ManyToOne()
+    private Location location;
 
     /**
      */

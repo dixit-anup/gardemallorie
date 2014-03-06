@@ -9,8 +9,8 @@
         <field:select field="go" id="c_com_appspot_gardemallorie_domain_BabySitting_go" itemValue="id" items="${babysitters}" path="/babysitters" z="hfdOQf4mG9Wl7X/ukIGWBfaRlls="/>
         <field:datetime dateTimePattern="${babySitting_plannedend_date_format}" field="plannedEnd" id="c_com_appspot_gardemallorie_domain_BabySitting_plannedEnd" z="zF7q6U3aDfFQMjT70JwiOIgAaWE="/>
         <field:select field="back" id="c_com_appspot_gardemallorie_domain_BabySitting_back" itemValue="id" items="${babysitters}" path="/babysitters" z="sndRGuNr11u6vk1oblrDpL6AMec="/>
-        <field:select field="location" id="c_com_appspot_gardemallorie_domain_BabySitting_location" itemValue="id" items="${locations}" path="/locations" z="FxIoFj1yy6kelLMTAZrRczwAOiQ="/>
         <field:textarea field="comment" id="c_com_appspot_gardemallorie_domain_BabySitting_comment" z="jjTwSe6XXybIfRUAJ0yyeqwD+WM="/>
+        <field:select field="location" id="c_com_appspot_gardemallorie_domain_BabySitting_location" itemValue="id" items="${locations}" path="/locations" z="FxIoFj1yy6kelLMTAZrRczwAOiQ="/>
         <field:datetime dateTimePattern="${babySitting_declaredbeginning_date_format}" field="declaredBeginning" id="c_com_appspot_gardemallorie_domain_BabySitting_declaredBeginning" z="snnCkn+fHBYKjJaBhEq9Ec6boCE="/>
         <field:datetime dateTimePattern="${babySitting_declaredend_date_format}" field="declaredEnd" id="c_com_appspot_gardemallorie_domain_BabySitting_declaredEnd" z="wjusJYZLeHUSS7kflaAxjGvQqD8="/>
         <field:datetime dateTimePattern="${babySitting_chargedbeginning_date_format}" field="chargedBeginning" id="c_com_appspot_gardemallorie_domain_BabySitting_chargedBeginning" z="RXZ9bpcl201GntUjafraw5vx5VQ="/>
