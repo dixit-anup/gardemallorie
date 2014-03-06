@@ -4,12 +4,16 @@
     <jsp:output omit-xml-declaration="yes"/>
     <page:list id="pl_com_appspot_gardemallorie_domain_BabySitting" items="${babysittings}" z="JvcK8yLPa/80mcBl69ti9WqC5Is=">
         <table:table data="${babysittings}" id="l_com_appspot_gardemallorie_domain_BabySitting" path="/babysittings" z="4ck+P7M4MCpBtzX8ryJML3S1UPA=">
-            <table:column date="true" dateTimePattern="${babySitting_day_date_format}" id="c_com_appspot_gardemallorie_domain_BabySitting_day" property="day" z="Q0yeHTUjjaolVcBW7KWfEYyuOYQ="/>
-            <table:column id="c_com_appspot_gardemallorie_domain_BabySitting_babySitter" property="babySitter" z="s58SfsqU/ojsUu9nM9dnq4uVSCo="/>
-            <table:column date="true" dateTimePattern="${babySitting_plannedbeginning_date_format}" id="c_com_appspot_gardemallorie_domain_BabySitting_plannedBeginning" property="plannedBeginning" z="HfbcHu5VkIjovADDpAHkYHWPdBE="/>
-            <table:column id="c_com_appspot_gardemallorie_domain_BabySitting_go" property="go" z="oOxcb1aPmHEuvX/kds63BcxS6QU="/>
-            <table:column date="true" dateTimePattern="${babySitting_plannedend_date_format}" id="c_com_appspot_gardemallorie_domain_BabySitting_plannedEnd" property="plannedEnd" z="jrUmmHXUeebzW9i5lbN1rFvi8Y0="/>
-            <table:column id="c_com_appspot_gardemallorie_domain_BabySitting_back" property="back" z="H/tXOrzezpVkVvJtAb2ZJKMadVw="/>
+            <table:column date="true" dateTimePattern="${babySitting_day_date_format}" id="c_com_appspot_gardemallorie_domain_BabySitting_day" property="day" z="Q0yeHTUjjaolVcBW7KWfEYyuOYQ=" sort="true"/>
+            <table:column id="c_com_appspot_gardemallorie_domain_BabySitting_babySitter" property="babySitter" z="s58SfsqU/ojsUu9nM9dnq4uVSCo=" sort="true"/>
+            <table:column date="true" dateTimePattern="${babySitting_plannedbeginning_date_format}" id="c_com_appspot_gardemallorie_domain_BabySitting_plannedBeginning" property="plannedBeginning" z="HfbcHu5VkIjovADDpAHkYHWPdBE=" sort="true"/>
+            <table:column id="c_com_appspot_gardemallorie_domain_BabySitting_go" property="go" z="oOxcb1aPmHEuvX/kds63BcxS6QU=" sort="true"/>
+            <table:column date="true" dateTimePattern="${babySitting_plannedend_date_format}" id="c_com_appspot_gardemallorie_domain_BabySitting_plannedEnd" property="plannedEnd" z="jrUmmHXUeebzW9i5lbN1rFvi8Y0=" sort="true"/>
+            <table:column id="c_com_appspot_gardemallorie_domain_BabySitting_back" property="back" z="H/tXOrzezpVkVvJtAb2ZJKMadVw=" sort="true"/>
+            <table:column date="true" dateTimePattern="${babySitting_declaredbeginning_date_format}" id="c_com_appspot_gardemallorie_domain_BabySitting_declaredBeginning" property="declaredBeginning" z="?" sort="true"/>
+            <table:column date="true" dateTimePattern="${babySitting_declaredend_date_format}" id="c_com_appspot_gardemallorie_domain_BabySitting_declaredEnd" property="declaredEnd" z="?" sort="true"/>
+            <table:column date="true" dateTimePattern="${babySitting_chargedbeginning_date_format}" id="c_com_appspot_gardemallorie_domain_BabySitting_chargedBeginning" property="chargedBeginning" z="?" sort="true"/>
+            <table:column date="true" dateTimePattern="${babySitting_chargedend_date_format}" id="c_com_appspot_gardemallorie_domain_BabySitting_chargedEnd" property="chargedEnd" z="?" sort="true"/>
         </table:table>
     </page:list>
 </div>

@@ -22,7 +22,7 @@
     			
 		<util:load-scripts />
 		
-		<spring:message code="application_name" var="app_name" htmlEscape="false"/>
+		<spring:message code="application_name" var="app_name" htmlEscape="false" scope="request"/>
 		<title><spring:message code="welcome_h3" arguments="${app_name}" /></title>
 	</head>
 	

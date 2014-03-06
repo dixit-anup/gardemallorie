@@ -68,6 +68,11 @@ public class BabySitting {
 
     /**
      */
+    @Size(max = 200)
+    private String comment;
+
+    /**
+     */
     @Column(nullable = true)
     @DateTimeFormat(pattern = "HH:mm")
     @Temporal(TemporalType.TIME)
@@ -94,9 +99,4 @@ public class BabySitting {
     @Temporal(TemporalType.TIME)
     private Date chargedEnd;
     
-    /**
-     */
-    @Size(max = 200)
-    private String comment;
-
 }

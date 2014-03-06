@@ -10,10 +10,10 @@
         <field:display date="true" dateTimePattern="${babySitting_plannedend_date_format}" field="plannedEnd" id="s_com_appspot_gardemallorie_domain_BabySitting_plannedEnd" object="${babysitting}" z="wK7f9ZRtHbz+VG5R78lZ+UZCVEw="/>
         <field:display field="back" id="s_com_appspot_gardemallorie_domain_BabySitting_back" object="${babysitting}" z="ZsO5ZXq116xVAOTstdVLHZko+MA="/>
         <field:display field="location" id="s_com_appspot_gardemallorie_domain_BabySitting_location" object="${babysitting}" z="B3Df+olNEeKM7e80UKLzRp+9M54="/>
+        <field:display field="comment" id="s_com_appspot_gardemallorie_domain_BabySitting_comment" object="${babysitting}" z="9NrSrKFIgLunkTlNp93PitxoEiY="/>
         <field:display date="true" dateTimePattern="${babySitting_declaredbeginning_date_format}" field="declaredBeginning" id="s_com_appspot_gardemallorie_domain_BabySitting_declaredBeginning" object="${babysitting}" z="n61/ZsC4h0mk+8PKnxynPdNkOYs="/>
         <field:display date="true" dateTimePattern="${babySitting_declaredend_date_format}" field="declaredEnd" id="s_com_appspot_gardemallorie_domain_BabySitting_declaredEnd" object="${babysitting}" z="6O37oDtjeWT7SxXTSNTO3LSqgKw="/>
         <field:display date="true" dateTimePattern="${babySitting_chargedbeginning_date_format}" field="chargedBeginning" id="s_com_appspot_gardemallorie_domain_BabySitting_chargedBeginning" object="${babysitting}" z="wNkteKgkmdMZ7JbZaWUlVPVaLHg="/>
         <field:display date="true" dateTimePattern="${babySitting_chargedend_date_format}" field="chargedEnd" id="s_com_appspot_gardemallorie_domain_BabySitting_chargedEnd" object="${babysitting}" z="6XeNWxjNtzP3zvIWU4wfW+MfBko="/>
-        <field:display field="comment" id="s_com_appspot_gardemallorie_domain_BabySitting_comment" object="${babysitting}" z="9NrSrKFIgLunkTlNp93PitxoEiY="/>
     </page:show>
 </div>

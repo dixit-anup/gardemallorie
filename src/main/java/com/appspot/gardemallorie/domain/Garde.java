@@ -68,6 +68,11 @@ public class Garde {
 
     /**
      */
+    @Size(max = 200)
+    private String commentaire;
+
+    /**
+     */
     @Column(nullable = true)
     @Temporal(TemporalType.TIME)
     @DateTimeFormat(pattern = "HH:mm")
@@ -94,9 +99,4 @@ public class Garde {
     @DateTimeFormat(pattern = "HH:mm")
     private Date factureFin;
     
-    /**
-     */
-    @Size(max = 200)
-    private String commentaire;
-
 }
