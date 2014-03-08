@@ -6,6 +6,16 @@
         <menu:category id="c_babysitting" z="UGB9x5f6l/wVoST82mgNdd7+DaA=">
             <menu:item id="i_babysitting_new" messageCode="global_menu_new" url="/babysittings?form" z="VcWIkNxFfmV31qSU4w/i1GSUgSo="/>
             <menu:item id="i_babysitting_list" messageCode="global_menu_list" url="/babysittings?page=1&amp;size=${empty param.size ? 10 : param.size}" z="lQvPjK9EJkJT+8VuUEPvsMaOzNM="/>
+            <menu:item id="fi_babysitting_daybetween" messageCode="global_menu_find" url="/babysittings?find=ByDayBetween&amp;form&amp;page=1&amp;size=${empty param.size ? 10 : param.size}" z="TEULtDIEGC5/9Tv/hZnTfHIJ/Js="/>
+            <menu:item id="fi_babysitting_dayequals" messageCode="global_menu_find" url="/babysittings?find=ByDayEquals&amp;form&amp;page=1&amp;size=${empty param.size ? 10 : param.size}" z="Y61bSV1wReawwjEzs0UFmNWl1k4="/>
+            <menu:item id="fi_babysitting_daygreaterthan" messageCode="global_menu_find" url="/babysittings?find=ByDayGreaterThan&amp;form&amp;page=1&amp;size=${empty param.size ? 10 : param.size}" z="N4YcxtL3IilZij63QK4koRULOoU="/>
+            <menu:item id="fi_babysitting_daygreaterthanequals" messageCode="global_menu_find" url="/babysittings?find=ByDayGreaterThanEquals&amp;form&amp;page=1&amp;size=${empty param.size ? 10 : param.size}" z="5N7lwq8LO+Miw991I8q4WRwFDBE="/>
+            <menu:item id="fi_babysitting_daylessthan" messageCode="global_menu_find" url="/babysittings?find=ByDayLessThan&amp;form&amp;page=1&amp;size=${empty param.size ? 10 : param.size}" z="7Rm+WWWWC6IjUsC5RTr7oyilI8I="/>
+            <menu:item id="fi_babysitting_daylessthanequals" messageCode="global_menu_find" url="/babysittings?find=ByDayLessThanEquals&amp;form&amp;page=1&amp;size=${empty param.size ? 10 : param.size}" z="Owr7LK7C4DmgFZh4Z7fURvfTfXA="/>
+            <menu:item id="fi_babysitting_daynotequals" messageCode="global_menu_find" url="/babysittings?find=ByDayNotEquals&amp;form&amp;page=1&amp;size=${empty param.size ? 10 : param.size}" z="ayxqb+G139xMFzOu1Yt4IC7qdZk="/>
+            <menu:item id="fi_babysitting_babysitter" messageCode="global_menu_find" url="/babysittings?find=ByBabySitter&amp;form&amp;page=1&amp;size=${empty param.size ? 10 : param.size}" z="cn1UKr5OaZk8qNDKCYXbp+gb9sE="/>
+            <menu:item id="fi_babysitting_go" messageCode="global_menu_find" url="/babysittings?find=ByGo&amp;form&amp;page=1&amp;size=${empty param.size ? 10 : param.size}" z="V3CG8JvSgafBsGn5aWmSNvFcs6Q="/>
+            <menu:item id="fi_babysitting_back" messageCode="global_menu_find" url="/babysittings?find=ByBack&amp;form&amp;page=1&amp;size=${empty param.size ? 10 : param.size}" z="cO2cNd+H0WNGQGy+6YO5Nv+agbI="/>
         </menu:category>
         <menu:category id="c_babysitter" z="knGcozuji7s33D5Yw204vGmdRhw=">
             <menu:item id="i_babysitter_new" messageCode="global_menu_new" url="/babysitters?form" z="AHI6DhWnadKFI0KeUr+KYjwakpU="/>
