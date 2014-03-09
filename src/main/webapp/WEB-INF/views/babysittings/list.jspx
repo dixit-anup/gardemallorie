@@ -10,12 +10,8 @@
             <table:column id="c_com_appspot_gardemallorie_domain_BabySitting_go" property="go" sort="true" z="user-managed"/>
             <table:column date="true" dateTimePattern="${babySitting_plannedend_date_format}" id="c_com_appspot_gardemallorie_domain_BabySitting_plannedEnd" property="plannedEnd" sort="true" z="user-managed"/>
             <table:column id="c_com_appspot_gardemallorie_domain_BabySitting_back" property="back" sort="true" z="user-managed"/>
-            <table:column id="c_com_appspot_gardemallorie_domain_BabySitting_comment" property="comment" z="itZdrIu/IDE/+D1B6ROXjqF7xTs="/>
-			<table:column id="c_com_appspot_gardemallorie_domain_BabySitting_location" property="location" z="user-managed" sort="true"/>
-            <table:column date="true" dateTimePattern="${babySitting_declaredbeginning_date_format}" id="c_com_appspot_gardemallorie_domain_BabySitting_declaredBeginning" property="declaredBeginning" z="PNb4vXECoKEGaWJJPHPl1z9K6WA="/>
-            <table:column date="true" dateTimePattern="${babySitting_declaredend_date_format}" id="c_com_appspot_gardemallorie_domain_BabySitting_declaredEnd" property="declaredEnd" z="VK3+8gepQx34U0YFwlpebSoWEdw="/>
-            <table:column date="true" dateTimePattern="${babySitting_chargedbeginning_date_format}" id="c_com_appspot_gardemallorie_domain_BabySitting_chargedBeginning" property="chargedBeginning" z="user-managed" sort="true"/>
-            <table:column date="true" dateTimePattern="${babySitting_chargedend_date_format}" id="c_com_appspot_gardemallorie_domain_BabySitting_chargedEnd" property="chargedEnd" z="?" sort="true"/>
+            <table:column id="c_com_appspot_gardemallorie_domain_BabySitting_location" property="location" sort="true" z="user-managed"/>
+            <table:column date="true" dateTimePattern="${babySitting_declaredend_date_format}" id="c_com_appspot_gardemallorie_domain_BabySitting_declaredend" property="declaredEnd" sort="true" z="user-managed"/>
         </table:table>
     </page:list>
 </div>

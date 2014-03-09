@@ -17,7 +17,7 @@ import org.springframework.roo.addon.tostring.RooToString;
 @RooToString
 @RooJpaActiveRecord(
 	finders = {
-		"findBabySittingsByDayBetween", "findBabySittingsByDayEquals", "findBabySittingsByDayGreaterThan", "findBabySittingsByDayGreaterThanEquals", "findBabySittingsByDayLessThan", "findBabySittingsByDayLessThanEquals", "findBabySittingsByDayNotEquals",
+		"findBabySittingsByDayBetween", "findBabySittingsByDayGreaterThanEquals", "findBabySittingsByDayLessThanEquals",
 		"findBabySittingsByBabySitter",
 		"findBabySittingsByGo",
 		"findBabySittingsByBack", 
@@ -30,8 +30,12 @@ public class BabySitting {
      */
     @NotNull
     @Temporal(TemporalType.DATE)
-    @DateTimeFormat(pattern = "dd/MM/yyyy, EEE")
+    @DateTimeFormat(pattern = "EEE dd/MM/yyyy")
     private Date day;
+
+    @Column(nullable = true)
+    @ManyToOne
+    private BabySitter babySitter;
 
     /**
      */
@@ -40,6 +44,10 @@ public class BabySitting {
     @Temporal(TemporalType.TIME)
     private Date plannedBeginning;
 
+    @Column(nullable = true)
+    @ManyToOne
+    private BabySitter go;
+
     /**
      */
     @Column(nullable = true)
@@ -47,17 +55,18 @@ public class BabySitting {
     @Temporal(TemporalType.TIME)
     private Date plannedEnd;
 
+    @Column(nullable = true)
+    @ManyToOne
+    private BabySitter back;
+
     /**
      */
     @Size(max = 200)
     private String comment;
 
-    /**
-     */
     @Column(nullable = true)
-    @DateTimeFormat(pattern = "HH:mm")
-    @Temporal(TemporalType.TIME)
-    private Date declaredBeginning;
+    @ManyToOne
+    private Location location;
 
     /**
      */
@@ -66,33 +75,4 @@ public class BabySitting {
     @Temporal(TemporalType.TIME)
     private Date declaredEnd;
 
-    /**
-     */
-    @Column(nullable = true)
-    @DateTimeFormat(pattern = "HH:mm")
-    @Temporal(TemporalType.TIME)
-    private Date chargedBeginning;
-
-    /**
-     */
-    @Column(nullable = true)
-    @DateTimeFormat(pattern = "HH:mm")
-    @Temporal(TemporalType.TIME)
-    private Date chargedEnd;
-
-    @Column(nullable = true)
-    @ManyToOne
-    private BabySitter babySitter;
-
-    @Column(nullable = true)
-    @ManyToOne
-    private Location location;
-
-    @Column(nullable = true)
-    @ManyToOne
-    private BabySitter back;
-
-    @Column(nullable = true)
-    @ManyToOne
-    private BabySitter go;
 }
