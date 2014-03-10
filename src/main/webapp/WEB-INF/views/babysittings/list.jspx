@@ -10,8 +10,9 @@
             <table:column id="c_com_appspot_gardemallorie_domain_BabySitting_go" property="go" sort="true" z="user-managed"/>
             <table:column date="true" dateTimePattern="${babySitting_plannedend_date_format}" id="c_com_appspot_gardemallorie_domain_BabySitting_plannedEnd" property="plannedEnd" sort="true" z="user-managed"/>
             <table:column id="c_com_appspot_gardemallorie_domain_BabySitting_back" property="back" sort="true" z="user-managed"/>
+            <table:column id="c_com_appspot_gardemallorie_domain_BabySitting_comment" property="comment" z="?"/>
             <table:column id="c_com_appspot_gardemallorie_domain_BabySitting_location" property="location" sort="true" z="user-managed"/>
-            <table:column date="true" dateTimePattern="${babySitting_declaredend_date_format}" id="c_com_appspot_gardemallorie_domain_BabySitting_declaredend" property="declaredEnd" sort="true" z="user-managed"/>
+            <table:column date="true" dateTimePattern="${babySitting_declaredend_date_format}" id="c_com_appspot_gardemallorie_domain_BabySitting_declaredend" property="declaredEnd" z="?"/>
         </table:table>
     </page:list>
 </div>
