@@ -50,6 +50,7 @@
           <c:forTokens items="${columnLabels}" delims="${'&#9999;'}" var="columnHeading" varStatus="num">
             <c:set var="columnProperty" value="${properties[num.count-1]}" />
             <c:set var="sort" value="false" />
+            <c:set var="class" value="${num.index >= 7 ? 'hidden-xs' : ''}"/>
             <c:forEach var="sortProperty" items="${sortProperties}">
                 <c:if test="${columnProperty eq sortProperty}">
                     <c:set var="sort" value="true" />
@@ -83,10 +84,10 @@
                             <spring:param name="sortOrder" value="asc" />
                         </c:if>
                     </spring:url>
-                    <th><a href="${querySortUrl}" class="${sortOrderClass}"><c:out value="${columnHeading}" /> <spring:eval var="colCounter" expression="colCounter  + 1" /></a></th>
+                    <th class="${class}"><a href="${querySortUrl}" class="${sortOrderClass}"><c:out value="${columnHeading}" /> <spring:eval var="colCounter" expression="colCounter  + 1" /></a></th>
                 </c:when>
                 <c:otherwise>
-                    <th><c:out value="${columnHeading}" /> <spring:eval var="colCounter" expression="colCounter  + 1" /></th>
+                    <th class="${class}"><c:out value="${columnHeading}" /> <spring:eval var="colCounter" expression="colCounter  + 1" /></th>
                 </c:otherwise>
             </c:choose>
           </c:forTokens>
@@ -107,7 +108,8 @@
             <c:set var="columnMaxLength" value="${lengths[num.count-1]}" />
             <c:set var="columnType" value="${types[num.count-1]}" />
             <c:set var="columnDatePattern" value="${patterns[num.count-1]}" />
-            <td>
+            <c:set var="class" value="${num.index >= 7 ? 'hidden-xs' : ''}"/>
+            <td class="${class}">
               <c:choose>
                 <c:when test="${columnType eq 'date'}">
                   <spring:escapeBody>
