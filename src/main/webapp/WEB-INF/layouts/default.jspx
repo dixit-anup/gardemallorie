@@ -31,10 +31,8 @@
    		<div class="container">
 		    <tiles:insertAttribute name="header" ignore="true" />
 		    <tiles:insertAttribute name="menu" ignore="true" />   
-		    <div class="jumbotron">
-	    		<tiles:insertAttribute name="body"/> 
-		    	<tiles:insertAttribute name="footer" ignore="true"/>
-		    </div>
+    		<tiles:insertAttribute name="body"/> 
+	    	<tiles:insertAttribute name="footer" ignore="true"/>
 		</div>
 
 	    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
