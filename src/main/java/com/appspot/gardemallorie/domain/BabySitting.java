@@ -1,9 +1,11 @@
 package com.appspot.gardemallorie.domain;
+
 import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import static javax.persistence.FetchType.LAZY;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -34,7 +36,7 @@ public class BabySitting {
     private Date day;
 
     @Column(nullable = true)
-    @ManyToOne
+    @ManyToOne(fetch = LAZY)
     private BabySitter babySitter;
 
     /**
@@ -45,7 +47,7 @@ public class BabySitting {
     private Date plannedBeginning;
 
     @Column(nullable = true)
-    @ManyToOne
+    @ManyToOne(fetch = LAZY)
     private BabySitter go;
 
     /**
@@ -56,7 +58,7 @@ public class BabySitting {
     private Date plannedEnd;
 
     @Column(nullable = true)
-    @ManyToOne
+    @ManyToOne(fetch = LAZY)
     private BabySitter back;
 
     /**
@@ -65,7 +67,7 @@ public class BabySitting {
     private String comment;
 
     @Column(nullable = true)
-    @ManyToOne
+    @ManyToOne(fetch = LAZY)
     private Location location;
 
     /**
