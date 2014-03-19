@@ -5,12 +5,12 @@
     <form:update id="fu_com_appspot_gardemallorie_domain_BabySitting" modelAttribute="babySitting" path="/babysittings" versionField="Version" z="8NwxTmDWKBwbBucCw0NNYokEQBI=">
         <field:datetime dateTimePattern="${babySitting_day_date_format}" field="day" id="c_com_appspot_gardemallorie_domain_BabySitting_day" required="true" z="Pa/ZLJr7EEV+ueLbkT6vCE1ihwc="/>
         <field:select field="babySitter" id="c_com_appspot_gardemallorie_domain_BabySitting_babySitter" itemValue="id" items="${babysitters}" path="/babysitters" z="agDQwDFFkJM+6mcCOnlAukQvCAI="/>
-        <field:datetime dateTimePattern="${babySitting_plannedbeginning_date_format}" field="plannedBeginning" id="c_com_appspot_gardemallorie_domain_BabySitting_plannedBeginning" z="cnRKl0p3W45j9sT0jALGKaaDpQY="/>
+        <field:input field="plannedBeginning" id="c_com_appspot_gardemallorie_domain_BabySitting_plannedBeginning" type="time" z="cnRKl0p3W45j9sT0jALGKaaDpQY="/>
         <field:select field="go" id="c_com_appspot_gardemallorie_domain_BabySitting_go" itemValue="id" items="${babysitters}" path="/babysitters" z="hfdOQf4mG9Wl7X/ukIGWBfaRlls="/>
-        <field:datetime dateTimePattern="${babySitting_plannedend_date_format}" field="plannedEnd" id="c_com_appspot_gardemallorie_domain_BabySitting_plannedEnd" z="zF7q6U3aDfFQMjT70JwiOIgAaWE="/>
+        <field:input field="plannedEnd" id="c_com_appspot_gardemallorie_domain_BabySitting_plannedEnd" type="time" z="zF7q6U3aDfFQMjT70JwiOIgAaWE="/>
         <field:select field="back" id="c_com_appspot_gardemallorie_domain_BabySitting_back" itemValue="id" items="${babysitters}" path="/babysitters" z="sndRGuNr11u6vk1oblrDpL6AMec="/>
         <field:textarea field="comment" id="c_com_appspot_gardemallorie_domain_BabySitting_comment" z="jjTwSe6XXybIfRUAJ0yyeqwD+WM="/>
         <field:select field="location" id="c_com_appspot_gardemallorie_domain_BabySitting_location" itemValue="id" items="${locations}" path="/locations" z="FxIoFj1yy6kelLMTAZrRczwAOiQ="/>
-        <field:datetime dateTimePattern="${babySitting_declaredend_date_format}" field="declaredEnd" id="c_com_appspot_gardemallorie_domain_BabySitting_declaredEnd" z="wjusJYZLeHUSS7kflaAxjGvQqD8="/>
+        <field:input field="declaredEnd" id="c_com_appspot_gardemallorie_domain_BabySitting_declaredEnd" type="time" z="wjusJYZLeHUSS7kflaAxjGvQqD8="/>
     </form:update>
 </jsp:root>

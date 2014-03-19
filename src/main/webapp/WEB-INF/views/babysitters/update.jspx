@@ -5,6 +5,6 @@
     <form:update id="fu_com_appspot_gardemallorie_domain_BabySitter" modelAttribute="babySitter" path="/babysitters" versionField="Version" z="uvFci1h61J6035I9M8DXZzm58nM=">
         <field:input field="firstName" id="c_com_appspot_gardemallorie_domain_BabySitter_firstName" z="/E0cJFVAMMlBglurfC8xw8rRiho="/>
         <field:input field="lastName" id="c_com_appspot_gardemallorie_domain_BabySitter_lastName" z="0kXB3VpcxSG+/YisjsKQDIhc218="/>
-        <field:input field="color" id="c_com_appspot_gardemallorie_domain_BabySitter_color" z="vq3iSKd/pTDrhIeD61SbRKgjpRg="/>
+        <field:input field="color" id="c_com_appspot_gardemallorie_domain_BabySitter_color" type="color" z="vq3iSKd/pTDrhIeD61SbRKgjpRg="/>
     </form:update>
 </jsp:root>
