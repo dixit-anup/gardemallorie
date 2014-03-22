@@ -4,8 +4,8 @@
     <groupId>com.appspot.gardemallorie</groupId>
     <artifactId>gardemallorie</artifactId>
     <packaging>war</packaging>
-    <version>0.1.0.BUILD-SNAPSHOT</version>
-    <name>gardemallorie</name>
+    <version>1.0.0</version>
+    <name>Garde Mallorie</name>
     <properties>
         <aspectj.version>1.7.4</aspectj.version>
         <java.version>7</java.version>
@@ -13,9 +13,9 @@
         <roo.version>1.2.5.RELEASE</roo.version>
         <slf4j.version>1.7.5</slf4j.version>
         <spring.version>3.2.6.RELEASE</spring.version>
-    <gae.version>1.9.0</gae.version>
-    <gae.home>${user.home}/.m2/repository/com/google/appengine/appengine-java-sdk/${gae.version}/appengine-java-sdk-${gae.version}</gae.home>
-    <spring-security.version>3.1.0.RELEASE</spring-security.version>
+    	<gae.version>1.9.0</gae.version>
+    	<gae.home>${user.home}/.m2/repository/com/google/appengine/appengine-java-sdk/${gae.version}/appengine-java-sdk-${gae.version}</gae.home>
+    	<spring-security.version>3.1.0.RELEASE</spring-security.version>
     </properties>
     <repositories>
         <repository>
