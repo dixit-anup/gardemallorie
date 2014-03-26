@@ -67,7 +67,7 @@
             <c:choose>
                 <c:when test="${sort}">
                     <c:set var="sortOrderSet" value="false" />
-                    <c:set var="sortOrderClass" value="sorting" />
+                    <c:set var="sortOrderClass" value="not-set" />
                     <spring:url value="" var="querySortUrl">
                         <c:forEach items="${paramValues}" var="p">
                             <c:if test="${p.key ne 'sortFieldName' and p.key ne 'sortOrder'}">
@@ -79,11 +79,11 @@
                                 <c:set var="sortOrderSet" value="true" />
                                 <c:if test="${p.value[0] eq 'asc'}">
                                     <spring:param name="sortOrder" value="desc" />
-                                    <c:set var="sortOrderClass" value="sorting_desc" />
+                                    <c:set var="sortOrderClass" value="chevron-down" />
                                 </c:if>
                                 <c:if test="${p.value[0] eq 'desc'}">
                                     <spring:param name="sortOrder" value="asc" />
-                                    <c:set var="sortOrderClass" value="sorting_asc" />
+                                    <c:set var="sortOrderClass" value="chevron-up" />
                                 </c:if>
                             </c:if>
                         </c:forEach>
@@ -92,7 +92,13 @@
                             <spring:param name="sortOrder" value="asc" />
                         </c:if>
                     </spring:url>
-                    <th><a href="${querySortUrl}" class="${sortOrderClass}"><c:out value="${columnHeading}" /> <spring:eval var="colCounter" expression="colCounter  + 1" /></a></th>
+                    <th>
+                    	<a href="${querySortUrl}" class="btn btn-default btn-sm">
+							<c:out value="${columnHeading} " />
+                    		<span class="glyphicon glyphicon-${sortOrderClass}"></span>
+                    		<spring:eval var="colCounter" expression="colCounter + 1" />
+                   		</a>
+                  	</th>
                 </c:when>
                 <c:otherwise>
                     <th><c:out value="${columnHeading}" /> <spring:eval var="colCounter" expression="colCounter  + 1" /></th>
@@ -141,30 +147,30 @@
             </td>
           </c:forTokens>
           <c:set var="itemId"><spring:eval expression="item[typeIdFieldName]"/></c:set>
-          <td class="utilbox">
+          <td>
+          	<!-- Show button -->
             <spring:url value="${path}/${itemId}" var="show_form_url" />
-            <spring:url value="/resources/images/show.png" var="show_image_url" />
             <spring:message arguments="${typeName}" code="entity_show" var="show_label" htmlEscape="false" />
-            <a href="${show_form_url}" alt="${fn:escapeXml(show_label)}" title="${fn:escapeXml(show_label)}">
-              <img alt="${fn:escapeXml(show_label)}" class="image" src="${show_image_url}" title="${fn:escapeXml(show_label)}" />
+            <a href="${show_form_url}" alt="${fn:escapeXml(show_label)}" title="${fn:escapeXml(show_label)}" class="btn btn-default btn-sm" role="button">
+				<span class="glyphicon glyphicon-zoom-in"></span>
             </a>
           </td>
           <c:if test="${update}">
-            <td class="utilbox">
+            <td>
+	          <!-- Update button -->
               <spring:url value="${path}/${itemId}" var="update_form_url">
                 <spring:param name="form" />
               </spring:url>
-              <spring:url value="/resources/images/update.png" var="update_image_url" />
               <spring:message arguments="${typeName}" code="entity_update" var="update_label" htmlEscape="false" />
-              <a href="${update_form_url}" alt="${fn:escapeXml(update_label)}" title="${fn:escapeXml(update_label)}">
-                <img alt="${fn:escapeXml(update_label)}" class="image" src="${update_image_url}" title="${fn:escapeXml(update_label)}" />
+              <a href="${update_form_url}" alt="${fn:escapeXml(update_label)}" title="${fn:escapeXml(update_label)}" class="btn btn-default btn-sm" role="button">
+				<span class="glyphicon glyphicon-pencil"></span>
               </a>
             </td>
           </c:if>
           <c:if test="${delete}">
-            <td class="utilbox">
+            <td>
+	          <!-- Delete button -->
               <spring:url value="${path}/${itemId}" var="delete_form_url" />
-              <spring:url value="/resources/images/delete.png" var="delete_image_url" />
               <form:form action="${delete_form_url}" method="DELETE">
                 <spring:message arguments="${typeName}" code="entity_delete" var="delete_label" htmlEscape="false" />
                 <c:set var="delete_confirm_msg">
@@ -172,7 +178,9 @@
                     <spring:message code="entity_delete_confirm" />
                   </spring:escapeBody>
                 </c:set>
-                <input alt="${fn:escapeXml(delete_label)}" class="image" src="${delete_image_url}" title="${fn:escapeXml(delete_label)}" type="image" value="${fn:escapeXml(delete_label)}" onclick="return confirm('${delete_confirm_msg}');" />
+                <button class="btn btn-default btn-sm" onclick="return confirm('${delete_confirm_msg}');" title="${fn:escapeXml(delete_label)}" type="submit">
+					<span class="glyphicon glyphicon-trash"></span>
+                </button>
                 <c:if test="${not empty param.page}">
                   <input name="page" type="hidden" value="1" />
                 </c:if>
@@ -184,24 +192,24 @@
           </c:if>
         </tr>
       </c:forEach>
-      <tr class="footer">
+      <tr>
         <td colspan="${colCounter}">
-          <c:if test="${empty create or create}">
-            <span class="new">
-              <spring:url value="${path}" var="create_url">
-                <spring:param name="form" />
-              </spring:url>
-              <a href="${create_url}">
-                <spring:url value="/resources/images/add.png" var="create_img_url" />
-                <spring:message arguments="${typeName}" code="global_menu_new" var="add_message" htmlEscape="false" />
-                <img alt="${fn:escapeXml(add_message)}" src="${create_img_url}" title="${fn:escapeXml(add_message)}" />
-              </a>
-            </span>
-            <c:out value=" " />
-          </c:if>
-          <c:if test="${not empty maxPages}">
-            <util:pagination maxPages="${maxPages}" page="${param.page}" size="${param.size}" />
-          </c:if>
+			<div class="btn-toolbar" role="toolbar">
+	          <c:if test="${empty create or create}">
+				<div class="btn-group">
+	              <spring:url value="${path}" var="create_url">
+	                <spring:param name="form" />
+	              </spring:url>
+	              <a href="${create_url}" class="btn btn-default btn-sm">
+	                <spring:message arguments="${typeName}" code="global_menu_new" var="add_message" htmlEscape="false" />
+					<span class="glyphicon glyphicon-plus"></span>
+	              </a>
+				</div>
+	          </c:if>
+	          <c:if test="${not empty maxPages}">
+	            <util:pagination maxPages="${maxPages}" page="${param.page}" size="${param.size}" />
+	          </c:if>
+			</div>
         </td>
       </tr>
     </table>

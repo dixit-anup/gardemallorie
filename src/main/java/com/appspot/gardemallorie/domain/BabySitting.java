@@ -32,7 +32,7 @@ public class BabySitting {
      */
     @NotNull
     @Temporal(TemporalType.DATE)
-    @DateTimeFormat(pattern = "EEE dd/MM/yyyy")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date day;
 
     @Column(nullable = true)

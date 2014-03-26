@@ -45,7 +45,7 @@
         <c:otherwise>
           <form:input id="_${sec_field}_id" path="${sec_field}" disabled="${disabled}" />
           <br />
-          <form:errors cssClass="errors" id="_${sec_field}_error_id" path="${sec_field}" />
+          <form:errors id="_${sec_field}_error_id" path="${sec_field}" />
         </c:otherwise>
       </c:choose>
       <spring:message arguments="${fn:escapeXml(label)}" code="field_invalid" var="field_invalid" htmlEscape="false" />

@@ -1,5 +1,6 @@
 package com.appspot.gardemallorie.domain;
 
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 import org.springframework.roo.addon.javabean.RooJavaBean;
@@ -15,7 +16,8 @@ public class Location {
 
     /**
      */
-    @Size(min = 3)
+    @NotNull
+    @Size(min = 2, max = 50)
     private String name;
 
 }

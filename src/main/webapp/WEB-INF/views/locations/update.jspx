@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<jsp:root xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:form="urn:jsptagdir:/WEB-INF/tags/form" xmlns:jsp="http://java.sun.com/JSP/Page" version="2.0">
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:form="urn:jsptagdir:/WEB-INF/tags/form" version="2.0">
     <jsp:directive.page contentType="text/html;charset=UTF-8"/>
     <jsp:output omit-xml-declaration="yes"/>
     <form:update id="fu_com_appspot_gardemallorie_domain_Location" modelAttribute="location" path="/locations" versionField="Version" z="APscoJpLvm8WjZ2WXVpdaaOypZY=">
-        <field:input field="name" id="c_com_appspot_gardemallorie_domain_Location_name" min="3" required="true" z="pVjouDu6sMCCZGkcjx19HM/JX1E="/>
+        <field:textarea field="name" id="c_com_appspot_gardemallorie_domain_Location_name" required="true" z="WVzLFfLkUXD30sa8+4qHUOC6Zcw="/>
     </form:update>
 </jsp:root>

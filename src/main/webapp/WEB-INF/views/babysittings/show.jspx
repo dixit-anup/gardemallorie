@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<jsp:root xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" version="2.0">
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" version="2.0">
     <jsp:directive.page contentType="text/html;charset=UTF-8"/>
     <jsp:output omit-xml-declaration="yes"/>
     <page:show id="ps_com_appspot_gardemallorie_domain_BabySitting" object="${babysitting}" path="/babysittings" z="abLrDAMlMndmS1UVEQw24/55Kn0=">
-        <field:display date="true" dateTimePattern="${babySitting_day_date_format}" field="day" id="s_com_appspot_gardemallorie_domain_BabySitting_day" object="${babysitting}" z="8Cefcq3OnCQo/TboKrRvQvJlN68="/>
+        <field:display date="true" dateTimePattern="EEE dd/MM/yyyy" field="day" id="s_com_appspot_gardemallorie_domain_BabySitting_day" object="${babysitting}" z="user-managed"/>
         <field:display field="babySitter" id="s_com_appspot_gardemallorie_domain_BabySitting_babySitter" object="${babysitting}" z="xQmbJgQ5rOyJ4h6urRw2mT4xLbY="/>
         <field:display date="true" dateTimePattern="${babySitting_plannedbeginning_date_format}" field="plannedBeginning" id="s_com_appspot_gardemallorie_domain_BabySitting_plannedBeginning" object="${babysitting}" z="YXUwcVJe/bvr5NRLYJNbhMffW8I="/>
         <field:display field="go" id="s_com_appspot_gardemallorie_domain_BabySitting_go" object="${babysitting}" z="G6NI7068IMJ1BDYba0OKvh3BdZU="/>

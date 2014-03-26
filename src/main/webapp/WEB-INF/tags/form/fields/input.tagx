@@ -68,32 +68,38 @@
       <spring:escapeBody javaScriptEscape="true" >${field}</spring:escapeBody>
     </c:set>
     
-    <div id="_${fn:escapeXml(id)}_id">
-      <label for="_${sec_field}_id">
+  <spring:bind path="${sec_field}">
+    <div id="_${fn:escapeXml(id)}_id" class="form-group ${status.error ? 'has-error' : ''}">
+      <label for="_${sec_field}_id" class="control-label col-xs-4 col-sm-2">
         <c:out value="${fn:escapeXml(label)}" />
-        :
       </label>
       <c:choose>
         <c:when test="${disableFormBinding}">
-          <input id="_${sec_field}_id" name="${sec_field}" type="${fn:escapeXml(type)}" />
+	      <div class="col-xs-7 col-sm-3">
+	          <input id="_${sec_field}_id" name="${sec_field}" type="${fn:escapeXml(type)}" cssClass="form-control input-sm"/>
+          </div>
         </c:when>
         <c:otherwise>
-          <c:choose>
-            <c:when test="${type eq 'color'}">
-              <html5:color id="_${sec_field}_id" path="${sec_field}" disabled="${disabled}" readonly="${readonly}" />
-            </c:when>
-            <c:when test="${type eq 'password'}">
-              <form:password id="_${sec_field}_id" path="${sec_field}" disabled="${disabled}" readonly="${readonly}" />
-            </c:when>
-            <c:when test="${type eq 'time'}">
-              <html5:time id="_${sec_field}_id" path="${sec_field}" disabled="${disabled}" readonly="${readonly}" />
-            </c:when>
-            <c:otherwise>
-              <form:input id="_${sec_field}_id" path="${sec_field}" disabled="${disabled}" readonly="${readonly}" />
-            </c:otherwise>
-          </c:choose>
-          <br />
-          <form:errors cssClass="errors" id="_${sec_field}_error_id" path="${sec_field}" />
+	      <div class="col-xs-7 col-sm-3">
+	          <c:choose>
+	            <c:when test="${type eq 'color'}">
+	              <html5:color id="_${sec_field}_id" path="${sec_field}" disabled="${disabled}" readonly="${readonly}" cssClass="form-control input-sm"/>
+	            </c:when>
+	            <c:when test="${type eq 'date'}">
+	              <html5:date id="_${sec_field}_id" path="${sec_field}" disabled="${disabled}" readonly="${readonly}" cssClass="form-control input-sm"/>
+	            </c:when>
+	            <c:when test="${type eq 'password'}">
+	              <form:password id="_${sec_field}_id" path="${sec_field}" disabled="${disabled}" readonly="${readonly}" cssClass="form-control input-sm"/>
+	            </c:when>
+	            <c:when test="${type eq 'time'}">
+	              <html5:time id="_${sec_field}_id" path="${sec_field}" disabled="${disabled}" readonly="${readonly}" cssClass="form-control input-sm"/>
+	            </c:when>
+	            <c:otherwise>
+	              <form:input id="_${sec_field}_id" path="${sec_field}" disabled="${disabled}" readonly="${readonly}" cssClass="form-control input-sm"/>
+	            </c:otherwise>
+	          </c:choose>
+          </div>
+          <form:errors id="_${sec_field}_error_id" path="${sec_field}" />
         </c:otherwise>
       </c:choose>
       <c:choose>
@@ -118,10 +124,7 @@
       <c:if test="${!empty validationRegex}">
         <c:set var="sec_validation_regex" value="regExp : '${validationRegex}', " />
       </c:if>
-      <script type="text/javascript">
-        Spring.addDecoration(new Spring.ElementDecoration({elementId : '_${sec_field}_id', widgetType : 'dijit.form.ValidationTextBox', widgetAttrs : {promptMessage: '${sec_field_validation}', invalidMessage: '${sec_field_invalid}', required : ${required}, ${sec_validation_regex} missingMessage : '${sec_field_required}' }})); 
-      </script>
     </div>
-    <br />
+  </spring:bind>  
   </c:if>
 </jsp:root>

@@ -20,29 +20,29 @@
       <c:set value="MM/dd/yyyy" var="dateTimePattern" />
     </c:if>
 
-    <div id="_${fn:escapeXml(id)}_id">
-      <label for="_${fn:escapeXml(field)}_id">
+    <div id="_${fn:escapeXml(id)}_id" class="form-group">
+      <label for="_${fn:escapeXml(field)}_id" class="control-label col-xs-4 col-sm-2">
         <c:out value="${label}" />
-        :
       </label>
-      <div class="box" id="_${fn:escapeXml(id)}_${fn:escapeXml(field)}_id">
-        <c:choose>
-          <c:when test="${date}">
-            <spring:escapeBody>
-              <fmt:formatDate value="${object[field]}" pattern="${fn:escapeXml(dateTimePattern)}" />
-            </spring:escapeBody>
-          </c:when>
-          <c:when test="${calendar}">
-            <spring:escapeBody>
-              <fmt:formatDate value="${object[field].time}" pattern="${fn:escapeXml(dateTimePattern)}" />
-            </spring:escapeBody>
-          </c:when>
-          <c:otherwise>
-            <spring:eval expression="object[field]" />
-          </c:otherwise>
-        </c:choose>
+      <div class="col-xs-7 col-sm-3" id="_${fn:escapeXml(id)}_${fn:escapeXml(field)}_id">
+      	<p class="form-control-static">
+	        <c:choose>
+	          <c:when test="${date}">
+	            <spring:escapeBody>
+	              <fmt:formatDate value="${object[field]}" pattern="${fn:escapeXml(dateTimePattern)}" />
+	            </spring:escapeBody>
+	          </c:when>
+	          <c:when test="${calendar}">
+	            <spring:escapeBody>
+	              <fmt:formatDate value="${object[field].time}" pattern="${fn:escapeXml(dateTimePattern)}" />
+	            </spring:escapeBody>
+	          </c:when>
+	          <c:otherwise>
+	            <spring:eval expression="object[field]" />
+	          </c:otherwise>
+	        </c:choose>
+        </p>
       </div>
     </div>
-    <br />
   </c:if>
 </jsp:root>
