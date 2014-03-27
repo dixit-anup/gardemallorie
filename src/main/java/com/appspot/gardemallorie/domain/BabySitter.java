@@ -1,5 +1,7 @@
 package com.appspot.gardemallorie.domain;
 
+import javax.persistence.PostLoad;
+import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
@@ -27,5 +29,7 @@ public class BabySitter {
     /**
      */
     private String color;
-
+    
+    private boolean billing;
+    
 }

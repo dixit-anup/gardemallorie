@@ -1,13 +1,19 @@
 package com.appspot.gardemallorie.domain;
 
+import static javax.persistence.FetchType.LAZY;
+import static javax.persistence.TemporalType.DATE;
+import static javax.persistence.TemporalType.TIME;
+
 import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.ManyToOne;
+import javax.persistence.PostLoad;
 import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
-import static javax.persistence.FetchType.LAZY;
+import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.roo.addon.javabean.RooJavaBean;
 import org.springframework.roo.addon.jpa.activerecord.RooJpaActiveRecord;
@@ -27,11 +33,11 @@ import org.springframework.roo.addon.tostring.RooToString;
 	}
 )
 public class BabySitting {
-
+	
     /**
      */
     @NotNull
-    @Temporal(TemporalType.DATE)
+    @Temporal(DATE)
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date day;
 
@@ -43,7 +49,7 @@ public class BabySitting {
      */
     @Column(nullable = true)
     @DateTimeFormat(pattern = "HH:mm")
-    @Temporal(TemporalType.TIME)
+    @Temporal(TIME)
     private Date plannedBeginning;
 
     @Column(nullable = true)
@@ -54,7 +60,7 @@ public class BabySitting {
      */
     @Column(nullable = true)
     @DateTimeFormat(pattern = "HH:mm")
-    @Temporal(TemporalType.TIME)
+    @Temporal(TIME)
     private Date plannedEnd;
 
     @Column(nullable = true)
@@ -74,7 +80,22 @@ public class BabySitting {
      */
     @Column(nullable = true)
     @DateTimeFormat(pattern = "HH:mm")
-    @Temporal(TemporalType.TIME)
+    @Temporal(TIME)
     private Date declaredEnd;
+
+    @Transient
+    private float extraHours;
+
+    @PostLoad
+    void postLoad() {
+    	System.out.println("declaredEnd: " + declaredEnd);
+    	if (declaredEnd != null) {
+        	Date sixOClock = (Date) declaredEnd.clone();
+        	sixOClock.setHours(18);
+        	sixOClock.setMinutes(0);
+        	sixOClock.setSeconds(0);
+        	extraHours = (sixOClock.getTime() - declaredEnd.getTime()) / (1000 * 60 * 60);
+    	}
+    }
 
 }
