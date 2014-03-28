@@ -6,5 +6,6 @@
         <field:input field="firstName" id="c_com_appspot_gardemallorie_domain_BabySitter_firstName" z="/E0cJFVAMMlBglurfC8xw8rRiho="/>
         <field:input field="lastName" id="c_com_appspot_gardemallorie_domain_BabySitter_lastName" max="20" min="3" required="true" z="TU+/vyMnWm3/Dio2ILdwdw/2fKY="/>
         <field:input field="color" id="c_com_appspot_gardemallorie_domain_BabySitter_color" type="color" z="user-managed"/>
+        <field:checkbox field="billing" id="c_com_appspot_gardemallorie_domain_BabySitter_billing" z="DeoY75nSajj1VLxdTaP+vp5FL9s="/>
     </form:update>
 </jsp:root>

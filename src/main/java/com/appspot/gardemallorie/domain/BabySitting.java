@@ -36,9 +36,9 @@ public class BabySitting {
 	
     /**
      */
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     @NotNull
     @Temporal(DATE)
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date day;
 
     @Column(nullable = true)
@@ -84,17 +84,16 @@ public class BabySitting {
     private Date declaredEnd;
 
     @Transient
-    private float extraHours;
+    private double extraHours;
 
     @PostLoad
     void postLoad() {
-    	System.out.println("declaredEnd: " + declaredEnd);
-    	if (declaredEnd != null) {
+    	if (babySitter.isBilling() && declaredEnd != null) {
         	Date sixOClock = (Date) declaredEnd.clone();
         	sixOClock.setHours(18);
         	sixOClock.setMinutes(0);
         	sixOClock.setSeconds(0);
-        	extraHours = (sixOClock.getTime() - declaredEnd.getTime()) / (1000 * 60 * 60);
+        	extraHours = (float)(declaredEnd.getTime() - sixOClock.getTime()) / (1000 * 60 * 60);
     	}
     }
 

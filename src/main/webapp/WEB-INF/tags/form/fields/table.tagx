@@ -16,6 +16,7 @@
   <jsp:directive.attribute name="path" type="java.lang.String" required="true" rtexprvalue="true" description="Specify the URL path" />
   <jsp:directive.attribute name="typeIdFieldName" type="java.lang.String" required="false" rtexprvalue="true" description="The identifier field name for the type (defaults to 'id')" />
   <jsp:directive.attribute name="create" type="java.lang.Boolean" required="false" rtexprvalue="true" description="Include 'create' link into table (default true)" />
+  <jsp:directive.attribute name="show" type="java.lang.Boolean" required="false" rtexprvalue="true" description="Include 'show' link into table (default true)" />
   <jsp:directive.attribute name="update" type="java.lang.Boolean" required="false" rtexprvalue="true" description="Include 'update' link into table (default true)" />
   <jsp:directive.attribute name="delete" type="java.lang.Boolean" required="false" rtexprvalue="true" description="Include 'delete' link into table (default true)" />
   <jsp:directive.attribute name="render" type="java.lang.Boolean" required="false" rtexprvalue="true" description="Indicate if the contents of this tag and all enclosed tags should be rendered (default 'true')" />
@@ -36,6 +37,10 @@
       <c:set var="typeIdFieldName" value="id" />
     </c:if>
 
+    <c:if test="${empty show}">
+      <c:set var="show" value="true" />
+    </c:if>
+
     <c:if test="${empty update}">
       <c:set var="update" value="true" />
     </c:if>
@@ -51,7 +56,7 @@
     <c:set var="properties" value="${fn:split(columnProperties, '&#9999;')}" scope="request" />
     <c:set var="sortProperties" value="${fn:split(columnSortProperties, '&#9999;')}" scope="request" />
     
-    <spring:eval var="colCounter" expression="1" />
+    <spring:eval var="colCounter" expression="0" />
 
     <table class="table table-condensed">
       <thead>
@@ -105,7 +110,10 @@
                 </c:otherwise>
             </c:choose>
           </c:forTokens>
-          <th></th>
+          <c:if test="${show}">
+            <th></th>
+            <spring:eval var="colCounter" expression="colCounter  + 1" />
+          </c:if>
           <c:if test="${update}">
             <th></th>
             <spring:eval var="colCounter" expression="colCounter  + 1" />
@@ -147,14 +155,16 @@
             </td>
           </c:forTokens>
           <c:set var="itemId"><spring:eval expression="item[typeIdFieldName]"/></c:set>
-          <td>
-          	<!-- Show button -->
-            <spring:url value="${path}/${itemId}" var="show_form_url" />
-            <spring:message arguments="${typeName}" code="entity_show" var="show_label" htmlEscape="false" />
-            <a href="${show_form_url}" alt="${fn:escapeXml(show_label)}" title="${fn:escapeXml(show_label)}" class="btn btn-default btn-sm" role="button">
-				<span class="glyphicon glyphicon-zoom-in"></span>
-            </a>
-          </td>
+          <c:if test="${update}">
+			  <td>
+				<!-- Show button -->
+				<spring:url value="${path}/${itemId}" var="show_form_url" />
+				<spring:message arguments="${typeName}" code="entity_show" var="show_label" htmlEscape="false" />
+				<a href="${show_form_url}" alt="${fn:escapeXml(show_label)}" title="${fn:escapeXml(show_label)}" class="btn btn-default btn-sm" role="button">
+					<span class="glyphicon glyphicon-zoom-in"></span>
+				</a>
+			  </td>
+          </c:if>
           <c:if test="${update}">
             <td>
 	          <!-- Update button -->

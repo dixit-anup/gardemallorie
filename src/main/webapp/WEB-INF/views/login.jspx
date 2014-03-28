@@ -51,7 +51,7 @@
       </div>
       <div class="form-group">
         <script type="text/javascript">Spring.addDecoration(new Spring.ValidateAllDecoration({elementId:'proceed', event:'onclick'}));</script>
-        <div class="btn-group col-xs-offset-4 col-sm-offset-2">
+        <div class="btn-group col-xs-offset-4 col-sm-offset-2 col-xs-7 col-sm-3">
 	        <spring:message code="button_submit" var="submit_label" htmlEscape="false" />
 	        <input id="proceed" type="submit" value="${fn:escapeXml(submit_label)}" class="btn btn-default btn-sm"/>
 	        <spring:message code="button_reset" var="reset_label" htmlEscape="false" />

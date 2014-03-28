@@ -7,6 +7,7 @@
             <table:column id="c_com_appspot_gardemallorie_domain_BabySitter_firstName" property="firstName" z="rnnFBEVHQw47jSleHHBZH6pQt2I="/>
             <table:column id="c_com_appspot_gardemallorie_domain_BabySitter_lastName" property="lastName" z="jLWbb4d95R484nwFURAa4glrXhg="/>
             <table:column id="c_com_appspot_gardemallorie_domain_BabySitter_color" property="color" z="jGYveSj2VV3odsrhyslJ4r2Ox2U="/>
+            <table:column id="c_com_appspot_gardemallorie_domain_BabySitter_billing" property="billing" z="zzcOKIe9H32mRIc9Mu5fWNVBTK8="/>
         </table:table>
     </page:list>
 </jsp:root>
