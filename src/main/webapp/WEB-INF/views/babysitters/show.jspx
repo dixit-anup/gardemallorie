@@ -5,7 +5,10 @@
     <page:show id="ps_com_appspot_gardemallorie_domain_BabySitter" object="${babysitter}" path="/babysitters" z="eTiMBAYm27MI209ZN2E3fqcJ9I4=">
         <field:display field="firstName" id="s_com_appspot_gardemallorie_domain_BabySitter_firstName" object="${babysitter}" z="O6PfwmlNZJ3ltFHJhXwSQ5xH4Jw="/>
         <field:display field="lastName" id="s_com_appspot_gardemallorie_domain_BabySitter_lastName" object="${babysitter}" z="t9iWe+htE9Xiwb4e1c5AWkLRWNY="/>
+        <field:display field="notification" id="s_com_appspot_gardemallorie_domain_BabySitter_notification" object="${babysitter}" z="MaYIFeziN6X0IjAn1vusfVPK8FI="/>
+        <field:display field="email" id="s_com_appspot_gardemallorie_domain_BabySitter_email" object="${babysitter}" z="scHiys/sjRZOes1jjFpRLDg179E="/>
         <field:display field="color" id="s_com_appspot_gardemallorie_domain_BabySitter_color" object="${babysitter}" z="C8XYjHhRaPP7Os+JSP/yFRhNGuU="/>
         <field:display field="billing" id="s_com_appspot_gardemallorie_domain_BabySitter_billing" object="${babysitter}" z="dMWbAD37tUPRNcmV0ognLRtbAhM="/>
+        <field:display date="true" dateTimePattern="${babySitter_extrahoursbeginning_date_format}" field="extraHoursBeginning" id="s_com_appspot_gardemallorie_domain_BabySitter_extraHoursBeginning" object="${babysitter}" z="qFMfH7OwBq4Iay5blvoEo9iikaA="/>
     </page:show>
 </jsp:root>

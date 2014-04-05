@@ -13,8 +13,9 @@
         <intercept-url pattern="/**" method="DELETE" access="hasRole('ROLE_ADMIN')" />
         <intercept-url pattern="/**" method="POST" access="hasRole('ROLE_ADMIN')" />
         <intercept-url pattern="/**" method="PUT" access="hasRole('ROLE_ADMIN')" />
-        <intercept-url pattern="/login/**" access="permitAll" requires-channel="https"/>
-        <intercept-url pattern="/**" access="permitAll" />
+        <intercept-url pattern="/login/**" access="permitAll"/>
+        <intercept-url pattern="/**" access="permitAll" requires-channel="${http.requires-channel}"/>
+        <remember-me key="gardemallorie"/>
     </http>
 
     <!-- Configure Authentication mechanism -->
