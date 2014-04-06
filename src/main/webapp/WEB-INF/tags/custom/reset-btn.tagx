@@ -1,0 +1,10 @@
+<jsp:root
+	version="2.0"
+	xmlns:custom="urn:jsptagdir:/WEB-INF/tags/custom"
+	xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:spring="http://www.springframework.org/tags">
+	
+	<custom:btn glyphicon="remove" titleCode="button_reset" type="reset"/>
+
+</jsp:root>

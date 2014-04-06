@@ -5,10 +5,10 @@
     <form:update id="fu_com_appspot_gardemallorie_domain_BabySitter" modelAttribute="babySitter" path="/babysitters" versionField="Version" z="uvFci1h61J6035I9M8DXZzm58nM=">
         <field:input field="firstName" id="c_com_appspot_gardemallorie_domain_BabySitter_firstName" z="/E0cJFVAMMlBglurfC8xw8rRiho="/>
         <field:input field="lastName" id="c_com_appspot_gardemallorie_domain_BabySitter_lastName" max="20" min="3" required="true" z="TU+/vyMnWm3/Dio2ILdwdw/2fKY="/>
-        <field:checkbox field="notification" id="c_com_appspot_gardemallorie_domain_BabySitter_notification" z="f3uBMewbhvTVEWrRcoe6z0ivgF0="/>
-        <field:input field="email" id="c_com_appspot_gardemallorie_domain_BabySitter_email" validationMessageCode="field_invalid_email" z="JXFfCyNPBGQoaaY9iwo/M0AsULw="/>
+        <field:checkbox field="notification" id="c_com_appspot_gardemallorie_domain_BabySitter_notification" z="?"/>
+        <field:input field="email" id="c_com_appspot_gardemallorie_domain_BabySitter_email" type="email" z="user-managed"/>
         <field:input field="color" id="c_com_appspot_gardemallorie_domain_BabySitter_color" type="color" z="user-managed"/>
-        <field:checkbox field="billing" id="c_com_appspot_gardemallorie_domain_BabySitter_billing" z="DeoY75nSajj1VLxdTaP+vp5FL9s="/>
+        <field:checkbox field="billing" id="c_com_appspot_gardemallorie_domain_BabySitter_billing" z="?"/>
         <field:input field="extraHoursBeginning" id="c_com_appspot_gardemallorie_domain_BabySitter_extraHoursBeginning" type="time" z="user-managed"/>
     </form:update>
 </jsp:root>
