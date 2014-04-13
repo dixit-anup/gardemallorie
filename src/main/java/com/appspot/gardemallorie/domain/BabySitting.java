@@ -1,28 +1,18 @@
 package com.appspot.gardemallorie.domain;
 
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.FetchType;
 import javax.persistence.ManyToOne;
 import javax.persistence.PostLoad;
-import javax.persistence.PostPersist;
-import javax.persistence.PostUpdate;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.format.annotation.DateTimeFormat;
-import org.springframework.mail.MailSender;
-import org.springframework.mail.SimpleMailMessage;
 import org.springframework.roo.addon.javabean.RooJavaBean;
 import org.springframework.roo.addon.jpa.activerecord.RooJpaActiveRecord;
 import org.springframework.roo.addon.json.RooJson;
@@ -89,50 +79,6 @@ public class BabySitting {
             Date extraHoursBeginning = babySitter.getExtraHoursBeginning();
             extraHours = (float) (declaredEnd.getTime() - extraHoursBeginning.getTime()) / MILLISECONDS_PER_HOURS;
         }
-    }
-
-    @Autowired
-    private transient MailSender mailSender;
-
-    @Autowired
-    @Qualifier("newBabySittingMailMessage")
-    private transient SimpleMailMessage newBabySittingMailMessage;
-
-    @Autowired
-    @Qualifier("updateBabySittingMailMessage")
-    private transient SimpleMailMessage updateBabySittingMailMessage;
-
-    @PostPersist
-    void onPersist() {
-    	sendMailMessage(newBabySittingMailMessage);
-    }
-    
-    @PostUpdate
-    void onUpdate() {
-    	throw new UnsupportedOperationException();
-    }
-
-    void sendMailMessage(SimpleMailMessage templateMessage) {
-    	
-    	Set<BabySitter> babySitters = new HashSet<BabySitter>(3);
-    	babySitters.add(babySitter);
-    	babySitters.add(back);
-    	babySitters.add(go);
-    	List<String> to = new ArrayList<String>();
-
-    	for (BabySitter b : babySitters) {
-    		if (b != null && b.isNotification() && b.getEmail() != null) {
-    			to.add(b.getEmail());
-    		}
-    	}
-
-    	if (to.size() > 0) {
-	        SimpleMailMessage mailMessage = new SimpleMailMessage(templateMessage);
-	        mailMessage.setTo(to.toArray(new String[to.size()]));
-	        mailMessage.setText("http://2.gardemallorie.appspot.com/babysittings/" + getId());
-	        mailSender.send(mailMessage);
-    	}
-
     }
 
 }

@@ -9,6 +9,7 @@
         ${propertyKey}.
     -->
     <context:property-placeholder location="classpath*:META-INF/spring/*.properties"/>
+
     <!--
         Turn on AspectJ @Configurable support. As a result, any time you
         instantiate an object, Spring will attempt to perform dependency
@@ -23,6 +24,7 @@
         areas, such as @PersistenceContext injection into entities.
     -->
     <context:spring-configured/>
+
     <!--
         This declaration will cause Spring to locate every @Component,
         @Repository and @Service in your application. In practical terms this
@@ -48,25 +50,13 @@
         <context:exclude-filter expression=".*_Roo_.*" type="regex"/>
         <context:exclude-filter expression="org.springframework.stereotype.Controller" type="annotation"/>
     </context:component-scan>
+
     <bean class="org.springframework.orm.jpa.JpaTransactionManager" id="transactionManager">
         <property name="entityManagerFactory" ref="entityManagerFactory"/>
     </bean>
     <tx:annotation-driven mode="aspectj" transaction-manager="transactionManager"/>
     <bean class="org.springframework.orm.jpa.LocalEntityManagerFactoryBean" id="entityManagerFactory">
         <property name="persistenceUnitName" value="transactions-optional"/>
-    </bean>
-
-    <!-- email -->
-    <bean class="com.appspot.gardemallorie.spring.mail.GaeMailSender" id="mailSender">
-    </bean>
-    <bean class="org.springframework.mail.SimpleMailMessage" id="newBabySittingMailMessage">
-        <property name="from" value="${email.from}"/>
-        <property name="subject" value="${email.subject.babySitting.new}"/>
-        <property name="cc" value="deck.emilie@yahoo.fr"/>
-    </bean>
-    <bean class="org.springframework.mail.SimpleMailMessage" id="updateBabySittingMailMessage">
-        <property name="from" value="${email.from}"/>
-        <property name="subject" value="${email.subject.babySitting.update}"/>
     </bean>
 
     <task:executor id="asyncExecutor" pool-size="${executor.poolSize}"/>
