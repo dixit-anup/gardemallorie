@@ -2,18 +2,21 @@ project --java 7 --topLevelPackage com.appspot.gardemallorie
 
 jpa setup --database GOOGLE_APP_ENGINE --provider DATANUCLEUS
 
-enum type --class ~.reference.BabySitterType
-enum constant --name "JOSEPHINE"
-enum constant --name "EMILIE"
-enum constant --name "BETTY"
-enum constant --name "GISELE"
+entity jpa --activeRecord true --class ~.domain.Location --equals true --serializable false --testAutomatically true
+field string --fieldName name --notNull --sizeMax 50 --sizeMin 2
+//repository jpa --entity ~.domain.Location --interface ~.repository.LocationRepository
 
-enum type --class ~.reference.LocalisationType
-enum constant --name "JANNEYRIAS"
-enum constant --name "LES_LORANCES"
-enum constant --name "LES_SAUVAGES"
+entity jpa --activeRecord true --class ~.domain.BabySitter --equals true --serializable false --testAutomatically true
+field string --fieldName firstName
+field string --fieldName lastName --notNull --sizeMax 20 --sizeMin 3
+field boolean --fieldName notification --primitive true
+field string --fieldName email
+field string --fieldName color
+field boolean --fieldName billing --primitive true
+field date --dateTimeFormatPattern HH:mm --fieldName extraHoursBeginning --notNull false --persistenceType JPA_TIME --type java.util.Date
+//repository jpa --entity ~.domain.BabySitter --interface ~.repository.BabySitterRepository
 
-entity jpa --class ~.domain.Garde --serializable true --testAutomatically false
+entity jpa --activeRecord true --class ~.domain.BabySitting --equals true --serializable false --testAutomatically true
 field date      --fieldName le           --type java.util.Date               --persistenceType JPA_DATE --dateTimeFormatPattern "yyyy/MM/dd" --notNull true
 field enum      --fieldName par          --type ~.reference.BabySitterType   --enumType STRING
 field enum      --fieldName a            --type ~.reference.LocalisationType --enumType STRING

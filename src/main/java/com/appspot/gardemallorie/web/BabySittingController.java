@@ -1,20 +1,16 @@
 package com.appspot.gardemallorie.web;
-
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-
 import org.springframework.roo.addon.web.mvc.controller.finder.RooWebFinder;
 import org.springframework.roo.addon.web.mvc.controller.scaffold.RooWebScaffold;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-
 import com.appspot.gardemallorie.domain.BabySitting;
 
 /**
- * TODO: send emails using AspectJ
  * @author DAVID
  *
  */
@@ -62,5 +58,4 @@ public class BabySittingController {
         addDateTimeFormatPatterns(uiModel);
         return "babysittings/extraHours";
     }
-
 }

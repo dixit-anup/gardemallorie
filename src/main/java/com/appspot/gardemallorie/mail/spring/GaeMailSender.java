@@ -1,4 +1,4 @@
-package com.appspot.gardemallorie.spring.mail;
+package com.appspot.gardemallorie.mail.spring;
 
 import java.util.Properties;
 

@@ -537,11 +537,10 @@
                 <configuration>
                         <fork>false</fork>
                         <log4jConfiguration>${basedir}/src/main/resources/log4j.properties</log4jConfiguration>
-                        <mappingIncludes>**/*.class</mappingIncludes>
+                        <mappingIncludes>com/appspot/gardemallorie/domain/*.class</mappingIncludes>
                         <verbose>true</verbose>
                         <enhancerName>ASM</enhancerName>
                         <api>JPA</api>
-                    <mappingExcludes>**/CustomRequestFactoryServlet.class, **/GaeAuthFilter.class</mappingExcludes>
                 </configuration>
                 <executions>
                     <execution>

@@ -1,25 +1,26 @@
 package com.appspot.gardemallorie.domain;
+import org.springframework.roo.addon.equals.RooEquals;
+import org.springframework.roo.addon.javabean.RooJavaBean;
+import org.springframework.roo.addon.tostring.RooToString;
+import org.springframework.roo.addon.jpa.activerecord.RooJpaActiveRecord;
 
-import static javax.persistence.TemporalType.TIME;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Temporal;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
+import javax.persistence.TemporalType;
 
-import org.hibernate.validator.constraints.Email;
 import org.springframework.format.annotation.DateTimeFormat;
-import org.springframework.roo.addon.javabean.RooJavaBean;
-import org.springframework.roo.addon.jpa.activerecord.RooJpaActiveRecord;
 import org.springframework.roo.addon.json.RooJson;
-import org.springframework.roo.addon.tostring.RooToString;
 
 @RooJavaBean
-@RooJpaActiveRecord
-@RooJson
 @RooToString
+@RooJpaActiveRecord
+@RooEquals
+@RooJson
 public class BabySitter {
 
     /**
@@ -32,20 +33,26 @@ public class BabySitter {
     @Size(min = 3, max = 20)
     private String lastName;
 
+    /**
+     */
     private boolean notification;
-    
-	@Email
-	private String email;
-	
+
+    /**
+     */
+    private String email;
+
     /**
      */
     private String color;
-    
-    private boolean billing;
-    
-    @Column(nullable = true)
-    @DateTimeFormat(pattern = "HH:mm")
-    @Temporal(TIME)
-    private Date extraHoursBeginning;
 
+    /**
+     */
+    private boolean billing;
+
+    /**
+     */
+    @Column(nullable = true)
+    @Temporal(TemporalType.TIME)
+    @DateTimeFormat(pattern = "HH:mm")
+    private Date extraHoursBeginning;
 }

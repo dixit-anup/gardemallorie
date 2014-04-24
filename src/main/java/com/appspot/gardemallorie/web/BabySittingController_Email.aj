@@ -75,7 +75,7 @@ privileged aspect BabySittingController_Email {
 	        mailMessage.setTo(to.toArray(new String[to.size()]));
 	        StringBuilder text = new StringBuilder();
 	        text.append("Date :\t\t\t").append(new SimpleDateFormat("EEE dd/MM/yyyy", locale).format(babySitting.getDay()));
-	        text.append("\r\nBaby-sitter :\t").append(babySitting.getBabySitter().getFirstName());
+	        text.append("\r\nBaby-sitter :\t\t").append(babySitting.getBabySitter().getFirstName());
 	        text.append("\r\nDébut prévu :\t");
 	        if (babySitting.getPlannedBeginning() != null) {
 	        	text.append(new SimpleDateFormat("HH:mm", locale).format(babySitting.getPlannedBeginning()));
