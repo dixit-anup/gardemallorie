@@ -94,6 +94,7 @@ privileged aspect BabySittingController_Roo_Controller {
         uiModel.addAttribute("babySitting_plannedend_date_format", "HH:mm");
         uiModel.addAttribute("babySitting_declaredend_date_format", "HH:mm");
         uiModel.addAttribute("babySitting_chargedend_date_format", "HH:mm");
+        uiModel.addAttribute("babySitting_copyuntil_date_format", "yyyy-MM-dd");
     }
     
     void BabySittingController.populateEditForm(Model uiModel, BabySitting babySitting) {

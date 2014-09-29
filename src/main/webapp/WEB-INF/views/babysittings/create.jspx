@@ -14,6 +14,8 @@
         <field:input field="declaredEnd" id="c_com_appspot_gardemallorie_domain_BabySitting_declaredEnd" type="time" z="user-managed"/>
         <field:input field="extraHours" id="c_com_appspot_gardemallorie_domain_BabySitting_extraHours" readonly="true" z="user-managed"/>
         <field:input field="chargedEnd" id="c_com_appspot_gardemallorie_domain_BabySitting_chargedEnd" type="time" z="user-managed"/>
+        <field:input field="childcareVouchers" id="c_com_appspot_gardemallorie_domain_BabySitting_childcareVouchers" type="time" z="user-managed"/>
+        <field:input field="copyUntil" id="c_com_appspot_gardemallorie_domain_BabySitting_copyUntil" z="user-managed"/>
     </form:create>
     <form:dependency dependencies="${dependencies}" id="d_com_appspot_gardemallorie_domain_BabySitting" render="${not empty dependencies}" z="NzEPcAHDXJ2jwF45PDCeZ1ny5Rw="/>
 </jsp:root>

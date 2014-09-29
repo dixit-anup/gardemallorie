@@ -15,7 +15,7 @@ privileged aspect BabySitting_Roo_Jpa_ActiveRecord {
     @PersistenceContext
     transient EntityManager BabySitting.entityManager;
     
-    public static final List<String> BabySitting.fieldNames4OrderClauseFilter = java.util.Arrays.asList("MILLISECONDS_PER_HOURS", "day", "babySitter", "plannedBeginning", "go", "plannedEnd", "back", "comment", "location", "declaredEnd", "extraHours", "chargedEnd");
+    public static final List<String> BabySitting.fieldNames4OrderClauseFilter = java.util.Arrays.asList("MILLISECONDS_PER_HOURS", "day", "babySitter", "plannedBeginning", "go", "plannedEnd", "back", "comment", "location", "declaredEnd", "chargedEnd", "extraHours", "childcareVouchers", "copyUntil");
     
     public static final EntityManager BabySitting.entityManager() {
         EntityManager em = new BabySitting().entityManager;

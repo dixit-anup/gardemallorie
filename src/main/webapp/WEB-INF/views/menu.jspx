@@ -5,7 +5,7 @@
     <menu:menu id="_menu" z="nZaf43BjUg1iM0v70HJVEsXDopc=">
         <menu:category id="c_babysitting" z="UGB9x5f6l/wVoST82mgNdd7+DaA=">
             <menu:item id="i_babysitting_new" messageCode="global_menu_new" url="/babysittings?form" z="VcWIkNxFfmV31qSU4w/i1GSUgSo="/>
-            <menu:item id="i_babysitting_extrahours" messageCode="global_menu_extrahours" url="/babysittings?find=ExtraHours" z="fZIlRMKzi2j04r3UCBeR8CiMt5k="/>
+            <menu:item id="i_babysitting_extracharges" messageCode="global_menu_extracharges" url="/babysittings?find=ExtraCharges" z="user-managed"/>
             <menu:item id="i_babysitting_list" messageCode="global_menu_list" url="/babysittings?page=1&amp;size=${empty param.size ? 10 : param.size}" z="lQvPjK9EJkJT+8VuUEPvsMaOzNM="/>
             <menu:item id="fi_babysitting_babysitter" messageCode="global_menu_find" url="/babysittings?find=ByBabySitter&amp;form&amp;page=1&amp;size=${empty param.size ? 10 : param.size}" z="cn1UKr5OaZk8qNDKCYXbp+gb9sE="/>
             <menu:item id="fi_babysitting_back" messageCode="global_menu_find" url="/babysittings?find=ByBack&amp;form&amp;page=1&amp;size=${empty param.size ? 10 : param.size}" z="cO2cNd+H0WNGQGy+6YO5Nv+agbI="/>

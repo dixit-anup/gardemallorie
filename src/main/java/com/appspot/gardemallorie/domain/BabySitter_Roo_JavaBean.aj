@@ -64,4 +64,12 @@ privileged aspect BabySitter_Roo_JavaBean {
         this.extraHoursBeginning = extraHoursBeginning;
     }
     
+    public float BabySitter.getChildcareVouchers() {
+        return this.childcareVouchers;
+    }
+    
+    public void BabySitter.setChildcareVouchers(float childcareVouchers) {
+        this.childcareVouchers = childcareVouchers;
+    }
+    
 }

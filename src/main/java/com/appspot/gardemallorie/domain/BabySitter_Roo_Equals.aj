@@ -17,11 +17,11 @@ privileged aspect BabySitter_Roo_Equals {
             return true;
         }
         BabySitter rhs = (BabySitter) obj;
-        return new EqualsBuilder().append(billing, rhs.billing).append(color, rhs.color).append(email, rhs.email).append(extraHoursBeginning, rhs.extraHoursBeginning).append(firstName, rhs.firstName).append(id, rhs.id).append(lastName, rhs.lastName).append(notification, rhs.notification).isEquals();
+        return new EqualsBuilder().append(billing, rhs.billing).append(childcareVouchers, rhs.childcareVouchers).append(color, rhs.color).append(email, rhs.email).append(extraHoursBeginning, rhs.extraHoursBeginning).append(firstName, rhs.firstName).append(id, rhs.id).append(lastName, rhs.lastName).append(notification, rhs.notification).isEquals();
     }
     
     public int BabySitter.hashCode() {
-        return new HashCodeBuilder().append(billing).append(color).append(email).append(extraHoursBeginning).append(firstName).append(id).append(lastName).append(notification).toHashCode();
+        return new HashCodeBuilder().append(billing).append(childcareVouchers).append(color).append(email).append(extraHoursBeginning).append(firstName).append(id).append(lastName).append(notification).toHashCode();
     }
     
 }

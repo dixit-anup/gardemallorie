@@ -10,5 +10,6 @@
         <field:display field="color" id="s_com_appspot_gardemallorie_domain_BabySitter_color" object="${babysitter}" z="C8XYjHhRaPP7Os+JSP/yFRhNGuU="/>
         <field:display field="billing" id="s_com_appspot_gardemallorie_domain_BabySitter_billing" object="${babysitter}" z="dMWbAD37tUPRNcmV0ognLRtbAhM="/>
         <field:display date="true" dateTimePattern="${babySitter_extrahoursbeginning_date_format}" field="extraHoursBeginning" id="s_com_appspot_gardemallorie_domain_BabySitter_extraHoursBeginning" object="${babysitter}" z="qFMfH7OwBq4Iay5blvoEo9iikaA="/>
+        <field:display field="childcareVouchers" id="s_com_appspot_gardemallorie_domain_BabySitter_childcareVouchers" object="${babysitter}" z="h4xAtx3PjpDWTNJh41iuMVdu018="/>
     </page:show>
 </jsp:root>

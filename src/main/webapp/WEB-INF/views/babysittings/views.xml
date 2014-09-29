@@ -1,70 +1,76 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <!DOCTYPE tiles-definitions PUBLIC "-//Apache Software Foundation//DTD Tiles Configuration 2.1//EN" "http://tiles.apache.org/dtds/tiles-config_2_1.dtd">
 <tiles-definitions>
-    <definition extends="default" name="babysittings/extraHours">
-        <put-attribute name="body" value="/WEB-INF/views/babysittings/extraHours.jspx"/>
+    <definition extends="default" name="babysittings/extraCharges">
+        <put-attribute name="body" value="/WEB-INF/views/babysittings/extraCharges.jspx"/>
     </definition>
     <definition extends="default" name="babysittings/list">
         <put-attribute name="body" value="/WEB-INF/views/babysittings/list.jspx"/>
     </definition>
-<definition extends="default" name="babysittings/show">
+	<definition extends="default" name="babysittings/show">
         <put-attribute name="body" value="/WEB-INF/views/babysittings/show.jspx"/>
     </definition>
-<definition extends="default" name="babysittings/create">
+	<definition extends="default" name="babysittings/create">
         <put-attribute name="body" value="/WEB-INF/views/babysittings/create.jspx"/>
     </definition>
-<definition extends="default" name="babysittings/update">
+	<definition extends="default" name="babysittings/update">
         <put-attribute name="body" value="/WEB-INF/views/babysittings/update.jspx"/>
     </definition>
-<definition extends="default" name="babysittings/findBabySittingsByBabySitter">
+	<definition extends="default" name="babysittings/findBabySittingsByBabySitter">
         <put-attribute name="body" value="/WEB-INF/views/babysittings/findBabySittingsByBabySitter.jspx"/>
     </definition>
-<definition extends="default" name="babysittings/findBabySittingsByBack">
+	<definition extends="default" name="babysittings/findBabySittingsByBack">
         <put-attribute name="body" value="/WEB-INF/views/babysittings/findBabySittingsByBack.jspx"/>
     </definition>
-<definition extends="default" name="babysittings/findBabySittingsByDayBetween">
+	<definition extends="default" name="babysittings/findBabySittingsByDayBetween">
         <put-attribute name="body" value="/WEB-INF/views/babysittings/findBabySittingsByDayBetween.jspx"/>
     </definition>
-<definition extends="default" name="babysittings/findBabySittingsByDayEquals">
+	<definition extends="default" name="babysittings/findBabySittingsByDayEquals">
         <put-attribute name="body" value="/WEB-INF/views/babysittings/findBabySittingsByDayEquals.jspx"/>
     </definition>
-<definition extends="default" name="babysittings/findBabySittingsByDayGreaterThan">
+	<definition extends="default" name="babysittings/findBabySittingsByDayGreaterThan">
         <put-attribute name="body" value="/WEB-INF/views/babysittings/findBabySittingsByDayGreaterThan.jspx"/>
     </definition>
-<definition extends="default" name="babysittings/findBabySittingsByDayGreaterThanEquals">
+	<definition extends="default" name="babysittings/findBabySittingsByDayGreaterThanEquals">
         <put-attribute name="body" value="/WEB-INF/views/babysittings/findBabySittingsByDayGreaterThanEquals.jspx"/>
     </definition>
-<definition extends="default" name="babysittings/findBabySittingsByDayLessThan">
+	<definition extends="default" name="babysittings/findBabySittingsByDayLessThan">
         <put-attribute name="body" value="/WEB-INF/views/babysittings/findBabySittingsByDayLessThan.jspx"/>
     </definition>
-<definition extends="default" name="babysittings/findBabySittingsByDayLessThanEquals">
+	<definition extends="default" name="babysittings/findBabySittingsByDayLessThanEquals">
         <put-attribute name="body" value="/WEB-INF/views/babysittings/findBabySittingsByDayLessThanEquals.jspx"/>
     </definition>
-<definition extends="default" name="babysittings/findBabySittingsByDayNotEquals">
+	<definition extends="default" name="babysittings/findBabySittingsByDayNotEquals">
         <put-attribute name="body" value="/WEB-INF/views/babysittings/findBabySittingsByDayNotEquals.jspx"/>
     </definition>
-<definition extends="default" name="babysittings/findBabySittingsByPlannedBeginningBetween">
+	<definition extends="default" name="babysittings/findBabySittingsByPlannedBeginningBetween">
         <put-attribute name="body" value="/WEB-INF/views/babysittings/findBabySittingsByPlannedBeginningBetween.jspx"/>
     </definition>
-<definition extends="default" name="babysittings/findBabySittingsByPlannedBeginningEquals">
+	<definition extends="default" name="babysittings/findBabySittingsByPlannedBeginningEquals">
         <put-attribute name="body" value="/WEB-INF/views/babysittings/findBabySittingsByPlannedBeginningEquals.jspx"/>
     </definition>
-<definition extends="default" name="babysittings/findBabySittingsByPlannedBeginningGreaterThan">
+	<definition extends="default" name="babysittings/findBabySittingsByPlannedBeginningGreaterThan">
         <put-attribute name="body" value="/WEB-INF/views/babysittings/findBabySittingsByPlannedBeginningGreaterThan.jspx"/>
     </definition>
-<definition extends="default" name="babysittings/findBabySittingsByPlannedBeginningGreaterThanEquals">
+	<definition extends="default" name="babysittings/findBabySittingsByPlannedBeginningGreaterThanEquals">
         <put-attribute name="body" value="/WEB-INF/views/babysittings/findBabySittingsByPlannedBeginningGreaterThanEquals.jspx"/>
     </definition>
-<definition extends="default" name="babysittings/findBabySittingsByPlannedBeginningLessThan">
+	<definition extends="default" name="babysittings/findBabySittingsByPlannedBeginningLessThan">
         <put-attribute name="body" value="/WEB-INF/views/babysittings/findBabySittingsByPlannedBeginningLessThan.jspx"/>
     </definition>
-<definition extends="default" name="babysittings/findBabySittingsByPlannedBeginningLessThanEquals">
+	<definition extends="default" name="babysittings/findBabySittingsByPlannedBeginningLessThanEquals">
         <put-attribute name="body" value="/WEB-INF/views/babysittings/findBabySittingsByPlannedBeginningLessThanEquals.jspx"/>
     </definition>
-<definition extends="default" name="babysittings/findBabySittingsByPlannedBeginningNotEquals">
+	<definition extends="default" name="babysittings/findBabySittingsByPlannedBeginningNotEquals">
         <put-attribute name="body" value="/WEB-INF/views/babysittings/findBabySittingsByPlannedBeginningNotEquals.jspx"/>
     </definition>
-<definition extends="default" name="babysittings/findBabySittingsByGo">
+	<definition extends="default" name="babysittings/findBabySittingsByGo">
         <put-attribute name="body" value="/WEB-INF/views/babysittings/findBabySittingsByGo.jspx"/>
+    </definition>
+	<definition extends="default" name="babysittings/findBabySittingsByDayAndBabySitter">
+        <put-attribute name="body" value="/WEB-INF/views/babysittings/findBabySittingsByDayAndBabySitter.jspx"/>
+    </definition>
+<definition extends="default" name="babysittings/findBabySittingsByBackAndGo">
+        <put-attribute name="body" value="/WEB-INF/views/babysittings/findBabySittingsByBackAndGo.jspx"/>
     </definition>
 </tiles-definitions>

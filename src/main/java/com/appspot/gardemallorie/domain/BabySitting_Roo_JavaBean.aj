@@ -82,6 +82,14 @@ privileged aspect BabySitting_Roo_JavaBean {
         this.declaredEnd = declaredEnd;
     }
     
+    public Date BabySitting.getChargedEnd() {
+        return this.chargedEnd;
+    }
+    
+    public void BabySitting.setChargedEnd(Date chargedEnd) {
+        this.chargedEnd = chargedEnd;
+    }
+    
     public float BabySitting.getExtraHours() {
         return this.extraHours;
     }
@@ -90,12 +98,20 @@ privileged aspect BabySitting_Roo_JavaBean {
         this.extraHours = extraHours;
     }
     
-    public Date BabySitting.getChargedEnd() {
-        return this.chargedEnd;
+    public float BabySitting.getChildcareVouchers() {
+        return this.childcareVouchers;
     }
     
-    public void BabySitting.setChargedEnd(Date chargedEnd) {
-        this.chargedEnd = chargedEnd;
+    public void BabySitting.setChildcareVouchers(float childcareVouchers) {
+        this.childcareVouchers = childcareVouchers;
+    }
+    
+    public Date BabySitting.getCopyUntil() {
+        return this.copyUntil;
+    }
+    
+    public void BabySitting.setCopyUntil(Date copyUntil) {
+        this.copyUntil = copyUntil;
     }
     
 }

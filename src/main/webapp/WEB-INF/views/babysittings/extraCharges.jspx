@@ -2,11 +2,12 @@
 <jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" xmlns:table="urn:jsptagdir:/WEB-INF/tags/form/fields" version="2.0">
     <jsp:directive.page contentType="text/html;charset=UTF-8"/>
     <jsp:output omit-xml-declaration="yes"/>
-    <page:list id="pl_com_appspot_gardemallorie_domain_BabySitting" items="${extraHours}" z="JvcK8yLPa/80mcBl69ti9WqC5Is=">
-        <table:table data="${extraHours}" id="l_com_appspot_gardemallorie_domain_BabySitting" path="/babysittings" z="4ck+P7M4MCpBtzX8ryJML3S1UPA="
-			create="false" delete="false" show="false" update="false">
+    <page:list id="pl_com_appspot_gardemallorie_domain_BabySitting" items="${extraCharges}" z="JvcK8yLPa/80mcBl69ti9WqC5Is=">
+        <table:table data="${extraCharges}" id="l_com_appspot_gardemallorie_domain_BabySitting"
+        	path="/babysittings" z="4ck+P7M4MCpBtzX8ryJML3S1UPA=" create="false" delete="false" show="false" update="false">
             <table:column date="true" dateTimePattern="MM/yyyy" id="c_com_appspot_gardemallorie_domain_BabySitting_day" property="day" z="user-managed"/>
             <table:column id="c_com_appspot_gardemallorie_domain_BabySitting_extraHours" property="extraHours" z="user-managed"/>
+            <table:column id="c_com_appspot_gardemallorie_domain_BabySitting_childcareVouchers" property="childcareVouchers" z="user-managed"/>
         </table:table>
     </page:list>
 </jsp:root>

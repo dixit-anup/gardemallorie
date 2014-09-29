@@ -10,5 +10,6 @@
         <field:input field="color" id="c_com_appspot_gardemallorie_domain_BabySitter_color" type="color" z="user-managed"/>
         <field:checkbox field="billing" id="c_com_appspot_gardemallorie_domain_BabySitter_billing" z="DeoY75nSajj1VLxdTaP+vp5FL9s="/>
         <field:input field="extraHoursBeginning" id="c_com_appspot_gardemallorie_domain_BabySitter_extraHoursBeginning" type="time" z="user-managed"/>
+        <field:input field="childcareVouchers" id="c_com_appspot_gardemallorie_domain_BabySitter_childcareVouchers" z="lyJLyxiAveVUJ2gA6XUNtMvHF2w="/>
     </form:update>
 </jsp:root>

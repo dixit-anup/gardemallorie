@@ -106,7 +106,7 @@
                   	</th>
                 </c:when>
                 <c:otherwise>
-                    <th style="vertical-align: middle;"><c:out value="${columnHeading}" /> <spring:eval var="colCounter" expression="colCounter  + 1" /></th>
+                    <th style="vertical-align: top;"><c:out value="${columnHeading}" /> <spring:eval var="colCounter" expression="colCounter  + 1" /></th>
                 </c:otherwise>
             </c:choose>
           </c:forTokens>

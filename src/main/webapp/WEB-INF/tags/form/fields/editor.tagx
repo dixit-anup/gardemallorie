@@ -30,7 +30,6 @@
       <spring:escapeBody javaScriptEscape="true" >${field}</spring:escapeBody>
     </c:set>
 
-    <script type="text/javascript">dojo.require("dijit.Editor");</script>
     <div id="_${fn:escapeXml(id)}_id">
       <label for="_${sec_field}_id">
         <c:out value="${fn:escapeXml(label)}" /> :
