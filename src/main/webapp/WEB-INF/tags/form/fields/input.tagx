@@ -73,7 +73,7 @@
 
 		<div id="_${fn:escapeXml(id)}_id" class="form-group">
 			<label for="_${sec_field}_id" class="control-label col-xs-4 col-sm-2">
-				<c:out value="${fn:escapeXml(label)}" />
+				<c:out value="${label}" />
 			</label>
 			<div class="col-xs-7 col-sm-3">
 				<c:choose>
