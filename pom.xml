@@ -4,7 +4,7 @@
     <groupId>com.appspot.gardemallorie</groupId>
     <artifactId>gardemallorie</artifactId>
     <packaging>war</packaging>
-    <version>1.1.1</version>
+    <version>1.1.2</version>
     <name>Garde Mallorie</name>
     <properties>
         <aspectj.version>1.7.4</aspectj.version>

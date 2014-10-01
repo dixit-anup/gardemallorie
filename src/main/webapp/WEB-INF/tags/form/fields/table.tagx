@@ -24,6 +24,7 @@
 
   <c:if test="${empty render or render}">
 
+    <c:set var="columnCssClasses" scope="request" />
     <c:set var="columnProperties" scope="request" />
     <c:set var="columnLabels" scope="request" />
     <c:set var="columnMaxLengths" scope="request" />
@@ -50,6 +51,7 @@
     </c:if>
 
     <spring:message var="typeName" code="menu_item_${fn:toLowerCase(fn:split(id,'_')[fn:length(fn:split(id,'_')) - 1])}_new_label" htmlEscape="false" />
+    <c:set var="cssClasses" value="${fn:split(columnCssClasses, '&#9999;')}" scope="request" />
     <c:set var="lengths" value="${fn:split(columnMaxLengths, '&#9999;')}" scope="request" />
     <c:set var="types" value="${fn:split(columnTypes, '&#9999;')}" scope="request" />
     <c:set var="patterns" value="${fn:split(columnDatePatterns, '&#9999;')}" scope="request" />
@@ -62,6 +64,7 @@
       <thead>
         <tr>
           <c:forTokens items="${columnLabels}" delims="${'&#9999;'}" var="columnHeading" varStatus="num">
+            <c:set var="cssClass" value="${cssClasses[num.count-1]}"/>
             <c:set var="columnProperty" value="${properties[num.count-1]}" />
             <c:set var="sort" value="false" />
             <c:forEach var="sortProperty" items="${sortProperties}">
@@ -97,7 +100,7 @@
                             <spring:param name="sortOrder" value="asc" />
                         </c:if>
                     </spring:url>
-                    <th>
+                    <th class="${cssClass}">
                     	<a href="${querySortUrl}" class="btn btn-default btn-sm">
 							<c:out value="${columnHeading} " />
                     		<span class="glyphicon glyphicon-${sortOrderClass}"></span>
@@ -106,7 +109,7 @@
                   	</th>
                 </c:when>
                 <c:otherwise>
-                    <th style="vertical-align: top;"><c:out value="${columnHeading}" /> <spring:eval var="colCounter" expression="colCounter  + 1" /></th>
+                    <th class="${cssClass}" style="vertical-align: top;"><c:out value="${columnHeading}" /> <spring:eval var="colCounter" expression="colCounter  + 1" /></th>
                 </c:otherwise>
             </c:choose>
           </c:forTokens>
@@ -127,10 +130,11 @@
       <c:forEach items="${data}" var="item">
         <tr>
           <c:forTokens items="${columnProperties}" delims="${'&#9999;'}" var="column" varStatus="num">
+            <c:set var="cssClass" value="${cssClasses[num.count-1]}"/>
             <c:set var="columnMaxLength" value="${lengths[num.count-1]}" />
             <c:set var="columnType" value="${types[num.count-1]}" />
             <c:set var="columnDatePattern" value="${patterns[num.count-1]}" />
-            <td>
+            <td class="${cssClass}">
               <c:choose>
                 <c:when test="${columnType eq 'date'}">
                   <spring:escapeBody>
