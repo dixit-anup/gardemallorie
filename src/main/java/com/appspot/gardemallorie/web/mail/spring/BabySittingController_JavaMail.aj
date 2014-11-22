@@ -1,4 +1,4 @@
-package com.appspot.gardemallorie.web.spring.mail;
+package com.appspot.gardemallorie.web.mail.spring;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -74,25 +74,6 @@ privileged aspect BabySittingController_JavaMail {
     	}
 
     	if (to.size() > 0) {
-    		
-/*	        SimpleMailMessage mailMessage = new SimpleMailMessage(templateMailMessage);
-	        mailMessage.setTo(to.toArray(new String[to.size()]));
-	        StringBuilder text = new StringBuilder();
-	        text.append("Date :\t\t\t").append(new SimpleDateFormat("EEE dd/MM/yyyy", locale).format(babySitting.getDay()));
-	        text.append("\r\nBaby-sitter :\t\t").append(babySitting.getBabySitter().getFirstName());
-	        text.append("\r\nDébut prévu :\t");
-	        if (babySitting.getPlannedBeginning() != null) {
-	        	text.append(new SimpleDateFormat("HH:mm", locale).format(babySitting.getPlannedBeginning()));
-	        }
-	        text.append("\r\nAller :\t\t\t").append(babySitting.getGo().getFirstName());
-	        text.append("\r\nFin prévue :\t\t");
-	        if (babySitting.getPlannedEnd() != null) {
-	        	text.append(new SimpleDateFormat("HH:mm", locale).format(babySitting.getPlannedEnd()));
-	        }
-	        text.append("\r\nRetour :\t\t").append(babySitting.getBack().getFirstName());
-	        text.append("\r\nCommentaire :\t").append(babySitting.getComment());
-	        text.append("\r\nLieu :\t\t\t").append(babySitting.getLocation().getName());
-	        mailMessage.setText(text.toString());*/
 			babySittingController.javaMailSender.send(new MimeMessagePreparatorImpl(babySitting, locale, templateMailMessage, to));
     	}
 

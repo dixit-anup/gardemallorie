@@ -6,13 +6,14 @@
 
 	<description>HTML 5 Tag Library</description>
 	<tlib-version>3.0</tlib-version>
-	<short-name>html5</short-name>
-	<uri>http://gardemallorie.appspot.com/tags/html5</uri>
+	<short-name>custom</short-name>
+	<uri>http://gardemallorie.appspot.com/tags/custom</uri>
 
+	<!-- TODO: check Springs documentation about HTML5 tags -->
 	<tag>
 		<description>Renders an HTML 'input' tag using the bound value.</description>
 		<name>input</name>
-		<tag-class>com.appspot.gardemallorie.web.tags.html5.InputTag</tag-class>
+		<tag-class>com.appspot.gardemallorie.web.tags.custom.spring.Html5InputTag</tag-class>
 		<body-content>empty</body-content>
 		<attribute>
 			<description>Path to property for data binding</description>
@@ -208,5 +209,23 @@
 		</attribute>
 		<dynamic-attributes>true</dynamic-attributes>
 	</tag>
-
+	
+	<function>
+		<name>createLogoutURL</name>
+		<function-class>com.appspot.gardemallorie.web.tags.custom.google.Functions</function-class>
+		<function-signature>java.lang.String createLogoutURL(javax.servlet.jsp.PageContext)</function-signature>
+	</function>
+ 
+	<function>
+		<name>isUserAdmin</name>
+		<function-class>com.appspot.gardemallorie.web.tags.custom.google.Functions</function-class>
+		<function-signature>boolean isUserAdmin()</function-signature>
+	</function>
+ 
+	<function>
+		<name>isUserLoggedIn</name>
+		<function-class>com.appspot.gardemallorie.web.tags.custom.google.Functions</function-class>
+		<function-signature>boolean isUserLoggedIn()</function-signature>
+	</function>
+ 
 </taglib>

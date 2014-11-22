@@ -1,11 +1,9 @@
 package com.appspot.gardemallorie.web;
+
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.validation.Valid;
 
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.roo.addon.web.mvc.controller.finder.RooWebFinder;

@@ -1,9 +1,19 @@
-<html xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:tiles="http://tiles.apache.org/tags-tiles" xmlns:spring="http://www.springframework.org/tags" xmlns:util="urn:jsptagdir:/WEB-INF/tags/util" >  
+<html
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:custom="http://gardemallorie.appspot.com/tags/custom"
+	xmlns:tiles="http://tiles.apache.org/tags-tiles"
+	xmlns:spring="http://www.springframework.org/tags"
+	xmlns:util="urn:jsptagdir:/WEB-INF/tags/util" >  
 	
 	<jsp:output doctype-root-element="HTML" doctype-system="about:legacy-compat" />
 	
 	<jsp:directive.page contentType="text/html;charset=UTF-8" />  
 	<jsp:directive.page pageEncoding="UTF-8" /> 
+
+	<spring:message code="application_name" var="app_name" htmlEscape="false" scope="request"/>
+    <c:set value="${custom:isUserAdmin()}" var="isUserAdmin" scope="request"/>
+    <c:set value="${custom:isUserLoggedIn()}" var="isUserLoggedIn" scope="request"/>
 			
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
@@ -22,7 +32,6 @@
     			
 		<util:load-scripts />
 		
-		<spring:message code="application_name" var="app_name" htmlEscape="false" scope="request"/>
 		<title><spring:message code="welcome_h3" arguments="${app_name}" /></title>
 	</head>
 	

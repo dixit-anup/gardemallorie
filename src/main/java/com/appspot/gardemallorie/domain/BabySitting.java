@@ -1,10 +1,15 @@
 package com.appspot.gardemallorie.domain;
+
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
+
 import javax.persistence.Column;
+import javax.persistence.EntityManager;
 import javax.persistence.FetchType;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.PostLoad;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -12,17 +17,16 @@ import javax.persistence.Transient;
 import javax.persistence.TypedQuery;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.roo.addon.javabean.RooJavaBean;
 import org.springframework.roo.addon.jpa.activerecord.RooJpaActiveRecord;
-import org.springframework.roo.addon.json.RooJson;
 import org.springframework.roo.addon.tostring.RooToString;
 import org.springframework.transaction.annotation.Transactional;
 
 @RooJavaBean
-@RooJson
-@RooToString
 @RooJpaActiveRecord(finders = { "findBabySittingsByDayBetween", "findBabySittingsByDayGreaterThanEquals", "findBabySittingsByDayLessThanEquals", "findBabySittingsByBabySitter", "findBabySittingsByGo", "findBabySittingsByBack" })
+@RooToString
 public class BabySitting {
 
     private static final long MILLISECONDS_PER_HOURS = 1000 * 60 * 60;
@@ -80,7 +84,10 @@ public class BabySitting {
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     @Transient
     private Date copyUntil;
-
+    
+    @OneToMany(mappedBy = "babySitting", fetch = FetchType.EAGER)
+    private Set<CalendarEvent> calendarEvents;
+    
     @PostLoad
     void onLoad() {
         if (babySitter.isBilling()) {
@@ -121,5 +128,9 @@ public class BabySitting {
         //System.out.println("################## " + qlString);
         return entityManager().createQuery(qlString.toString(), BabySitting.class).setParameter("day", day).setParameter("babySitter", babySitter);
     }
-
+    
+    public EntityManager getEntityManager() {
+    	return entityManager();
+    }
+    
 }

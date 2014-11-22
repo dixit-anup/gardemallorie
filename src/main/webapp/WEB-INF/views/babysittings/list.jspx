@@ -3,7 +3,7 @@
     <jsp:directive.page contentType="text/html;charset=UTF-8"/>
     <jsp:output omit-xml-declaration="yes"/>
     <page:list id="pl_com_appspot_gardemallorie_domain_BabySitting" items="${babysittings}" z="JvcK8yLPa/80mcBl69ti9WqC5Is=">
-        <table:table data="${babysittings}" id="l_com_appspot_gardemallorie_domain_BabySitting" path="/babysittings" z="4ck+P7M4MCpBtzX8ryJML3S1UPA=">
+        <table:table data="${babysittings}" delete="${isUserAdmin}" id="l_com_appspot_gardemallorie_domain_BabySitting" path="/babysittings" update="${isUserAdmin}" z="user-managed">
             <table:column date="true" dateTimePattern="EEE dd/MM/yyyy" id="c_com_appspot_gardemallorie_domain_BabySitting_day" property="day" sort="true" z="user-managed"/>
             <table:column id="c_com_appspot_gardemallorie_domain_BabySitting_babySitter" property="babySitter" sort="true" z="user-managed"/>
             <table:column date="true" dateTimePattern="${babySitting_plannedbeginning_date_format}" id="c_com_appspot_gardemallorie_domain_BabySitting_plannedBeginning" property="plannedBeginning" sort="true" z="user-managed"/>
@@ -12,13 +12,9 @@
             <table:column id="c_com_appspot_gardemallorie_domain_BabySitting_back" property="back" sort="true" z="user-managed"/>
             <table:column id="c_com_appspot_gardemallorie_domain_BabySitting_comment" property="comment" z="user-managed"/>
             <table:column id="c_com_appspot_gardemallorie_domain_BabySitting_location" property="location" sort="true" z="user-managed"/>
-            <table:column date="true" dateTimePattern="${babySitting_declaredend_date_format}"
-            	id="c_com_appspot_gardemallorie_domain_BabySitting_declaredend" property="declaredEnd"
-            	z="user-managed" cssClass="hidden-xs"/>
-            <table:column id="c_com_appspot_gardemallorie_domain_BabySitting_extraHours" property="extraHours"
-            	z="user-managed" cssClass="hidden-xs"/>
-            <table:column id="c_com_appspot_gardemallorie_domain_BabySitting_chargedend" property="chargedEnd"
-            	date="true" dateTimePattern="${babySitting_chargedend_date_format}" z="user-managed" cssClass="hidden-xs"/>
+            <table:column cssClass="hidden-xs" date="true" dateTimePattern="${babySitting_declaredend_date_format}" id="c_com_appspot_gardemallorie_domain_BabySitting_declaredend" property="declaredEnd" z="user-managed"/>
+            <table:column cssClass="hidden-xs" id="c_com_appspot_gardemallorie_domain_BabySitting_extraHours" property="extraHours" z="user-managed"/>
+            <table:column cssClass="hidden-xs" date="true" dateTimePattern="${babySitting_chargedend_date_format}" id="c_com_appspot_gardemallorie_domain_BabySitting_chargedend" property="chargedEnd" z="user-managed"/>
         </table:table>
     </page:list>
 </jsp:root>

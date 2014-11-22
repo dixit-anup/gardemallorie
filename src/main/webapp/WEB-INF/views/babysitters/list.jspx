@@ -3,7 +3,7 @@
     <jsp:directive.page contentType="text/html;charset=UTF-8"/>
     <jsp:output omit-xml-declaration="yes"/>
     <page:list id="pl_com_appspot_gardemallorie_domain_BabySitter" items="${babysitters}" z="9f3OM0GvwEy/gh6D9WSCpJ7Rou4=">
-        <table:table data="${babysitters}" id="l_com_appspot_gardemallorie_domain_BabySitter" path="/babysitters" z="4a/lUuW5Drgir6nnE/r3I84DBDY=">
+        <table:table data="${babysitters}" delete="${isUserAdmin}" id="l_com_appspot_gardemallorie_domain_BabySitter" path="/babysitters" update="${isUserAdmin}" z="user-managed">
             <table:column id="c_com_appspot_gardemallorie_domain_BabySitter_firstName" property="firstName" z="rnnFBEVHQw47jSleHHBZH6pQt2I="/>
             <table:column id="c_com_appspot_gardemallorie_domain_BabySitter_lastName" property="lastName" z="jLWbb4d95R484nwFURAa4glrXhg="/>
             <table:column id="c_com_appspot_gardemallorie_domain_BabySitter_notification" property="notification" z="MjAj+m9meP1W1arVGnYT15N0wAw="/>

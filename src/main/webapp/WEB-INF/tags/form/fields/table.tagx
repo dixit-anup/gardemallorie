@@ -159,7 +159,7 @@
             </td>
           </c:forTokens>
           <c:set var="itemId"><spring:eval expression="item[typeIdFieldName]"/></c:set>
-          <c:if test="${update}">
+          <c:if test="${show}">
 			  <td>
 				<!-- Show button -->
 				<spring:url value="${path}/${itemId}" var="show_form_url" />

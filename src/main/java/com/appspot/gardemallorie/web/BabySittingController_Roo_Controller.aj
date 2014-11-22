@@ -5,6 +5,7 @@ package com.appspot.gardemallorie.web;
 
 import com.appspot.gardemallorie.domain.BabySitter;
 import com.appspot.gardemallorie.domain.BabySitting;
+import com.appspot.gardemallorie.domain.CalendarEvent;
 import com.appspot.gardemallorie.domain.Location;
 import com.appspot.gardemallorie.web.BabySittingController;
 import java.io.UnsupportedEncodingException;
@@ -101,6 +102,7 @@ privileged aspect BabySittingController_Roo_Controller {
         uiModel.addAttribute("babySitting", babySitting);
         addDateTimeFormatPatterns(uiModel);
         uiModel.addAttribute("babysitters", BabySitter.findAllBabySitters());
+        uiModel.addAttribute("calendarevents", CalendarEvent.findAllCalendarEvents());
         uiModel.addAttribute("locations", Location.findAllLocations());
     }
     

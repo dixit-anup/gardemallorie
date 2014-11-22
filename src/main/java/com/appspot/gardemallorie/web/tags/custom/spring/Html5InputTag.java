@@ -1,10 +1,11 @@
-package com.appspot.gardemallorie.web.tags.html5;
+package com.appspot.gardemallorie.web.tags.custom.spring;
 
 import javax.servlet.jsp.JspException;
 
+import org.springframework.web.servlet.tags.form.InputTag;
 import org.springframework.web.servlet.tags.form.TagWriter;
 
-public class InputTag extends org.springframework.web.servlet.tags.form.InputTag {
+public class Html5InputTag extends InputTag {
 
 	private static final long serialVersionUID = 3750325455941455442L;
 

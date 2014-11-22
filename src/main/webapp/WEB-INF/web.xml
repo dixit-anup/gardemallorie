@@ -1,18 +1,14 @@
 <?xml version="1.0" encoding="ISO-8859-1" standalone="no"?>
 <web-app xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="2.5" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
 
-    
     <display-name>gardemallorie</display-name>
     
     <description>Roo generated gardemallorie application</description>
 
-    
     <context-param>
         <param-name>contextConfigLocation</param-name>
         <param-value>classpath*:META-INF/spring/applicationContext*.xml</param-value>
     </context-param>
-    
-    
     
     <!-- Enable escaping of form submission contents -->
     <context-param>
@@ -32,49 +28,33 @@
         </init-param>
     </filter>
     
-    
-    
     <filter>
         <filter-name>HttpMethodFilter</filter-name>
         <filter-class>org.springframework.web.filter.HiddenHttpMethodFilter</filter-class>
-    </filter>
-    
-    
-    
-    
-    <filter>
-        <filter-name>springSecurityFilterChain</filter-name>
-        <filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
     </filter>
     <filter>
         <filter-name>Spring OpenEntityManagerInViewFilter</filter-name>
         <filter-class>org.springframework.orm.jpa.support.OpenEntityManagerInViewFilter</filter-class>
     </filter>
+
     <filter-mapping>
         <filter-name>CharacterEncodingFilter</filter-name>
         <url-pattern>/*</url-pattern>
     </filter-mapping>
-    
     <filter-mapping>
         <filter-name>HttpMethodFilter</filter-name>
-        <url-pattern>/*</url-pattern>
-    </filter-mapping>
-    
-    <!-- Creates the Spring Container shared by all Servlets and Filters -->
-    
-    
-    
-    
-    <filter-mapping>
-        <filter-name>springSecurityFilterChain</filter-name>
         <url-pattern>/*</url-pattern>
     </filter-mapping>
     <filter-mapping>
         <filter-name>Spring OpenEntityManagerInViewFilter</filter-name>
         <url-pattern>/*</url-pattern>
     </filter-mapping>
+
     <listener>
         <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+    </listener>
+    <listener>
+    	<listener-class>org.springframework.web.context.request.RequestContextListener</listener-class>
     </listener>
     
     <!-- Handles Spring requests -->
@@ -87,13 +67,55 @@
         </init-param>
         <load-on-startup>1</load-on-startup>
     </servlet>
-    
     <servlet-mapping>
         <servlet-name>gardemallorie</servlet-name>
         <url-pattern>/</url-pattern>
+        <!-- 
+			The pattern /* will force everything through your servlet.
+			The pattern / will make your servlet the default servlet for the app, meaning it will pick up every pattern that doesn't have another exact match.
+         -->
     </servlet-mapping>
 
-    
+	<servlet>
+		<servlet-name>gaeOauth2AuthorizationCodeCallbackServlet</servlet-name>
+		<servlet-class>com.appspot.gardemallorie.security.google.oauth2.GaeAuthorizationCodeCallbackServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>gaeOauth2AuthorizationCodeCallbackServlet</servlet-name>
+		<url-pattern>/oauth2_callback/*</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>gaeOauth2AuthorizationCodeServlet</servlet-name>
+		<servlet-class>com.appspot.gardemallorie.security.google.oauth2.GaeAuthorizationCodeServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>gaeOauth2AuthorizationCodeServlet</servlet-name>
+		<url-pattern>/login</url-pattern>
+	</servlet-mapping>
+	
+	<security-constraint>
+		<display-name>Google authentication constraint</display-name>
+ 		<web-resource-collection>
+			<web-resource-name>Google Oauth2 resources</web-resource-name>
+			<url-pattern>/login</url-pattern>
+			<url-pattern>/oauth2_callback</url-pattern>
+		</web-resource-collection>
+<!-- 		<web-resource-collection>
+			<web-resource-name>Admin resources</web-resource-name>
+			<url-pattern>/</url-pattern>
+			<http-method>DELETE</http-method>
+			<http-method>POST</http-method>
+			<http-method>PUT</http-method>
+		</web-resource-collection>
+ -->		<auth-constraint>
+			<role-name>admin</role-name>
+		</auth-constraint>
+<!-- 		<user-data-constraint>
+            <transport-guarantee>CONFIDENTIAL</transport-guarantee>
+        </user-data-constraint>
+ -->	</security-constraint>
+
     <session-config>
         <session-timeout>10</session-timeout>
     </session-config>

@@ -1,26 +1,31 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:menu="urn:jsptagdir:/WEB-INF/tags/menu" version="2.0">
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:custom="http://gardemallorie.appspot.com/tags/custom" xmlns:menu="urn:jsptagdir:/WEB-INF/tags/menu" version="2.0">
     <jsp:directive.page contentType="text/html;charset=UTF-8"/>
     <jsp:output omit-xml-declaration="yes"/>
+    <span>isUserLoggedIn: ${isUserLoggedIn} isUserAdmin:${isUserAdmin}</span>
     <menu:menu id="_menu" z="nZaf43BjUg1iM0v70HJVEsXDopc=">
         <menu:category id="c_babysitting" z="UGB9x5f6l/wVoST82mgNdd7+DaA=">
-            <menu:item id="i_babysitting_new" messageCode="global_menu_new" url="/babysittings?form" z="VcWIkNxFfmV31qSU4w/i1GSUgSo="/>
-            <menu:item id="i_babysitting_extracharges" messageCode="global_menu_extracharges" url="/babysittings?find=ExtraCharges" z="user-managed"/>
+            <menu:item id="i_babysitting_new" messageCode="global_menu_new" render="${isUserAdmin}" url="/babysittings?form" z="user-managed"/>
             <menu:item id="i_babysitting_list" messageCode="global_menu_list" url="/babysittings?page=1&amp;size=${empty param.size ? 10 : param.size}" z="lQvPjK9EJkJT+8VuUEPvsMaOzNM="/>
+            <menu:item id="i_babysitting_extracharges" messageCode="global_menu_extracharges" url="/babysittings?find=ExtraCharges" z="user-managed"/>
+            <!-- 
             <menu:item id="fi_babysitting_babysitter" messageCode="global_menu_find" url="/babysittings?find=ByBabySitter&amp;form&amp;page=1&amp;size=${empty param.size ? 10 : param.size}" z="cn1UKr5OaZk8qNDKCYXbp+gb9sE="/>
             <menu:item id="fi_babysitting_back" messageCode="global_menu_find" url="/babysittings?find=ByBack&amp;form&amp;page=1&amp;size=${empty param.size ? 10 : param.size}" z="cO2cNd+H0WNGQGy+6YO5Nv+agbI="/>
             <menu:item id="fi_babysitting_daybetween" messageCode="global_menu_find" url="/babysittings?find=ByDayBetween&amp;form&amp;page=1&amp;size=${empty param.size ? 10 : param.size}" z="TEULtDIEGC5/9Tv/hZnTfHIJ/Js="/>
             <menu:item id="fi_babysitting_daygreaterthanequals" messageCode="global_menu_find" url="/babysittings?find=ByDayGreaterThanEquals&amp;form&amp;page=1&amp;size=${empty param.size ? 10 : param.size}" z="5N7lwq8LO+Miw991I8q4WRwFDBE="/>
             <menu:item id="fi_babysitting_daylessthanequals" messageCode="global_menu_find" url="/babysittings?find=ByDayLessThanEquals&amp;form&amp;page=1&amp;size=${empty param.size ? 10 : param.size}" z="Owr7LK7C4DmgFZh4Z7fURvfTfXA="/>
             <menu:item id="fi_babysitting_go" messageCode="global_menu_find" url="/babysittings?find=ByGo&amp;form&amp;page=1&amp;size=${empty param.size ? 10 : param.size}" z="V3CG8JvSgafBsGn5aWmSNvFcs6Q="/>
+ 			-->
         </menu:category>
         <menu:category id="c_babysitter" z="knGcozuji7s33D5Yw204vGmdRhw=">
-            <menu:item id="i_babysitter_new" messageCode="global_menu_new" url="/babysitters?form" z="AHI6DhWnadKFI0KeUr+KYjwakpU="/>
+            <menu:item id="i_babysitter_new" messageCode="global_menu_new" render="${isUserAdmin}" url="/babysitters?form" z="user-managed"/>
             <menu:item id="i_babysitter_list" messageCode="global_menu_list" url="/babysitters?page=1&amp;size=${empty param.size ? 10 : param.size}" z="mUqYIwnPFwtMyvq4SF8sJFYCAAg="/>
         </menu:category>
         <menu:category id="c_location" z="RvMgx8apsPylYygCQ4tMBVfulVw=">
-            <menu:item id="i_location_new" messageCode="global_menu_new" url="/locations?form" z="sW8KSnwNnd9wjssI0lLV1kzOguk="/>
+            <menu:item id="i_location_new" messageCode="global_menu_new" render="${isUserAdmin}" url="/locations?form" z="user-managed"/>
             <menu:item id="i_location_list" messageCode="global_menu_list" url="/locations?page=1&amp;size=${empty param.size ? 10 : param.size}" z="VdKLEljpeTLil2W6A3GdWmSBzXI="/>
         </menu:category>
+        <menu:item id="i_login" messageCode="global_menu_login" render="${not isUserLoggedIn}" url="/login" z="G+iyajikDujbBvqi01z6ahMLPew="/>
+        <menu:item id="i_logout" messageCode="global_menu_logout" render="${isUserLoggedIn}" url="${custom:createLogoutURL(pageContext)}" z="lB1UOlz7YJYUsYv3h0ucWVhn+AA="/>
     </menu:menu>
 </jsp:root>
