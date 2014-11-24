@@ -3,12 +3,7 @@
 
 package com.appspot.gardemallorie.domain;
 
-import com.appspot.gardemallorie.domain.BabySitter;
-import com.appspot.gardemallorie.domain.BabySitting;
-import com.appspot.gardemallorie.domain.CalendarEvent;
-import com.appspot.gardemallorie.domain.Location;
 import java.util.Date;
-import java.util.Set;
 
 privileged aspect BabySitting_Roo_JavaBean {
     
@@ -114,14 +109,6 @@ privileged aspect BabySitting_Roo_JavaBean {
     
     public void BabySitting.setCopyUntil(Date copyUntil) {
         this.copyUntil = copyUntil;
-    }
-    
-    public Set<CalendarEvent> BabySitting.getCalendarEvents() {
-        return this.calendarEvents;
-    }
-    
-    public void BabySitting.setCalendarEvents(Set<CalendarEvent> calendarEvents) {
-        this.calendarEvents = calendarEvents;
     }
     
 }

@@ -12,5 +12,4 @@
         <field:textarea field="comment" id="c_com_appspot_gardemallorie_domain_BabySitting_comment" z="jjTwSe6XXybIfRUAJ0yyeqwD+WM="/>
         <field:select field="location" id="c_com_appspot_gardemallorie_domain_BabySitting_location" itemValue="id" items="${locations}" path="/locations" z="FxIoFj1yy6kelLMTAZrRczwAOiQ="/>
     </form:create>
-    <form:dependency dependencies="${dependencies}" id="d_com_appspot_gardemallorie_domain_BabySitting" render="${not empty dependencies}" z="NzEPcAHDXJ2jwF45PDCeZ1ny5Rw="/>
 </jsp:root>

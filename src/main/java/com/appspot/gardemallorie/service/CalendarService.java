@@ -6,8 +6,6 @@ public interface CalendarService {
 	
 	void deleteEvents(BabySitting babySitting);
 
-	void insertEvents(BabySitting babySitting);
+	void saveEvents(BabySitting babySitting);
 	
-	void updateEvents(BabySitting babySitting);
-
 }

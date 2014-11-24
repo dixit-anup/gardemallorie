@@ -10,6 +10,9 @@ import org.slf4j.LoggerFactory;
 
 import com.google.api.client.auth.oauth2.AuthorizationCodeFlow;
 import com.google.api.client.auth.oauth2.Credential;
+import com.google.api.client.auth.oauth2.CredentialRefreshListener;
+import com.google.api.client.auth.oauth2.TokenErrorResponse;
+import com.google.api.client.auth.oauth2.TokenResponse;
 import com.google.api.client.extensions.appengine.datastore.AppEngineDataStoreFactory;
 import com.google.api.client.extensions.appengine.http.UrlFetchTransport;
 import com.google.api.client.googleapis.auth.oauth2.GoogleAuthorizationCodeFlow;
@@ -21,6 +24,7 @@ import com.google.api.services.calendar.Calendar;
 import com.google.api.services.calendar.CalendarScopes;
 import com.google.appengine.api.users.UserServiceFactory;
 
+//TODO: include this code in the GoogleCalendarService
 public class Utils {
 
 	private static final String APPLICATION_NAME = "BabySitting";
@@ -41,6 +45,7 @@ public class Utils {
 	
 	public static AuthorizationCodeFlow newAuthorizationCodeFlow() throws IOException {
 
+		CustomCredentialRefreshListener customCredentialRefreshListener = new CustomCredentialRefreshListener();
 		GoogleAuthorizationCodeFlow flow = new GoogleAuthorizationCodeFlow.Builder(
 			HTTP_TRANSPORT,
 			JSON_FACTORY,
@@ -49,42 +54,53 @@ public class Utils {
 			Collections.singleton(CalendarScopes.CALENDAR)
 		)
 		.setDataStoreFactory(DATA_STORE_FACTORY)
-		/*.addRefreshListener(new DataStoreCredentialRefreshListener(getUserId(), DATA_STORE_FACTORY))
-		  .addRefreshListener(new CredentialRefreshListener() {
-		
-		    @Override
-		    public void onTokenResponse(Credential credential, TokenResponse tokenResponse)
-		        throws IOException {
-		      logger.error("onTokenResponse");
-		    }
-		
-		    @Override
-		    public void onTokenErrorResponse(Credential credential,
-		        TokenErrorResponse tokenErrorResponse) throws IOException {
-		      logger.error("onTokenErrorResponse");
-		    }})*/
+		.addRefreshListener(customCredentialRefreshListener)
 		.build();
+		
+		customCredentialRefreshListener.setAuthorizationCodeFlow(flow);
+		
 		LOGGER.debug("flow.refreshListeners: {}", flow.getRefreshListeners());
+
 		return flow;
 	}
 	
 	public static Calendar loadCalendarClient() throws IOException {
 
 		Credential credential = newAuthorizationCodeFlow().loadCredential(getUserEmail());
-	    
-		if (LOGGER.isDebugEnabled()) {
-			if (credential == null) {
-				LOGGER.debug("loadCalendarClient(), credential: null");
-			}
-			else {
-				LOGGER.debug("loadCalendarClient(), credential.refreshListeners: {}", credential.getRefreshListeners());
-			}
+
+		if (credential == null) {
+			LOGGER.debug("loadCalendarClient(), credential: null");
+		}
+		else {
+			LOGGER.debug("loadCalendarClient(), credential.refreshListeners: {}", credential.getRefreshListeners());
 		}
 	
 		return new Calendar.Builder(HTTP_TRANSPORT, JSON_FACTORY, credential).setApplicationName(APPLICATION_NAME).build();
 	}
 	
 	private Utils() {
+	}
+	
+	static class CustomCredentialRefreshListener implements CredentialRefreshListener {
+
+		private AuthorizationCodeFlow authorizationCodeFlow;
+		private final Logger logger = LoggerFactory.getLogger(getClass());
+		
+		public void setAuthorizationCodeFlow(AuthorizationCodeFlow authorizationCodeFlow) {
+			this.authorizationCodeFlow = authorizationCodeFlow;
+		}
+
+		@Override
+		public void onTokenResponse(Credential credential, TokenResponse tokenResponse) throws IOException {
+			logger.debug("credential: {}, tokenResponse: {}", credential, tokenResponse);
+		}
+
+		@Override
+		public void onTokenErrorResponse(Credential credential, TokenErrorResponse tokenErrorResponse) throws IOException {
+			logger.error("credential: {}, tokenErrorResponse: {}, clientId: {}", credential, tokenErrorResponse, authorizationCodeFlow.getClientId());
+			authorizationCodeFlow.getCredentialDataStore().delete(authorizationCodeFlow.getClientId());
+		}
+		
 	}
   
 }

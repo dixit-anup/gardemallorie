@@ -1,18 +1,17 @@
 package com.appspot.gardemallorie.domain;
 
+import static javax.persistence.FetchType.LAZY;
+import static javax.persistence.TemporalType.DATE;
+import static javax.persistence.TemporalType.TIME;
+
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.Set;
 
 import javax.persistence.Column;
-import javax.persistence.EntityManager;
-import javax.persistence.FetchType;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.PostLoad;
 import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 import javax.persistence.Transient;
 import javax.persistence.TypedQuery;
 import javax.validation.constraints.NotNull;
@@ -33,46 +32,46 @@ public class BabySitting {
 
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     @NotNull
-    @Temporal(TemporalType.DATE)
+    @Temporal(DATE)
     private Date day;
 
     @Column(nullable = true)
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = LAZY)
     private BabySitter babySitter;
 
     @Column(nullable = true)
     @DateTimeFormat(pattern = "HH:mm")
-    @Temporal(TemporalType.TIME)
+    @Temporal(TIME)
     private Date plannedBeginning;
 
     @Column(nullable = true)
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = LAZY)
     private BabySitter go;
 
     @Column(nullable = true)
     @DateTimeFormat(pattern = "HH:mm")
-    @Temporal(TemporalType.TIME)
+    @Temporal(TIME)
     private Date plannedEnd;
 
     @Column(nullable = true)
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = LAZY)
     private BabySitter back;
 
     @Size(max = 200)
     private String comment;
 
     @Column(nullable = true)
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = LAZY)
     private Location location;
 
     @Column(nullable = true)
     @DateTimeFormat(pattern = "HH:mm")
-    @Temporal(TemporalType.TIME)
+    @Temporal(TIME)
     private Date declaredEnd;
 
     @Column(nullable = true)
     @DateTimeFormat(pattern = "HH:mm")
-    @Temporal(TemporalType.TIME)
+    @Temporal(TIME)
     private Date chargedEnd;
 
     @Transient
@@ -84,9 +83,6 @@ public class BabySitting {
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     @Transient
     private Date copyUntil;
-    
-    @OneToMany(mappedBy = "babySitting", fetch = FetchType.EAGER)
-    private Set<CalendarEvent> calendarEvents;
     
     @PostLoad
     void onLoad() {
@@ -128,9 +124,5 @@ public class BabySitting {
         //System.out.println("################## " + qlString);
         return entityManager().createQuery(qlString.toString(), BabySitting.class).setParameter("day", day).setParameter("babySitter", babySitter);
     }
-    
-    public EntityManager getEntityManager() {
-    	return entityManager();
-    }
-    
+
 }
