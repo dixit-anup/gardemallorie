@@ -11,6 +11,7 @@ import org.slf4j.LoggerFactory;
 import com.google.api.client.auth.oauth2.AuthorizationCodeFlow;
 import com.google.api.client.auth.oauth2.Credential;
 import com.google.api.client.auth.oauth2.CredentialRefreshListener;
+import com.google.api.client.auth.oauth2.StoredCredential;
 import com.google.api.client.auth.oauth2.TokenErrorResponse;
 import com.google.api.client.auth.oauth2.TokenResponse;
 import com.google.api.client.extensions.appengine.datastore.AppEngineDataStoreFactory;
@@ -76,6 +77,11 @@ public class Utils {
 		}
 	
 		return new Calendar.Builder(HTTP_TRANSPORT, JSON_FACTORY, credential).setApplicationName(APPLICATION_NAME).build();
+	}
+	
+	public static void removeCredential() throws IOException {
+		LOGGER.debug("Removing Credential for {}", getUserEmail());
+		StoredCredential.getDefaultDataStore(DATA_STORE_FACTORY).delete(getUserEmail());
 	}
 	
 	private Utils() {

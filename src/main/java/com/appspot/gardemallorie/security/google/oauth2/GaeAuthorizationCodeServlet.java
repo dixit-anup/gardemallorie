@@ -27,6 +27,15 @@ public class GaeAuthorizationCodeServlet extends AbstractAuthorizationCodeServle
 	private Logger logger = LoggerFactory.getLogger(getClass());
 
 	@Override
+	protected void service(HttpServletRequest request, HttpServletResponse response)
+			throws IOException, ServletException {
+		
+		Utils.removeCredential();
+		
+		super.service(request, response);
+	}
+
+	@Override
 	protected void doGet(HttpServletRequest request,
 			HttpServletResponse response) throws IOException {
 		

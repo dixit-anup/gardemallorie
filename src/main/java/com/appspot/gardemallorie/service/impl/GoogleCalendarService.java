@@ -23,6 +23,7 @@ import com.appspot.gardemallorie.domain.CalendarEvent;
 import com.appspot.gardemallorie.domain.CalendarEventType;
 import com.appspot.gardemallorie.domain.Location;
 import com.appspot.gardemallorie.security.google.oauth2.Utils;
+import com.appspot.gardemallorie.service.CalendarException;
 import com.appspot.gardemallorie.service.CalendarService;
 import com.google.api.client.util.DateTime;
 import com.google.api.services.calendar.Calendar;
@@ -58,15 +59,14 @@ public class GoogleCalendarService implements CalendarService {
 		
 		logger.debug("deleteEvents()");
 		
-		Collection<CalendarEvent> calendarEvents = CalendarEvent.findCalendarEventsByBabySitting(babySitting);
-
-		execute(babySitting, calendarEvents, new CalendarCallback<Void>() {
+		execute(babySitting, new CalendarCallback<Void>() {
 
 			@Override
 			public Void doWithCalendar(BabySitting babySitting,
-					Calendar calendar, String calendarId, Event event,
 					CalendarEvent actualEvent,
-					CalendarEventType actualEventType) throws IOException {
+					CalendarEventType actualEventType,
+					Calendar calendar,
+					String calendarId, Event event) throws IOException {
 
 				Void result = calendar.events().delete(calendarId, actualEvent.getExternalId()).setSendNotifications(true).execute();
 				
@@ -80,8 +80,9 @@ public class GoogleCalendarService implements CalendarService {
 		
 	}
 	
-	protected <T> void execute(BabySitting babySitting, Collection<CalendarEvent> actualEvents, CalendarCallback<T> callback) {
+	protected <T> void execute(BabySitting babySitting, CalendarCallback<T> callback) {
 		
+		Collection<CalendarEvent> actualEvents = CalendarEvent.findCalendarEventsByBabySitting(babySitting);
 		Calendar calendar;
 		String calendarId = Utils.getUserEmail();
 		Map<CalendarEventType, Event> events = new HashMap<CalendarEventType, Event>(3);
@@ -115,16 +116,16 @@ public class GoogleCalendarService implements CalendarService {
 					}
 					logger.debug("actualEvent: {}", actualEvent);
 
-					result = callback.doWithCalendar(babySitting, calendar, calendarId, event, actualEvent, eventType);
+					result = callback.doWithCalendar(babySitting, actualEvent, eventType, calendar, calendarId, event);
 					logger.debug("result: {}", result);
 				}
 			}
 
 		}
 		catch (IOException e) {
-			logger.error(e.getMessage(), e);
+			logger.error("An error occured using Google Calendar.", e);
 			//TODO: create a CalendarException
-			throw new RuntimeException(e);
+			throw new CalendarException(e);
 		}
 
 	}
@@ -134,56 +135,47 @@ public class GoogleCalendarService implements CalendarService {
 		
 		logger.debug("saveEvents()");
 		
-		Collection<CalendarEvent> calendarEvents = CalendarEvent.findCalendarEventsByBabySitting(babySitting);
-		logger.debug("calendarEvents: {}", calendarEvents);
-		
-		if (calendarEvents == null || calendarEvents.isEmpty()) {
-			
-			execute(babySitting, calendarEvents, new CalendarCallback<Event>() {
+		execute(babySitting, new CalendarCallback<Event>() {
 
-				@Override
-				public Event doWithCalendar(BabySitting babySitting,
-						Calendar calendar, String calendarId, Event event,
-						CalendarEvent actualEvent,
-						CalendarEventType actualEventType) throws IOException {
+			@Override
+			public Event doWithCalendar(BabySitting babySitting,
+					CalendarEvent actualEvent,
+					CalendarEventType actualEventType,
+					Calendar calendar,
+					String calendarId, Event event) throws IOException {
 
-					logger.debug("inserting events");
+				Event resultEvent;
 
-					Event resultEvent = calendar.events().insert(calendarId, event).setSendNotifications(true).execute();
+				// Create event
+				if (actualEvent == null) {
+					
+					logger.debug("inserting event {}", actualEventType);
+
+					resultEvent = calendar.events().insert(calendarId, event).setSendNotifications(true).execute();
 
 					CalendarEvent calendarEvent = new CalendarEvent();
 					calendarEvent.setBabySitting(babySitting);
 					calendarEvent.setExternalId(resultEvent.getId());
 					calendarEvent.setType(actualEventType);
 					calendarEvent.persist();
-
-					return resultEvent;
 				}
-			});
-		}
-		else {
+				// Update event
+				else {
+					
+					logger.debug("updating event {}", actualEventType);
+
+					resultEvent = calendar.events().update(calendarId, actualEvent.getExternalId(), event).setSendNotifications(true).execute();
+				}
 			
-			execute(babySitting, calendarEvents, new CalendarCallback<Event>() {
-
-				@Override
-				public Event doWithCalendar(BabySitting babySitting,
-						Calendar calendar, String calendarId, Event event,
-						CalendarEvent actualEvent,
-						CalendarEventType actualEventType) throws IOException {
-
-					logger.debug("updating events");
-
-					return calendar.events().update(calendarId, actualEvent.getExternalId(), event).setSendNotifications(true).execute();
-				}
-			});
-		}
-		
+				return resultEvent;
+			}
+		});
 		
 	}
 
 	interface CalendarCallback<T> {
 		
-		T doWithCalendar(BabySitting babySitting, Calendar calendar, String calendarId, Event event, CalendarEvent actualEvent, CalendarEventType actualEventType) throws IOException;
+		T doWithCalendar(BabySitting babySitting, CalendarEvent actualEvent, CalendarEventType actualEventType, Calendar calendar, String calendarId, Event event) throws IOException;
 
 	}
 	

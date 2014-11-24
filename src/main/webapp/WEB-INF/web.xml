@@ -82,7 +82,7 @@
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>gaeOauth2AuthorizationCodeCallbackServlet</servlet-name>
-		<url-pattern>/oauth2_callback/*</url-pattern>
+		<url-pattern>/oauth2_callback</url-pattern>
 	</servlet-mapping>
 	
 	<servlet>
