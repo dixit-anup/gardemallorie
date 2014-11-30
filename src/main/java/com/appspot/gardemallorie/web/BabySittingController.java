@@ -5,8 +5,8 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
-import org.springframework.roo.addon.web.mvc.controller.finder.RooWebFinder;
 import org.springframework.roo.addon.web.mvc.controller.scaffold.RooWebScaffold;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,25 +15,23 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.appspot.gardemallorie.domain.BabySitter;
 import com.appspot.gardemallorie.domain.BabySitting;
+import com.appspot.gardemallorie.service.BabySittingService;
 
-/**
- * @author DAVID
- *
- */
-@Controller
 @RequestMapping("/babysittings")
+@Controller
 @RooWebScaffold(path = "babysittings", formBackingObject = BabySitting.class)
-@RooWebFinder
 public class BabySittingController {
 
+    @Autowired
+    private BabySittingService babySittingService;
+    
     @RequestMapping(method = RequestMethod.PUT, params = "copyUntil", produces = "text/html")
     public String copyUntil(@RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd") Date copyUntil, BabySitting b, BindingResult bindingResult, Model uiModel) {
 
-    	BabySitting babySitting = BabySitting.findBabySitting(b.getId());
+    	BabySitting babySitting = babySittingService.findBabySitting(b.getId());
     	
-    	if (BabySitting.countFindBabySittingsByDayGreaterThanEquals(babySitting.getDay()) > 1) {
+    	if (babySittingService.countBabySittingsByDayGreaterThanEquals(babySitting.getDay()) > 1) {
             return "babysittings/update";
     	}
 
@@ -61,7 +59,7 @@ public class BabySittingController {
         	copy.setLocation(babySitting.getLocation());
         	copy.setPlannedBeginning(babySitting.getPlannedBeginning());
         	copy.setPlannedEnd(babySitting.getPlannedEnd());
-            copy.persist();
+        	babySittingService.saveBabySitting(copy);
         }
         
         uiModel.asMap().clear();
@@ -69,46 +67,16 @@ public class BabySittingController {
         return findNextBabySittings(null, null, null, null, uiModel);
     }
     
-    @RequestMapping(params = "find=ByDayAndBabySitter")
-    public String findBabySittingsByDayAndBabySitter(
-			@RequestParam(value = "day", required = false) @DateTimeFormat(pattern = "yyyy-MM-dd") Date day,
-			@RequestParam(value = "babySitter", required = false) Long babySitter,
-			@RequestParam(value = "page", required = false) Integer page,
-			@RequestParam(value = "size", required = false) Integer size,
-			Model uiModel
-		)
-    {
-        if (page != null || size != null) {
-            int sizeNo = size == null ? 10 : size.intValue();
-            final int firstResult = page == null ? 0 : (page.intValue() - 1) * sizeNo;
-            uiModel.addAttribute("babysittings", BabySitting.findBabySittingsByDayAndBabySitter(day, babySitter).setFirstResult(firstResult).setMaxResults(sizeNo).getResultList());
-            float nrOfPages = (float) BabySitting.countFindBabySittingsByDayAndBabySitter(day, babySitter) / sizeNo;
-            uiModel.addAttribute("maxPages", (int) ((nrOfPages > (int) nrOfPages || nrOfPages == 0.0) ? nrOfPages + 1 : nrOfPages));
-        } else {
-            uiModel.addAttribute("babysittings", BabySitting.findBabySittingsByDayAndBabySitter(day, babySitter).getResultList());
-        }
-        addDateTimeFormatPatterns(uiModel);
-        return "babysittings/list";
-    }
-    
-    
-    @RequestMapping(params = {"find=ByDayAndBabySitter", "form"})
-    public String findBabySittingsByDayAndBabySitterForm(Model uiModel) {
-        uiModel.addAttribute("babysitters", BabySitter.findAllBabySitters());
-        return "babysittings/findBabySittingsByDayAndBabySitter";
-    }
-    
     @RequestMapping(params = "find=Next")
     public String findNextBabySittings(@RequestParam(value = "page", required = false) Integer page, @RequestParam(value = "size", required = false) Integer size, @RequestParam(value = "sortFieldName", required = false) String sortFieldName, @RequestParam(value = "sortOrder", required = false) String sortOrder, Model uiModel) {
-        Date day = new Date();
         if (page != null || size != null) {
             int sizeNo = size == null ? 10 : size.intValue();
             final int firstResult = page == null ? 0 : (page.intValue() - 1) * sizeNo;
-            uiModel.addAttribute("babysittings", BabySitting.findBabySittingsByDayGreaterThanEquals(day, sortFieldName, sortOrder).setFirstResult(firstResult).setMaxResults(sizeNo).getResultList());
-            float nrOfPages = (float) BabySitting.countFindBabySittingsByDayGreaterThanEquals(day) / sizeNo;
+            uiModel.addAttribute("babysittings", babySittingService.findNextBabySittings(firstResult, sizeNo));
+            float nrOfPages = (float) babySittingService.countNextBabySittings() / sizeNo;
             uiModel.addAttribute("maxPages", (int) ((nrOfPages > (int) nrOfPages || nrOfPages == 0.0) ? nrOfPages + 1 : nrOfPages));
         } else {
-            uiModel.addAttribute("babysittings", BabySitting.findBabySittingsByDayGreaterThanEquals(day, sortFieldName, sortOrder).getResultList());
+            uiModel.addAttribute("babysittings", babySittingService.findNextBabySittings());
         }
         addDateTimeFormatPatterns(uiModel);
         return "babysittings/list";
@@ -117,7 +85,7 @@ public class BabySittingController {
     @RequestMapping(params = "find=ExtraCharges")
     public String findExtraCharges(Model uiModel) {
 
-    	List<BabySitting> babySittings = BabySitting.findAllBabySittings("day", "asc");
+    	List<BabySitting> babySittings = babySittingService.findAllBabySittingsOrderByDay();
         List<BabySitting> extraChargesList = new ArrayList<BabySitting>();
         BabySitting extraCharges = null;
         

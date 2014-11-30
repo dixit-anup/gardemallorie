@@ -4,9 +4,11 @@ gardemallorie
 Garde Mallorie
 
 TODO :
-- clean dependencies and dependency scopes
+- fix named queries
 - fix searches pages and sort columns
-- use a service layer
-- replace manually added aspects by services
-- Turn Utils.class into a service
+- fix oauth2 authentication errors
+- fix redirect exceptions
+- clean dependencies and dependency scopes
 - split the project into separated Maven modules (persistence)
+- use colors
+- enhance HTML 5 input tag (see Spring documentation)

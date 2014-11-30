@@ -49,6 +49,19 @@
         <filter-name>Spring OpenEntityManagerInViewFilter</filter-name>
         <url-pattern>/*</url-pattern>
     </filter-mapping>
+    
+    <filter>
+    	<filter-name>logoutFilter</filter-name>
+    	<filter-class>com.appspot.gardemallorie.web.google.LogoutFilter</filter-class>
+    	<init-param>
+    		<param-name>logoutRedirectURL</param-name>
+    		<param-value>/logout</param-value>
+    	</init-param>
+    </filter>
+    <filter-mapping>
+        <filter-name>logoutFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
 
     <listener>
         <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
@@ -78,7 +91,7 @@
 
 	<servlet>
 		<servlet-name>gaeOauth2AuthorizationCodeCallbackServlet</servlet-name>
-		<servlet-class>com.appspot.gardemallorie.security.google.oauth2.GaeAuthorizationCodeCallbackServlet</servlet-class>
+		<servlet-class>com.appspot.gardemallorie.web.google.GaeAuthorizationCodeCallbackServlet</servlet-class>
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>gaeOauth2AuthorizationCodeCallbackServlet</servlet-name>
@@ -87,7 +100,7 @@
 	
 	<servlet>
 		<servlet-name>gaeOauth2AuthorizationCodeServlet</servlet-name>
-		<servlet-class>com.appspot.gardemallorie.security.google.oauth2.GaeAuthorizationCodeServlet</servlet-class>
+		<servlet-class>com.appspot.gardemallorie.web.google.GaeAuthorizationCodeServlet</servlet-class>
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>gaeOauth2AuthorizationCodeServlet</servlet-name>
@@ -101,32 +114,23 @@
 			<url-pattern>/login</url-pattern>
 			<url-pattern>/oauth2_callback</url-pattern>
 		</web-resource-collection>
-<!-- 		<web-resource-collection>
-			<web-resource-name>Admin resources</web-resource-name>
-			<url-pattern>/</url-pattern>
-			<http-method>DELETE</http-method>
-			<http-method>POST</http-method>
-			<http-method>PUT</http-method>
-		</web-resource-collection>
- -->		<auth-constraint>
+		<auth-constraint>
 			<role-name>admin</role-name>
 		</auth-constraint>
-<!-- 		<user-data-constraint>
-            <transport-guarantee>CONFIDENTIAL</transport-guarantee>
-        </user-data-constraint>
- -->	</security-constraint>
+	</security-constraint>
 
     <session-config>
         <session-timeout>10</session-timeout>
     </session-config>
-    
+<!--     
     <error-page>
         <exception-type>java.lang.Exception</exception-type>
         <location>/uncaughtException</location>
     </error-page>
     
-    <error-page>
+ -->    <error-page>
         <error-code>404</error-code>
         <location>/resourceNotFound</location>
     </error-page>
+
 </web-app>

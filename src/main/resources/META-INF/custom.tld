@@ -223,6 +223,12 @@
 	</function>
  
 	<function>
+		<name>getUserEmail</name>
+		<function-class>com.appspot.gardemallorie.web.tags.custom.google.Functions</function-class>
+		<function-signature>java.lang.String getUserEmail()</function-signature>
+	</function>
+ 
+	<function>
 		<name>isUserLoggedIn</name>
 		<function-class>com.appspot.gardemallorie.web.tags.custom.google.Functions</function-class>
 		<function-signature>boolean isUserLoggedIn()</function-signature>

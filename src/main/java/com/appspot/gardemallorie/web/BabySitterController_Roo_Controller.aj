@@ -4,10 +4,12 @@
 package com.appspot.gardemallorie.web;
 
 import com.appspot.gardemallorie.domain.BabySitter;
+import com.appspot.gardemallorie.service.BabySitterService;
 import com.appspot.gardemallorie.web.BabySitterController;
 import java.io.UnsupportedEncodingException;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -19,6 +21,9 @@ import org.springframework.web.util.WebUtils;
 
 privileged aspect BabySitterController_Roo_Controller {
     
+    @Autowired
+    BabySitterService BabySitterController.babySitterService;
+    
     @RequestMapping(method = RequestMethod.POST, produces = "text/html")
     public String BabySitterController.create(@Valid BabySitter babySitter, BindingResult bindingResult, Model uiModel, HttpServletRequest httpServletRequest) {
         if (bindingResult.hasErrors()) {
@@ -26,7 +31,7 @@ privileged aspect BabySitterController_Roo_Controller {
             return "babysitters/create";
         }
         uiModel.asMap().clear();
-        babySitter.persist();
+        babySitterService.saveBabySitter(babySitter);
         return "redirect:/babysitters/" + encodeUrlPathSegment(babySitter.getId().toString(), httpServletRequest);
     }
     
@@ -39,7 +44,7 @@ privileged aspect BabySitterController_Roo_Controller {
     @RequestMapping(value = "/{id}", produces = "text/html")
     public String BabySitterController.show(@PathVariable("id") Long id, Model uiModel) {
         addDateTimeFormatPatterns(uiModel);
-        uiModel.addAttribute("babysitter", BabySitter.findBabySitter(id));
+        uiModel.addAttribute("babysitter", babySitterService.findBabySitter(id));
         uiModel.addAttribute("itemId", id);
         return "babysitters/show";
     }
@@ -49,11 +54,11 @@ privileged aspect BabySitterController_Roo_Controller {
         if (page != null || size != null) {
             int sizeNo = size == null ? 10 : size.intValue();
             final int firstResult = page == null ? 0 : (page.intValue() - 1) * sizeNo;
-            uiModel.addAttribute("babysitters", BabySitter.findBabySitterEntries(firstResult, sizeNo, sortFieldName, sortOrder));
-            float nrOfPages = (float) BabySitter.countBabySitters() / sizeNo;
+            uiModel.addAttribute("babysitters", babySitterService.findBabySitterEntries(firstResult, sizeNo));
+            float nrOfPages = (float) babySitterService.countAllBabySitters() / sizeNo;
             uiModel.addAttribute("maxPages", (int) ((nrOfPages > (int) nrOfPages || nrOfPages == 0.0) ? nrOfPages + 1 : nrOfPages));
         } else {
-            uiModel.addAttribute("babysitters", BabySitter.findAllBabySitters(sortFieldName, sortOrder));
+            uiModel.addAttribute("babysitters", babySitterService.findAllBabySitters());
         }
         addDateTimeFormatPatterns(uiModel);
         return "babysitters/list";
@@ -66,20 +71,20 @@ privileged aspect BabySitterController_Roo_Controller {
             return "babysitters/update";
         }
         uiModel.asMap().clear();
-        babySitter.merge();
+        babySitterService.updateBabySitter(babySitter);
         return "redirect:/babysitters/" + encodeUrlPathSegment(babySitter.getId().toString(), httpServletRequest);
     }
     
     @RequestMapping(value = "/{id}", params = "form", produces = "text/html")
     public String BabySitterController.updateForm(@PathVariable("id") Long id, Model uiModel) {
-        populateEditForm(uiModel, BabySitter.findBabySitter(id));
+        populateEditForm(uiModel, babySitterService.findBabySitter(id));
         return "babysitters/update";
     }
     
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE, produces = "text/html")
     public String BabySitterController.delete(@PathVariable("id") Long id, @RequestParam(value = "page", required = false) Integer page, @RequestParam(value = "size", required = false) Integer size, Model uiModel) {
-        BabySitter babySitter = BabySitter.findBabySitter(id);
-        babySitter.remove();
+        BabySitter babySitter = babySitterService.findBabySitter(id);
+        babySitterService.deleteBabySitter(babySitter);
         uiModel.asMap().clear();
         uiModel.addAttribute("page", (page == null) ? "1" : page.toString());
         uiModel.addAttribute("size", (size == null) ? "10" : size.toString());

@@ -1,4 +1,4 @@
-package com.appspot.gardemallorie.security.google.oauth2;
+package com.appspot.gardemallorie.web.google;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Configurable;
 
 import com.google.api.client.auth.oauth2.AuthorizationCodeFlow;
 import com.google.api.client.extensions.servlet.auth.oauth2.AbstractAuthorizationCodeServlet;
@@ -17,6 +19,7 @@ import com.google.api.services.calendar.model.CalendarListEntry;
 import com.google.appengine.api.users.UserService;
 import com.google.appengine.api.users.UserServiceFactory;
 
+@Configurable()
 public class GaeAuthorizationCodeServlet extends AbstractAuthorizationCodeServlet {
 
 	/**
@@ -24,22 +27,23 @@ public class GaeAuthorizationCodeServlet extends AbstractAuthorizationCodeServle
 	 */
 	private static final long serialVersionUID = 6521005706469551253L;
 
-	private Logger logger = LoggerFactory.getLogger(getClass());
+	private final Logger logger = LoggerFactory.getLogger(getClass());
+	
+	@Autowired
+	private GoogleOauth2Controller googleOauth2Controller;
 
 	@Override
-	protected void service(HttpServletRequest request, HttpServletResponse response)
-			throws IOException, ServletException {
+	protected void service(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 		
-		Utils.removeCredential();
+		googleOauth2Controller.removeCurrentUserCredential();
 		
 		super.service(request, response);
 	}
 
 	@Override
-	protected void doGet(HttpServletRequest request,
-			HttpServletResponse response) throws IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 		
-	        com.google.api.services.calendar.Calendar client = Utils.loadCalendarClient();
+	        com.google.api.services.calendar.Calendar client = googleOauth2Controller.createCalendarClient();
 	        com.google.api.services.calendar.Calendar.CalendarList.List listRequest =
 	            client.calendarList().list();
 	        listRequest.setFields("items(id,summary)");
@@ -73,18 +77,18 @@ public class GaeAuthorizationCodeServlet extends AbstractAuthorizationCodeServle
 	}
 
 	@Override
-	protected String getRedirectUri(HttpServletRequest req) throws ServletException, IOException {
-		return Utils.getRedirectUri(req);
+	protected String getRedirectUri(HttpServletRequest request) throws ServletException, IOException {
+		return googleOauth2Controller.getRedirectUri(request);
 	}
 
 	@Override
-	protected String getUserId(HttpServletRequest req) throws ServletException, IOException {
-		return Utils.getUserEmail();
+	protected String getUserId(HttpServletRequest request) throws ServletException, IOException {
+		return googleOauth2Controller.getCurrentUserEmail();
 	}
 
 	@Override
 	protected AuthorizationCodeFlow initializeFlow() throws IOException {
-		return Utils.newAuthorizationCodeFlow();
+		return googleOauth2Controller.createAuthorizationCodeFlow();
 	}
 
 }

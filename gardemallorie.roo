@@ -2,41 +2,58 @@ project --java 7 --topLevelPackage com.appspot.gardemallorie
 
 jpa setup --database GOOGLE_APP_ENGINE --provider DATANUCLEUS
 
-entity jpa --activeRecord true --class ~.domain.Location --equals true --serializable false --testAutomatically true
-field string --fieldName name --notNull --sizeMax 50 --sizeMin 2
-//repository jpa --entity ~.domain.Location --interface ~.repository.LocationRepository
+entity jpa --activeRecord false --class ~.domain.Location
+field string	--fieldName name --notNull --sizeMax 50 --sizeMin 2
 
-entity jpa --activeRecord true --class ~.domain.BabySitter --equals true --serializable false --testAutomatically true
+entity jpa --activeRecord false --class ~.domain.BabySitter
 field string	--fieldName firstName
 field string	--fieldName lastName --notNull --sizeMax 20 --sizeMin 3
 field boolean	--fieldName notification --primitive true
 field string	--fieldName email
 field string	--fieldName color
 field boolean	--fieldName billing --primitive true
-field date		--fieldName extraHoursBeginning --type java.util.Date --dateTimeFormatPattern HH:mm --notNull false --persistenceType JPA_TIME
+field date		--fieldName extraHoursBeginning --type java.util.Date		--persistenceType JPA_TIME	--dateTimeFormatPattern HH:mm			--notNull false
 field number	--fieldName childcareVouchers	--type float
-//repository jpa --entity ~.domain.BabySitter --interface ~.repository.BabySitterRepository
 
-entity jpa --activeRecord true --class ~.domain.BabySitting --equals true --serializable false --testAutomatically true
-field date      --fieldName le           		--type java.util.Date               --persistenceType JPA_DATE --dateTimeFormatPattern "yyyy/MM/dd" --notNull true
-field enum      --fieldName par          		--type ~.reference.BabySitterType   --enumType STRING
-field enum      --fieldName a            		--type ~.reference.LocalisationType --enumType STRING
-field date      --fieldName prevuDebut   		--type java.util.Date               --persistenceType JPA_TIME --dateTimeFormatPattern "HH:mm"
-field date      --fieldName prevuFin     		--type java.util.Date               --persistenceType JPA_TIME --dateTimeFormatPattern "HH:mm"
-field date      --fieldName reelDebut    		--type java.util.Date               --persistenceType JPA_TIME --dateTimeFormatPattern "HH:mm"
-field date      --fieldName reelFin      		--type java.util.Date               --persistenceType JPA_TIME --dateTimeFormatPattern "HH:mm"
-field date      --fieldName factureDebut 		--type java.util.Date               --persistenceType JPA_TIME --dateTimeFormatPattern "HH:mm"
-field date      --fieldName factureFin   		--type java.util.Date               --persistenceType JPA_TIME --dateTimeFormatPattern "HH:mm"
-field number	--fieldName extraHours			--type float						
-field number	--fieldName childcareVouchers	--type float						
-field date      --fieldName copyUntil   		--type java.util.Date               
+entity jpa --activeRecord false --class ~.domain.BabySitting
+field date      --fieldName day           		--type java.util.Date       --persistenceType JPA_DATE	--dateTimeFormatPattern "yyyy-MM-dd"	--notNull true	--permitReservedWords true
+field reference	--fieldName babySitter     		--type ~.domain.BabySitter	--fetch LAZY														--notNull false
+field date      --fieldName plannedBeginning	--type java.util.Date       --persistenceType JPA_TIME	--dateTimeFormatPattern "HH:mm"			--notNull false
+field reference	--fieldName go		     		--type ~.domain.BabySitter	--fetch LAZY														--notNull false	--permitReservedWords true
+field date      --fieldName plannedEnd			--type java.util.Date       --persistenceType JPA_TIME	--dateTimeFormatPattern "HH:mm"			--notNull false
+field reference	--fieldName back	     		--type ~.domain.BabySitter	--fetch LAZY														--notNull false
+field string	--fieldName comment				--sizeMax 200
+field reference	--fieldName location     		--type ~.domain.Location	--fetch LAZY														--notNull false
+field date      --fieldName declaredEnd			--type java.util.Date       --persistenceType JPA_TIME	--dateTimeFormatPattern "HH:mm"			--notNull false
+field date      --fieldName chargedEnd			--type java.util.Date       --persistenceType JPA_TIME	--dateTimeFormatPattern "HH:mm"			--notNull false
+field number	--fieldName extraHours			--type float				--transient true
+field number	--fieldName childcareVouchers	--type float				--transient true
+field date      --fieldName copyUntil   		--type java.util.Date       --transient true			--dateTimeFormatPattern "yyyy-MM-dd"
 
-json all --deepSerialize false
-web mvc json setup
-web mvc json all --package ~.web
+enum type --class ~.domain.CalendarEventType
+enum constant --name BABY_SITTER
+enum constant --name BACK
+enum constant --name GO				--permitReservedWords true
+
+entity jpa --activeRecord false --class ~.domain.CalendarEvent
+field reference	--fieldName babySitting			--type ~.domain.BabySitting			--fetch LAZY				--notNull true
+field string	--fieldName externalId																			--notNull true
+field enum		--fieldName type				--type ~.domain.CalendarEventType	--enumType STRING			--notNull true
+
+
+repository jpa --interface ~.repository.BabySitterRepository	--entity ~.domain.BabySitter
+repository jpa --interface ~.repository.BabySittingRepository	--entity ~.domain.BabySitting
+repository jpa --interface ~.repository.CalendarEventRepository	--entity ~.domain.CalendarEvent
+repository jpa --interface ~.repository.LocationRepository		--entity ~.domain.Location
+
+service all --classPackage ~.service.impl --interfacePackage ~.service
+
+//json all --deepSerialize false
+//web mvc json setup
+//web mvc json all --package ~.web
 
 web mvc setup
 web mvc all --package ~.web
-web mvc finder all
+//web mvc finder all
 
-security setup
+//security setup

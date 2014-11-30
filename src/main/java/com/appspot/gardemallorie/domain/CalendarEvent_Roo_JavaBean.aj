@@ -3,20 +3,20 @@
 
 package com.appspot.gardemallorie.domain;
 
+import com.appspot.gardemallorie.domain.BabySitting;
 import com.appspot.gardemallorie.domain.CalendarEvent;
 import com.appspot.gardemallorie.domain.CalendarEventType;
 
 privileged aspect CalendarEvent_Roo_JavaBean {
     
-	public BabySitting CalendarEvent.getBabySitting() {
-		return babySitting;
-	}
-
-	public void CalendarEvent.setBabySitting(BabySitting babySitting) {
-		this.babySitting = babySitting;
-		entityManager.refresh(babySitting);
-	}
-	
+    public BabySitting CalendarEvent.getBabySitting() {
+        return this.babySitting;
+    }
+    
+    public void CalendarEvent.setBabySitting(BabySitting babySitting) {
+        this.babySitting = babySitting;
+    }
+    
     public String CalendarEvent.getExternalId() {
         return this.externalId;
     }

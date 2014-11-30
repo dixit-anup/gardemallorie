@@ -5,8 +5,14 @@ package com.appspot.gardemallorie.web;
 
 import com.appspot.gardemallorie.domain.BabySitter;
 import com.appspot.gardemallorie.domain.BabySitting;
+import com.appspot.gardemallorie.domain.CalendarEvent;
 import com.appspot.gardemallorie.domain.Location;
+import com.appspot.gardemallorie.service.BabySitterService;
+import com.appspot.gardemallorie.service.BabySittingService;
+import com.appspot.gardemallorie.service.CalendarEventService;
+import com.appspot.gardemallorie.service.LocationService;
 import com.appspot.gardemallorie.web.ApplicationConversionServiceFactoryBean;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Configurable;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.format.FormatterRegistry;
@@ -15,10 +21,22 @@ privileged aspect ApplicationConversionServiceFactoryBean_Roo_ConversionService 
     
     declare @type: ApplicationConversionServiceFactoryBean: @Configurable;
     
+    @Autowired
+    BabySitterService ApplicationConversionServiceFactoryBean.babySitterService;
+    
+    @Autowired
+    BabySittingService ApplicationConversionServiceFactoryBean.babySittingService;
+    
+    @Autowired
+    CalendarEventService ApplicationConversionServiceFactoryBean.calendarEventService;
+    
+    @Autowired
+    LocationService ApplicationConversionServiceFactoryBean.locationService;
+    
     public Converter<Long, BabySitter> ApplicationConversionServiceFactoryBean.getIdToBabySitterConverter() {
         return new org.springframework.core.convert.converter.Converter<java.lang.Long, com.appspot.gardemallorie.domain.BabySitter>() {
             public com.appspot.gardemallorie.domain.BabySitter convert(java.lang.Long id) {
-                return BabySitter.findBabySitter(id);
+                return babySitterService.findBabySitter(id);
             }
         };
     }
@@ -42,7 +60,7 @@ privileged aspect ApplicationConversionServiceFactoryBean_Roo_ConversionService 
     public Converter<Long, BabySitting> ApplicationConversionServiceFactoryBean.getIdToBabySittingConverter() {
         return new org.springframework.core.convert.converter.Converter<java.lang.Long, com.appspot.gardemallorie.domain.BabySitting>() {
             public com.appspot.gardemallorie.domain.BabySitting convert(java.lang.Long id) {
-                return BabySitting.findBabySitting(id);
+                return babySittingService.findBabySitting(id);
             }
         };
     }
@@ -51,6 +69,30 @@ privileged aspect ApplicationConversionServiceFactoryBean_Roo_ConversionService 
         return new org.springframework.core.convert.converter.Converter<java.lang.String, com.appspot.gardemallorie.domain.BabySitting>() {
             public com.appspot.gardemallorie.domain.BabySitting convert(String id) {
                 return getObject().convert(getObject().convert(id, Long.class), BabySitting.class);
+            }
+        };
+    }
+    
+    public Converter<CalendarEvent, String> ApplicationConversionServiceFactoryBean.getCalendarEventToStringConverter() {
+        return new org.springframework.core.convert.converter.Converter<com.appspot.gardemallorie.domain.CalendarEvent, java.lang.String>() {
+            public String convert(CalendarEvent calendarEvent) {
+                return new StringBuilder().append(calendarEvent.getExternalId()).toString();
+            }
+        };
+    }
+    
+    public Converter<Long, CalendarEvent> ApplicationConversionServiceFactoryBean.getIdToCalendarEventConverter() {
+        return new org.springframework.core.convert.converter.Converter<java.lang.Long, com.appspot.gardemallorie.domain.CalendarEvent>() {
+            public com.appspot.gardemallorie.domain.CalendarEvent convert(java.lang.Long id) {
+                return calendarEventService.findCalendarEvent(id);
+            }
+        };
+    }
+    
+    public Converter<String, CalendarEvent> ApplicationConversionServiceFactoryBean.getStringToCalendarEventConverter() {
+        return new org.springframework.core.convert.converter.Converter<java.lang.String, com.appspot.gardemallorie.domain.CalendarEvent>() {
+            public com.appspot.gardemallorie.domain.CalendarEvent convert(String id) {
+                return getObject().convert(getObject().convert(id, Long.class), CalendarEvent.class);
             }
         };
     }
@@ -66,7 +108,7 @@ privileged aspect ApplicationConversionServiceFactoryBean_Roo_ConversionService 
     public Converter<Long, Location> ApplicationConversionServiceFactoryBean.getIdToLocationConverter() {
         return new org.springframework.core.convert.converter.Converter<java.lang.Long, com.appspot.gardemallorie.domain.Location>() {
             public com.appspot.gardemallorie.domain.Location convert(java.lang.Long id) {
-                return Location.findLocation(id);
+                return locationService.findLocation(id);
             }
         };
     }
@@ -86,6 +128,9 @@ privileged aspect ApplicationConversionServiceFactoryBean_Roo_ConversionService 
         registry.addConverter(getBabySittingToStringConverter());
         registry.addConverter(getIdToBabySittingConverter());
         registry.addConverter(getStringToBabySittingConverter());
+        registry.addConverter(getCalendarEventToStringConverter());
+        registry.addConverter(getIdToCalendarEventConverter());
+        registry.addConverter(getStringToCalendarEventConverter());
         registry.addConverter(getLocationToStringConverter());
         registry.addConverter(getIdToLocationConverter());
         registry.addConverter(getStringToLocationConverter());

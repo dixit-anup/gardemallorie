@@ -25,7 +25,7 @@
             <menu:item id="i_location_new" messageCode="global_menu_new" render="${isUserAdmin}" url="/locations?form" z="user-managed"/>
             <menu:item id="i_location_list" messageCode="global_menu_list" url="/locations?page=1&amp;size=${empty param.size ? 10 : param.size}" z="VdKLEljpeTLil2W6A3GdWmSBzXI="/>
         </menu:category>
-        <menu:item id="i_login" messageCode="global_menu_login" render="${not isUserLoggedIn}" url="/login" z="G+iyajikDujbBvqi01z6ahMLPew="/>
-        <menu:item id="i_logout" messageCode="global_menu_logout" render="${isUserLoggedIn}" url="${custom:createLogoutURL(pageContext)}" z="lB1UOlz7YJYUsYv3h0ucWVhn+AA="/>
+		<menu:item id="i_login" messageCode="global_menu_login" render="${not isUserLoggedIn}" url="/login" z="user-managed"/>
+		<menu:item id="i_logout" messageCode="global_menu_logout" label="${userEmail}" render="${isUserLoggedIn}" url="${custom:createLogoutURL(pageContext)}" z="user-managed"/>
     </menu:menu>
 </jsp:root>

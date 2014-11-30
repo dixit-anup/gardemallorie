@@ -3,14 +3,15 @@
 
 package com.appspot.gardemallorie.web;
 
-import com.appspot.gardemallorie.domain.BabySitter;
 import com.appspot.gardemallorie.domain.BabySitting;
-import com.appspot.gardemallorie.domain.CalendarEvent;
-import com.appspot.gardemallorie.domain.Location;
+import com.appspot.gardemallorie.service.BabySitterService;
+import com.appspot.gardemallorie.service.BabySittingService;
+import com.appspot.gardemallorie.service.LocationService;
 import com.appspot.gardemallorie.web.BabySittingController;
 import java.io.UnsupportedEncodingException;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -22,6 +23,12 @@ import org.springframework.web.util.WebUtils;
 
 privileged aspect BabySittingController_Roo_Controller {
     
+    @Autowired
+    BabySitterService BabySittingController.babySitterService;
+    
+    @Autowired
+    LocationService BabySittingController.locationService;
+    
     @RequestMapping(method = RequestMethod.POST, produces = "text/html")
     public String BabySittingController.create(@Valid BabySitting babySitting, BindingResult bindingResult, Model uiModel, HttpServletRequest httpServletRequest) {
         if (bindingResult.hasErrors()) {
@@ -29,7 +36,7 @@ privileged aspect BabySittingController_Roo_Controller {
             return "babysittings/create";
         }
         uiModel.asMap().clear();
-        babySitting.persist();
+        babySittingService.saveBabySitting(babySitting);
         return "redirect:/babysittings/" + encodeUrlPathSegment(babySitting.getId().toString(), httpServletRequest);
     }
     
@@ -42,7 +49,7 @@ privileged aspect BabySittingController_Roo_Controller {
     @RequestMapping(value = "/{id}", produces = "text/html")
     public String BabySittingController.show(@PathVariable("id") Long id, Model uiModel) {
         addDateTimeFormatPatterns(uiModel);
-        uiModel.addAttribute("babysitting", BabySitting.findBabySitting(id));
+        uiModel.addAttribute("babysitting", babySittingService.findBabySitting(id));
         uiModel.addAttribute("itemId", id);
         return "babysittings/show";
     }
@@ -52,11 +59,11 @@ privileged aspect BabySittingController_Roo_Controller {
         if (page != null || size != null) {
             int sizeNo = size == null ? 10 : size.intValue();
             final int firstResult = page == null ? 0 : (page.intValue() - 1) * sizeNo;
-            uiModel.addAttribute("babysittings", BabySitting.findBabySittingEntries(firstResult, sizeNo, sortFieldName, sortOrder));
-            float nrOfPages = (float) BabySitting.countBabySittings() / sizeNo;
+            uiModel.addAttribute("babysittings", babySittingService.findBabySittingEntries(firstResult, sizeNo));
+            float nrOfPages = (float) babySittingService.countAllBabySittings() / sizeNo;
             uiModel.addAttribute("maxPages", (int) ((nrOfPages > (int) nrOfPages || nrOfPages == 0.0) ? nrOfPages + 1 : nrOfPages));
         } else {
-            uiModel.addAttribute("babysittings", BabySitting.findAllBabySittings(sortFieldName, sortOrder));
+            uiModel.addAttribute("babysittings", babySittingService.findAllBabySittings());
         }
         addDateTimeFormatPatterns(uiModel);
         return "babysittings/list";
@@ -69,20 +76,20 @@ privileged aspect BabySittingController_Roo_Controller {
             return "babysittings/update";
         }
         uiModel.asMap().clear();
-        babySitting.merge();
+        babySittingService.updateBabySitting(babySitting);
         return "redirect:/babysittings/" + encodeUrlPathSegment(babySitting.getId().toString(), httpServletRequest);
     }
     
     @RequestMapping(value = "/{id}", params = "form", produces = "text/html")
     public String BabySittingController.updateForm(@PathVariable("id") Long id, Model uiModel) {
-        populateEditForm(uiModel, BabySitting.findBabySitting(id));
+        populateEditForm(uiModel, babySittingService.findBabySitting(id));
         return "babysittings/update";
     }
     
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE, produces = "text/html")
     public String BabySittingController.delete(@PathVariable("id") Long id, @RequestParam(value = "page", required = false) Integer page, @RequestParam(value = "size", required = false) Integer size, Model uiModel) {
-        BabySitting babySitting = BabySitting.findBabySitting(id);
-        babySitting.remove();
+        BabySitting babySitting = babySittingService.findBabySitting(id);
+        babySittingService.deleteBabySitting(babySitting);
         uiModel.asMap().clear();
         uiModel.addAttribute("page", (page == null) ? "1" : page.toString());
         uiModel.addAttribute("size", (size == null) ? "10" : size.toString());
@@ -95,15 +102,13 @@ privileged aspect BabySittingController_Roo_Controller {
         uiModel.addAttribute("babySitting_plannedend_date_format", "HH:mm");
         uiModel.addAttribute("babySitting_declaredend_date_format", "HH:mm");
         uiModel.addAttribute("babySitting_chargedend_date_format", "HH:mm");
-        uiModel.addAttribute("babySitting_copyuntil_date_format", "yyyy-MM-dd");
     }
     
     void BabySittingController.populateEditForm(Model uiModel, BabySitting babySitting) {
         uiModel.addAttribute("babySitting", babySitting);
         addDateTimeFormatPatterns(uiModel);
-        uiModel.addAttribute("babysitters", BabySitter.findAllBabySitters());
-        uiModel.addAttribute("calendarevents", CalendarEvent.findAllCalendarEvents());
-        uiModel.addAttribute("locations", Location.findAllLocations());
+        uiModel.addAttribute("babysitters", babySitterService.findAllBabySitters());
+        uiModel.addAttribute("locations", locationService.findAllLocations());
     }
     
     String BabySittingController.encodeUrlPathSegment(String pathSegment, HttpServletRequest httpServletRequest) {

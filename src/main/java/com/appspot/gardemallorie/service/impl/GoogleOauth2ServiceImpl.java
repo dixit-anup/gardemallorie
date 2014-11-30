@@ -1,13 +1,15 @@
-package com.appspot.gardemallorie.security.google.oauth2;
+package com.appspot.gardemallorie.service.impl;
 
 import java.io.IOException;
 import java.util.Collections;
 
-import javax.servlet.http.HttpServletRequest;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import com.appspot.gardemallorie.service.GoogleOauth2Service;
 import com.google.api.client.auth.oauth2.AuthorizationCodeFlow;
 import com.google.api.client.auth.oauth2.Credential;
 import com.google.api.client.auth.oauth2.CredentialRefreshListener;
@@ -17,77 +19,81 @@ import com.google.api.client.auth.oauth2.TokenResponse;
 import com.google.api.client.extensions.appengine.datastore.AppEngineDataStoreFactory;
 import com.google.api.client.extensions.appengine.http.UrlFetchTransport;
 import com.google.api.client.googleapis.auth.oauth2.GoogleAuthorizationCodeFlow;
-import com.google.api.client.http.GenericUrl;
 import com.google.api.client.http.HttpTransport;
 import com.google.api.client.json.JsonFactory;
 import com.google.api.client.json.jackson2.JacksonFactory;
-import com.google.api.services.calendar.Calendar;
+import com.google.api.client.util.store.DataStoreFactory;
 import com.google.api.services.calendar.CalendarScopes;
 import com.google.appengine.api.users.UserServiceFactory;
 
-//TODO: include this code in the GoogleCalendarService
-public class Utils {
+@Service
+@Transactional
+public class GoogleOauth2ServiceImpl implements GoogleOauth2Service {
 
-	private static final String APPLICATION_NAME = "BabySitting";
-	private static final AppEngineDataStoreFactory DATA_STORE_FACTORY = AppEngineDataStoreFactory.getDefaultInstance();
-	private static final HttpTransport HTTP_TRANSPORT = UrlFetchTransport.getDefaultInstance();
-	private static final JsonFactory JSON_FACTORY = JacksonFactory.getDefaultInstance();
-	private static final Logger LOGGER = LoggerFactory.getLogger(Utils.class);
+	@Value("${calendar.clientId}")
+	private String clientId;
 	
-	public static String getUserEmail() {
+	@Value("${calendar.clientSecret}")
+	private String clientSecret;
+
+	private final DataStoreFactory dataStoreFactory = AppEngineDataStoreFactory.getDefaultInstance();
+	
+	private final HttpTransport httpTransport = UrlFetchTransport.getDefaultInstance();
+	
+	private final JsonFactory jsonFactory = JacksonFactory.getDefaultInstance();
+	
+	private final Logger logger = LoggerFactory.getLogger(getClass());
+	
+	@Override
+	public Credential getCurrentUserCredential() throws IOException {
+
+		Credential credential = createAuthorizationCodeFlow().loadCredential(getCurrentUserEmail());
+
+		if (credential == null) {
+			logger.debug("loadCalendarClient(), credential: null");
+		}
+		else {
+			logger.debug("loadCalendarClient(), credential.refreshListeners: {}", credential.getRefreshListeners());
+		}
+	
+		return credential;
+	}
+
+	@Override
+	public String getCurrentUserEmail() {
 		return UserServiceFactory.getUserService().getCurrentUser().getEmail();
 	}
-	
-	public static String getRedirectUri(HttpServletRequest req) {
-		GenericUrl url = new GenericUrl(req.getRequestURL().toString());
-		url.setRawPath("/oauth2_callback");
-		return url.build();
-	}
-	
-	public static AuthorizationCodeFlow newAuthorizationCodeFlow() throws IOException {
+
+	@Override
+	public AuthorizationCodeFlow createAuthorizationCodeFlow() throws IOException {
 
 		CustomCredentialRefreshListener customCredentialRefreshListener = new CustomCredentialRefreshListener();
 		GoogleAuthorizationCodeFlow flow = new GoogleAuthorizationCodeFlow.Builder(
-			HTTP_TRANSPORT,
-			JSON_FACTORY,
-			"707675818670-93tsf19go0vt3nffn2c4i4p6npc2nn4d.apps.googleusercontent.com",
-			"rWeD4DEoCnAHuA4wGyJ8GvjK",
+			httpTransport,
+			jsonFactory,
+			clientId,
+			clientSecret,
 			Collections.singleton(CalendarScopes.CALENDAR)
 		)
-		.setDataStoreFactory(DATA_STORE_FACTORY)
+		.setDataStoreFactory(dataStoreFactory)
 		.addRefreshListener(customCredentialRefreshListener)
 		.build();
 		
 		customCredentialRefreshListener.setAuthorizationCodeFlow(flow);
 		
-		LOGGER.debug("flow.refreshListeners: {}", flow.getRefreshListeners());
+		logger.debug("flow.refreshListeners: {}", flow.getRefreshListeners());
 
 		return flow;
 	}
-	
-	public static Calendar loadCalendarClient() throws IOException {
 
-		Credential credential = newAuthorizationCodeFlow().loadCredential(getUserEmail());
+	@Override
+	public void removeCurrentUserCredential() throws IOException {
+		String currentUserEmail = getCurrentUserEmail();
+		logger.debug("Removing Credential for {}", currentUserEmail);
+		StoredCredential.getDefaultDataStore(dataStoreFactory).delete(currentUserEmail);
+	}
 
-		if (credential == null) {
-			LOGGER.debug("loadCalendarClient(), credential: null");
-		}
-		else {
-			LOGGER.debug("loadCalendarClient(), credential.refreshListeners: {}", credential.getRefreshListeners());
-		}
-	
-		return new Calendar.Builder(HTTP_TRANSPORT, JSON_FACTORY, credential).setApplicationName(APPLICATION_NAME).build();
-	}
-	
-	public static void removeCredential() throws IOException {
-		LOGGER.debug("Removing Credential for {}", getUserEmail());
-		StoredCredential.getDefaultDataStore(DATA_STORE_FACTORY).delete(getUserEmail());
-	}
-	
-	private Utils() {
-	}
-	
-	static class CustomCredentialRefreshListener implements CredentialRefreshListener {
+	class CustomCredentialRefreshListener implements CredentialRefreshListener {
 
 		private AuthorizationCodeFlow authorizationCodeFlow;
 		private final Logger logger = LoggerFactory.getLogger(getClass());
@@ -108,5 +114,5 @@ public class Utils {
 		}
 		
 	}
-  
+
 }

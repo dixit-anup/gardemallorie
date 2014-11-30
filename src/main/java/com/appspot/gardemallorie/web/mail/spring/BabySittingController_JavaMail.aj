@@ -20,22 +20,26 @@ import org.springframework.validation.BindingResult;
 
 import com.appspot.gardemallorie.domain.BabySitter;
 import com.appspot.gardemallorie.domain.BabySitting;
+import com.appspot.gardemallorie.service.BabySittingService;
 import com.appspot.gardemallorie.web.BabySittingController;
 
 privileged aspect BabySittingController_JavaMail {
     
 	declare precedence: com.appspot.gardemallorie.web.BabySittingController_Roo_Controller;
 
+	//@Autowired
+	//private BabySittingService BabySittingController.babySittingService;
+
 	@Autowired
-	private transient JavaMailSender BabySittingController.javaMailSender;
+	private JavaMailSender BabySittingController.javaMailSender;
 	
 	@Autowired
 	@Qualifier("createBabySittingMailMessage")
-	private transient SimpleMailMessage BabySittingController.createMailMessage;
+	private SimpleMailMessage BabySittingController.createMailMessage;
 	
 	@Autowired
 	@Qualifier("updateBabySittingMailMessage")
-	private transient SimpleMailMessage BabySittingController.updateMailMessage;
+	private SimpleMailMessage BabySittingController.updateMailMessage;
 	
 	String around(BabySittingController babySittingController, BabySitting babySitting, BindingResult bindingResult, Model uiModel, HttpServletRequest httpServletRequest):
         (
@@ -55,7 +59,7 @@ privileged aspect BabySittingController_JavaMail {
     		
     		templateMailMessage = babySittingController.updateMailMessage;
 
-    		BabySitting actualBabySitting = BabySitting.findBabySitting(babySitting.getId());
+    		BabySitting actualBabySitting = babySittingController.babySittingService.findBabySitting(babySitting.getId());
         	babySitters.add(actualBabySitting.getBabySitter());
         	babySitters.add(actualBabySitting.getBack());
         	babySitters.add(actualBabySitting.getGo());

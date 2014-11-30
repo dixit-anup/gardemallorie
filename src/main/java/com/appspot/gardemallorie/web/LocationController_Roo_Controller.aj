@@ -4,10 +4,12 @@
 package com.appspot.gardemallorie.web;
 
 import com.appspot.gardemallorie.domain.Location;
+import com.appspot.gardemallorie.service.LocationService;
 import com.appspot.gardemallorie.web.LocationController;
 import java.io.UnsupportedEncodingException;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -19,6 +21,9 @@ import org.springframework.web.util.WebUtils;
 
 privileged aspect LocationController_Roo_Controller {
     
+    @Autowired
+    LocationService LocationController.locationService;
+    
     @RequestMapping(method = RequestMethod.POST, produces = "text/html")
     public String LocationController.create(@Valid Location location, BindingResult bindingResult, Model uiModel, HttpServletRequest httpServletRequest) {
         if (bindingResult.hasErrors()) {
@@ -26,7 +31,7 @@ privileged aspect LocationController_Roo_Controller {
             return "locations/create";
         }
         uiModel.asMap().clear();
-        location.persist();
+        locationService.saveLocation(location);
         return "redirect:/locations/" + encodeUrlPathSegment(location.getId().toString(), httpServletRequest);
     }
     
@@ -38,7 +43,7 @@ privileged aspect LocationController_Roo_Controller {
     
     @RequestMapping(value = "/{id}", produces = "text/html")
     public String LocationController.show(@PathVariable("id") Long id, Model uiModel) {
-        uiModel.addAttribute("location", Location.findLocation(id));
+        uiModel.addAttribute("location", locationService.findLocation(id));
         uiModel.addAttribute("itemId", id);
         return "locations/show";
     }
@@ -48,11 +53,11 @@ privileged aspect LocationController_Roo_Controller {
         if (page != null || size != null) {
             int sizeNo = size == null ? 10 : size.intValue();
             final int firstResult = page == null ? 0 : (page.intValue() - 1) * sizeNo;
-            uiModel.addAttribute("locations", Location.findLocationEntries(firstResult, sizeNo, sortFieldName, sortOrder));
-            float nrOfPages = (float) Location.countLocations() / sizeNo;
+            uiModel.addAttribute("locations", locationService.findLocationEntries(firstResult, sizeNo));
+            float nrOfPages = (float) locationService.countAllLocations() / sizeNo;
             uiModel.addAttribute("maxPages", (int) ((nrOfPages > (int) nrOfPages || nrOfPages == 0.0) ? nrOfPages + 1 : nrOfPages));
         } else {
-            uiModel.addAttribute("locations", Location.findAllLocations(sortFieldName, sortOrder));
+            uiModel.addAttribute("locations", locationService.findAllLocations());
         }
         return "locations/list";
     }
@@ -64,20 +69,20 @@ privileged aspect LocationController_Roo_Controller {
             return "locations/update";
         }
         uiModel.asMap().clear();
-        location.merge();
+        locationService.updateLocation(location);
         return "redirect:/locations/" + encodeUrlPathSegment(location.getId().toString(), httpServletRequest);
     }
     
     @RequestMapping(value = "/{id}", params = "form", produces = "text/html")
     public String LocationController.updateForm(@PathVariable("id") Long id, Model uiModel) {
-        populateEditForm(uiModel, Location.findLocation(id));
+        populateEditForm(uiModel, locationService.findLocation(id));
         return "locations/update";
     }
     
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE, produces = "text/html")
     public String LocationController.delete(@PathVariable("id") Long id, @RequestParam(value = "page", required = false) Integer page, @RequestParam(value = "size", required = false) Integer size, Model uiModel) {
-        Location location = Location.findLocation(id);
-        location.remove();
+        Location location = locationService.findLocation(id);
+        locationService.deleteLocation(location);
         uiModel.asMap().clear();
         uiModel.addAttribute("page", (page == null) ? "1" : page.toString());
         uiModel.addAttribute("size", (size == null) ? "10" : size.toString());

@@ -15,6 +15,5 @@
         <field:display field="extraHours" id="s_com_appspot_gardemallorie_domain_BabySitting_extraHours" object="${babysitting}" z="Zv/nxaSDwU4M4b3ItS3uXndxHZo="/>
         <field:display date="true" dateTimePattern="${babySitting_chargedend_date_format}" field="chargedEnd" id="s_com_appspot_gardemallorie_domain_BabySitting_chargedEnd" object="${babysitting}" z="6XeNWxjNtzP3zvIWU4wfW+MfBko="/>
         <field:display field="childcareVouchers" id="s_com_appspot_gardemallorie_domain_BabySitting_childcareVouchers" object="${babysitting}" z="N/CVKZD6Fr1iMSc+6Zyt0oaJzFw="/>
-        <field:display date="true" dateTimePattern="${babySitting_copyuntil_date_format}" field="copyUntil" id="s_com_appspot_gardemallorie_domain_BabySitting_copyUntil" object="${babysitting}" z="yrRl06Bv5DaBWnrewQfwzxx7L8w="/>
     </page:show>
 </jsp:root>

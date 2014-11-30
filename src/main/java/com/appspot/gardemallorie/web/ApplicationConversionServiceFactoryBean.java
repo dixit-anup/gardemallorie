@@ -19,12 +19,12 @@ public class ApplicationConversionServiceFactoryBean extends FormattingConversio
 		// Register application converters and formatters
 	}
 
-    public Converter<BabySitter, String> getBabySitterToStringConverter() {
+	public Converter<BabySitter, String> getBabySitterToStringConverter() {
         return new org.springframework.core.convert.converter.Converter<com.appspot.gardemallorie.domain.BabySitter, java.lang.String>() {
             public String convert(BabySitter babySitter) {
                 return babySitter.getFirstName();
             }
         };
     }
-    
+
 }
