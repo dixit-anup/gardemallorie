@@ -12,7 +12,7 @@ import org.springframework.roo.addon.tostring.RooToString;
 @NamedQueries({
 	@NamedQuery(
 		name = "Location.findAll",
-		query = "select location From Location location order by location.name asc"
+		query = "select location from Location location order by location.name asc"
 	)
 })
 @RooJavaBean

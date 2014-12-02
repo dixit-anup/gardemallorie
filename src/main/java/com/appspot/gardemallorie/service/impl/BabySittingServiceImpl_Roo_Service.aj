@@ -9,6 +9,7 @@ import com.appspot.gardemallorie.service.impl.BabySittingServiceImpl;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 privileged aspect BabySittingServiceImpl_Roo_Service {
@@ -20,6 +21,7 @@ privileged aspect BabySittingServiceImpl_Roo_Service {
     @Autowired
     BabySittingRepository BabySittingServiceImpl.babySittingRepository;
     
+	//@Transactional(propagation = Propagation.NOT_SUPPORTED)
     public long BabySittingServiceImpl.countAllBabySittings() {
         return babySittingRepository.count();
     }
@@ -32,10 +34,12 @@ privileged aspect BabySittingServiceImpl_Roo_Service {
         return babySittingRepository.findOne(id);
     }
     
+	//@Transactional(propagation = Propagation.NOT_SUPPORTED)
     public List<BabySitting> BabySittingServiceImpl.findAllBabySittings() {
         return babySittingRepository.findAll();
     }
     
+	//@Transactional(propagation = Propagation.NOT_SUPPORTED)
     public List<BabySitting> BabySittingServiceImpl.findBabySittingEntries(int firstResult, int maxResults) {
         return babySittingRepository.findAll(new org.springframework.data.domain.PageRequest(firstResult / maxResults, maxResults)).getContent();
     }

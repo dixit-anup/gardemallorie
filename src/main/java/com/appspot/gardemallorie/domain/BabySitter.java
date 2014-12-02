@@ -18,7 +18,7 @@ import org.springframework.roo.addon.tostring.RooToString;
 @NamedQueries({
 	@NamedQuery(
 		name = "BabySitter.findAll",
-		query = "select babySitter From BabySitter babySitter order by babySitter.firstName asc"
+		query = "select babySitter from BabySitter babySitter order by babySitter.firstName asc"
 	)
 })
 @RooJavaBean

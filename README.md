@@ -8,6 +8,7 @@ TODO :
 - fix searches pages and sort columns
 - fix oauth2 authentication errors
 - fix redirect exceptions
+- delete orphan CalendarEvents
 - clean dependencies and dependency scopes
 - split the project into separated Maven modules (persistence)
 - use colors

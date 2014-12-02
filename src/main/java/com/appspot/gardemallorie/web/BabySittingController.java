@@ -1,5 +1,11 @@
 package com.appspot.gardemallorie.web;
 
+import static java.util.Calendar.DAY_OF_MONTH;
+import static java.util.Calendar.DAY_OF_WEEK;
+import static java.util.Calendar.SATURDAY;
+import static java.util.Calendar.SUNDAY;
+import static org.springframework.web.servlet.view.UrlBasedViewResolver.REDIRECT_URL_PREFIX;
+
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -18,17 +24,25 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.appspot.gardemallorie.domain.BabySitting;
 import com.appspot.gardemallorie.service.BabySittingService;
 
-@RequestMapping("/babysittings")
 @Controller
+@RequestMapping("/babysittings")
 @RooWebScaffold(path = "babysittings", formBackingObject = BabySitting.class)
 public class BabySittingController {
+
+	static private final String INDEX_VIEW = REDIRECT_URL_PREFIX + '/';
+	static private final String BABYSITTING_EXTRACHARGES_VIEW = "babysittings/extraCharges";
+	static private final String BABYSITTING_LIST_VIEW = "babysittings/list";
 
     @Autowired
     private BabySittingService babySittingService;
     
-    @RequestMapping(method = RequestMethod.PUT, params = "copyUntil", produces = "text/html")
-    public String copyUntil(@RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd") Date copyUntil, BabySitting b, BindingResult bindingResult, Model uiModel) {
-
+	@RequestMapping(method = RequestMethod.PUT, params = "copyUntil", produces = "text/html")
+	public String copyUntil(
+		@RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd") Date copyUntil,
+		BabySitting b,
+		BindingResult bindingResult,
+		Model uiModel)
+	{
     	BabySitting babySitting = babySittingService.findBabySitting(b.getId());
     	
     	if (babySittingService.countBabySittingsByDayGreaterThanEquals(babySitting.getDay()) > 1) {
@@ -43,11 +57,11 @@ public class BabySittingController {
         
         while (currentDay.compareTo(copyUntilDay) <= 0) {
         	
-        	currentDay.add(Calendar.DAY_OF_MONTH, 1);
-        	int currentDayOfWeek = currentDay.get(Calendar.DAY_OF_WEEK);
+        	currentDay.add(DAY_OF_MONTH, 1);
+        	int currentDayOfWeek = currentDay.get(DAY_OF_WEEK);
 
         	// Skip saturdays and sundays
-        	if (currentDayOfWeek == Calendar.SATURDAY || currentDayOfWeek == Calendar.SUNDAY) {
+        	if (currentDayOfWeek == SATURDAY || currentDayOfWeek == SUNDAY) {
         		continue;
         	}
         	
@@ -64,11 +78,17 @@ public class BabySittingController {
         
         uiModel.asMap().clear();
         
-        return findNextBabySittings(null, null, null, null, uiModel);
+        return INDEX_VIEW;
     }
     
-    @RequestMapping(params = "find=Next")
-    public String findNextBabySittings(@RequestParam(value = "page", required = false) Integer page, @RequestParam(value = "size", required = false) Integer size, @RequestParam(value = "sortFieldName", required = false) String sortFieldName, @RequestParam(value = "sortOrder", required = false) String sortOrder, Model uiModel) {
+	@RequestMapping(params = "find=Next")
+	public String findNextBabySittings(
+			@RequestParam(value = "page", required = false) Integer page,
+			@RequestParam(value = "size", required = false) Integer size,
+			@RequestParam(value = "sortFieldName", required = false) String sortFieldName,
+			@RequestParam(value = "sortOrder", required = false) String sortOrder,
+			Model uiModel)
+	{
         if (page != null || size != null) {
             int sizeNo = size == null ? 10 : size.intValue();
             final int firstResult = page == null ? 0 : (page.intValue() - 1) * sizeNo;
@@ -78,8 +98,10 @@ public class BabySittingController {
         } else {
             uiModel.addAttribute("babysittings", babySittingService.findNextBabySittings());
         }
+        
         addDateTimeFormatPatterns(uiModel);
-        return "babysittings/list";
+        
+        return BABYSITTING_LIST_VIEW;
     }
 
     @RequestMapping(params = "find=ExtraCharges")
@@ -112,8 +134,10 @@ public class BabySittingController {
         }
 
         uiModel.addAttribute("extraCharges", extraChargesList);
+
         addDateTimeFormatPatterns(uiModel);
-        return "babysittings/extraCharges";
+        
+        return BABYSITTING_EXTRACHARGES_VIEW;
     }
 
 }
