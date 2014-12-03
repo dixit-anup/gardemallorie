@@ -52,9 +52,10 @@ public class LogoutFilter implements Filter {
 				throw ce;
 			}
 		}
-		/*catch (Throwable t) {
-			logger.debug("Throwable: {}", t);
-		}*/
+		catch (Throwable t) {
+			logger.debug("##################### Throwable: {}", t);
+			throw new ServletException(t);
+		}
 
 	}
 

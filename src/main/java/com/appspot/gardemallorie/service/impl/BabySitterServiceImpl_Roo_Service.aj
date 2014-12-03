@@ -32,10 +32,6 @@ privileged aspect BabySitterServiceImpl_Roo_Service {
         return babySitterRepository.findOne(id);
     }
     
-    public List<BabySitter> BabySitterServiceImpl.findAllBabySitters() {
-        return babySitterRepository.findAll();
-    }
-    
     public List<BabySitter> BabySitterServiceImpl.findBabySitterEntries(int firstResult, int maxResults) {
         return babySitterRepository.findAll(new org.springframework.data.domain.PageRequest(firstResult / maxResults, maxResults)).getContent();
     }

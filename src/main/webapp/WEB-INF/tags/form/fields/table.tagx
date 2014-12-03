@@ -74,36 +74,40 @@
             </c:forEach>
             <c:choose>
                 <c:when test="${sort}">
-                    <c:set var="sortOrderSet" value="false" />
-                    <c:set var="sortOrderClass" value="not-set" />
+                    <c:set var="sortDirection" value="" />
+                    <c:set var="sortDirectionClass" value="not-set" />
                     <spring:url value="" var="querySortUrl">
-                        <c:forEach items="${paramValues}" var="p">
-                            <c:if test="${p.key ne 'sortFieldName' and p.key ne 'sortOrder'}">
-                                <c:forEach var='value' items='${p.value}'>
-                                    <spring:param name="${p.key}" value="${value}" />
-                                </c:forEach>
-                            </c:if>
-                            <c:if test="${p.key eq 'sortOrder' and paramValues['sortFieldName'][0] eq columnProperty}">
-                                <c:set var="sortOrderSet" value="true" />
-                                <c:if test="${p.value[0] eq 'asc'}">
-                                    <spring:param name="sortOrder" value="desc" />
-                                    <c:set var="sortOrderClass" value="chevron-down" />
-                                </c:if>
-                                <c:if test="${p.value[0] eq 'desc'}">
-                                    <spring:param name="sortOrder" value="asc" />
-                                    <c:set var="sortOrderClass" value="chevron-up" />
-                                </c:if>
-                            </c:if>
+                        <c:forEach items="${paramValues}" var="paramEntry">
+                        	<c:choose>
+                        		<!-- 'sort' parameter -->
+                        		<c:when test="${paramEntry.key eq 'sort'}">
+		                            <c:if test="${fn:startsWith(paramEntry.value[0], columnProperty)}">
+		                            	<c:choose>
+		                            		<c:when test="${fn:contains(paramEntry.value[0], 'desc')}">
+							                    <c:set var="sortDirection" value="asc" />
+			                                    <c:set var="sortDirectionClass" value="chevron-down" />
+		                            		</c:when>
+		                            		<c:otherwise>
+							                    <c:set var="sortDirection" value="desc" />
+			                                    <c:set var="sortDirectionClass" value="chevron-up" />
+		                            		</c:otherwise>
+		                            	</c:choose>
+		                            </c:if>
+                        		</c:when>
+                        		<!-- other parameters -->
+	                            <c:otherwise>
+	                                <c:forEach var='paramValue' items='${paramEntry.value}'>
+	                                    <spring:param name="${paramEntry.key}" value="${paramValue}" />
+	                                </c:forEach>
+	                            </c:otherwise>
+                        	</c:choose>
                         </c:forEach>
-                        <spring:param name="sortFieldName" value="${columnProperty}" />
-                        <c:if test="${not sortOrderSet}">
-                            <spring:param name="sortOrder" value="asc" />
-                        </c:if>
+                        <spring:param name="sort" value="${columnProperty},${sortDirection}" />
                     </spring:url>
                     <th class="${cssClass}">
                     	<a href="${querySortUrl}" class="btn btn-default btn-sm">
 							<c:out value="${columnHeading} " />
-                    		<span class="glyphicon glyphicon-${sortOrderClass}"></span>
+                    		<span class="glyphicon glyphicon-${sortDirectionClass}"></span>
                     		<spring:eval var="colCounter" expression="colCounter + 1" />
                    		</a>
                   	</th>

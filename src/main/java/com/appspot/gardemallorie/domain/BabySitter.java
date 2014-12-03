@@ -3,8 +3,6 @@ package com.appspot.gardemallorie.domain;
 import java.util.Date;
 
 import javax.persistence.Column;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
@@ -15,12 +13,6 @@ import org.springframework.roo.addon.javabean.RooJavaBean;
 import org.springframework.roo.addon.jpa.entity.RooJpaEntity;
 import org.springframework.roo.addon.tostring.RooToString;
 
-@NamedQueries({
-	@NamedQuery(
-		name = "BabySitter.findAll",
-		query = "select babySitter from BabySitter babySitter order by babySitter.firstName asc"
-	)
-})
 @RooJavaBean
 @RooToString
 @RooJpaEntity

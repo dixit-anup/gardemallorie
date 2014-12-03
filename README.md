@@ -4,8 +4,7 @@ gardemallorie
 Garde Mallorie
 
 TODO :
-- fix named queries
-- fix searches pages and sort columns
+- fix search pages and sort columns
 - fix oauth2 authentication errors
 - fix redirect exceptions
 - delete orphan CalendarEvents

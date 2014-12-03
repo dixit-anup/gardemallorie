@@ -12,6 +12,7 @@ import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.roo.addon.web.mvc.controller.scaffold.RooWebScaffold;
 import org.springframework.stereotype.Controller;
@@ -81,29 +82,6 @@ public class BabySittingController {
         return INDEX_VIEW;
     }
     
-	@RequestMapping(params = "find=Next")
-	public String findNextBabySittings(
-			@RequestParam(value = "page", required = false) Integer page,
-			@RequestParam(value = "size", required = false) Integer size,
-			@RequestParam(value = "sortFieldName", required = false) String sortFieldName,
-			@RequestParam(value = "sortOrder", required = false) String sortOrder,
-			Model uiModel)
-	{
-        if (page != null || size != null) {
-            int sizeNo = size == null ? 10 : size.intValue();
-            final int firstResult = page == null ? 0 : (page.intValue() - 1) * sizeNo;
-            uiModel.addAttribute("babysittings", babySittingService.findNextBabySittings(firstResult, sizeNo));
-            float nrOfPages = (float) babySittingService.countNextBabySittings() / sizeNo;
-            uiModel.addAttribute("maxPages", (int) ((nrOfPages > (int) nrOfPages || nrOfPages == 0.0) ? nrOfPages + 1 : nrOfPages));
-        } else {
-            uiModel.addAttribute("babysittings", babySittingService.findNextBabySittings());
-        }
-        
-        addDateTimeFormatPatterns(uiModel);
-        
-        return BABYSITTING_LIST_VIEW;
-    }
-
     @RequestMapping(params = "find=ExtraCharges")
     public String findExtraCharges(Model uiModel) {
 
@@ -140,4 +118,34 @@ public class BabySittingController {
         return BABYSITTING_EXTRACHARGES_VIEW;
     }
 
+	@RequestMapping(params = "find=Next")
+	public String findNextBabySittings(Pageable pageable, Model uiModel)
+	{
+		int size = pageable.getPageSize();
+		float nrOfPages = (float) babySittingService.countNextBabySittings() / size;
+		List<BabySitting> babySittings = babySittingService.findNextBabySittings(pageable);
+
+		uiModel.addAttribute("babysittings", babySittings);
+        uiModel.addAttribute("maxPages", (int) ((nrOfPages > (int) nrOfPages || nrOfPages == 0.0) ? nrOfPages + 1 : nrOfPages));
+        
+        addDateTimeFormatPatterns(uiModel);
+        
+        return BABYSITTING_LIST_VIEW;
+    }
+
+    @RequestMapping(produces = "text/html")
+    public String list(Pageable pageable, Model uiModel) {
+
+		int size = pageable.getPageSize();
+		float nrOfPages = (float) babySittingService.countAllBabySittings() / size;
+		List<BabySitting> babySittings = babySittingService.findAllBabySittings(pageable);
+
+		uiModel.addAttribute("babysittings", babySittings);
+        uiModel.addAttribute("maxPages", (int) ((nrOfPages > (int) nrOfPages || nrOfPages == 0.0) ? nrOfPages + 1 : nrOfPages));
+
+        addDateTimeFormatPatterns(uiModel);
+
+        return BABYSITTING_LIST_VIEW;
+    }
+    
 }

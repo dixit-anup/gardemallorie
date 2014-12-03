@@ -3,18 +3,14 @@
 
 package com.appspot.gardemallorie.web;
 
-import com.appspot.gardemallorie.domain.BabySitting;
-import com.appspot.gardemallorie.domain.CalendarEvent;
-import com.appspot.gardemallorie.domain.CalendarEventType;
-import com.appspot.gardemallorie.service.BabySittingService;
-import com.appspot.gardemallorie.service.CalendarEventService;
-import com.appspot.gardemallorie.web.CalendarEventController;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -24,6 +20,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.util.UriUtils;
 import org.springframework.web.util.WebUtils;
+
+import com.appspot.gardemallorie.domain.CalendarEvent;
+import com.appspot.gardemallorie.domain.CalendarEventType;
+import com.appspot.gardemallorie.service.BabySittingService;
+import com.appspot.gardemallorie.service.CalendarEventService;
 
 privileged aspect CalendarEventController_Roo_Controller {
     

@@ -32,10 +32,6 @@ privileged aspect LocationServiceImpl_Roo_Service {
         return locationRepository.findOne(id);
     }
     
-    public List<Location> LocationServiceImpl.findAllLocations() {
-        return locationRepository.findAll();
-    }
-    
     public List<Location> LocationServiceImpl.findLocationEntries(int firstResult, int maxResults) {
         return locationRepository.findAll(new org.springframework.data.domain.PageRequest(firstResult / maxResults, maxResults)).getContent();
     }
