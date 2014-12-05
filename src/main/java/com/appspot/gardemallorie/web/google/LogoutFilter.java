@@ -37,12 +37,12 @@ public class LogoutFilter implements Filter {
 			chain.doFilter(request, response);
 		}
 		catch (CalendarException ce) {
-			logger.debug("################## CalendarException: {}", ce);
+			logger.error("################## CalendarException:", ce);
 			Throwable t = ce.getCause();
-			logger.debug("##################### CalendarException: {}, cause: {}", ce, t);
+			logger.error("##################### CalendarException: {}, cause:", ce, t);
 			if ( (t instanceof GoogleJsonResponseException) ) {
 				int statusCode = ((GoogleJsonResponseException)t).getStatusCode();
-				logger.debug("##################### statusCode: {}", statusCode);
+				logger.error("##################### statusCode: {}", statusCode);
 				if (statusCode == SC_UNAUTHORIZED ) {
 					logger.debug("Redirecting to {}", logoutRedirectURL);
 					((HttpServletResponse) response).sendRedirect(logoutRedirectURL);
@@ -52,8 +52,11 @@ public class LogoutFilter implements Filter {
 				throw ce;
 			}
 		}
+		catch (GoogleJsonResponseException e) {
+			logger.error("################## GoogleJsonResponseException:", e);
+		}
 		catch (Throwable t) {
-			logger.debug("##################### Throwable: {}", t);
+			logger.error("##################### Throwable:", t);
 			throw new ServletException(t);
 		}
 

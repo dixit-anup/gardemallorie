@@ -85,7 +85,7 @@
 				<spring:message code="list_page" arguments="${page + 1},${maxPages}" argumentSeparator="," />
 			</button>
 
-			<c:if test="${page lt maxPages}">
+			<c:if test="${page lt (maxPages - 1)}">
 				<spring:url value="${queryUrl}" var="next" htmlEscape="false">
 					<spring:param name="page" value="${page + 1}" />
 					<spring:param name="size" value="${size}" />
@@ -96,9 +96,9 @@
 				</a>
 			</c:if>
 
-			<c:if test="${page ne maxPages}">
+			<c:if test="${page ne (maxPages - 1)}">
 				<spring:url value="${queryUrl}" var="last" htmlEscape="false">
-					<spring:param name="page" value="${maxPages}" />
+					<spring:param name="page" value="${maxPages - 1}" />
 					<spring:param name="size" value="${size}" />
 				</spring:url>
 				<spring:message code="list_last" var="last_label" htmlEscape="false" />

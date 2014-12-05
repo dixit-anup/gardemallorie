@@ -11,6 +11,8 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
+import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -119,8 +121,10 @@ public class BabySittingController {
     }
 
 	@RequestMapping(params = "find=Next")
-	public String findNextBabySittings(Pageable pageable, Model uiModel)
+	public String findNextBabySittings(Pageable pageable, Model uiModel, HttpServletResponse response)
 	{
+		response.setHeader("Cache-Control", "private, max-age=0, no-cache");
+		
 		int size = pageable.getPageSize();
 		float nrOfPages = (float) babySittingService.countNextBabySittings() / size;
 		List<BabySitting> babySittings = babySittingService.findNextBabySittings(pageable);
