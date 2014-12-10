@@ -52,7 +52,7 @@
     
     <filter>
     	<filter-name>logoutFilter</filter-name>
-    	<filter-class>com.appspot.gardemallorie.web.google.LogoutFilter</filter-class>
+    	<filter-class>com.appspot.gardemallorie.web.google.GoogleLogoutFilter</filter-class>
     	<init-param>
     		<param-name>logoutRedirectURL</param-name>
     		<param-value>/logout</param-value>
@@ -117,6 +117,9 @@
 		<auth-constraint>
 			<role-name>admin</role-name>
 		</auth-constraint>
+		<user-data-constraint>
+			<transport-guarantee>CONFIDENTIAL</transport-guarantee>
+		</user-data-constraint>
 	</security-constraint>
 
     <session-config>

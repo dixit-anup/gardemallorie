@@ -42,7 +42,7 @@ public class GaeAuthorizationCodeServlet extends AbstractAuthorizationCodeServle
 
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-		
+		//TODO: remove the following code
 	        com.google.api.services.calendar.Calendar client = googleOauth2Controller.createCalendarClient();
 	        com.google.api.services.calendar.Calendar.CalendarList.List listRequest =
 	            client.calendarList().list();
