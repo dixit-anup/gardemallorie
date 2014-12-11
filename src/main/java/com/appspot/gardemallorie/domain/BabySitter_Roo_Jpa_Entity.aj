@@ -3,7 +3,6 @@
 
 package com.appspot.gardemallorie.domain;
 
-import com.appspot.gardemallorie.domain.BabySitter;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;

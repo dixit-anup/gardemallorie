@@ -3,13 +3,14 @@
 
 package com.appspot.gardemallorie.service.impl;
 
-import com.appspot.gardemallorie.domain.CalendarEvent;
-import com.appspot.gardemallorie.repository.CalendarEventRepository;
-import com.appspot.gardemallorie.service.impl.CalendarEventServiceImpl;
 import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import com.appspot.gardemallorie.domain.CalendarEvent;
+import com.appspot.gardemallorie.repository.CalendarEventRepository;
 
 privileged aspect CalendarEventServiceImpl_Roo_Service {
     

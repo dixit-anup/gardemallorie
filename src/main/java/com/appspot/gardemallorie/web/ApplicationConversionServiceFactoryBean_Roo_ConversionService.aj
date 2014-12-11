@@ -3,6 +3,11 @@
 
 package com.appspot.gardemallorie.web;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Configurable;
+import org.springframework.core.convert.converter.Converter;
+import org.springframework.format.FormatterRegistry;
+
 import com.appspot.gardemallorie.domain.BabySitter;
 import com.appspot.gardemallorie.domain.BabySitting;
 import com.appspot.gardemallorie.domain.CalendarEvent;
@@ -11,11 +16,6 @@ import com.appspot.gardemallorie.service.BabySitterService;
 import com.appspot.gardemallorie.service.BabySittingService;
 import com.appspot.gardemallorie.service.CalendarEventService;
 import com.appspot.gardemallorie.service.LocationService;
-import com.appspot.gardemallorie.web.ApplicationConversionServiceFactoryBean;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Configurable;
-import org.springframework.core.convert.converter.Converter;
-import org.springframework.format.FormatterRegistry;
 
 privileged aspect ApplicationConversionServiceFactoryBean_Roo_ConversionService {
     

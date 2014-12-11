@@ -3,11 +3,11 @@
 
 package com.appspot.gardemallorie.repository;
 
-import com.appspot.gardemallorie.domain.BabySitter;
-import com.appspot.gardemallorie.repository.BabySitterRepository;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.stereotype.Repository;
+
+import com.appspot.gardemallorie.domain.BabySitter;
 
 privileged aspect BabySitterRepository_Roo_Jpa_Repository {
     

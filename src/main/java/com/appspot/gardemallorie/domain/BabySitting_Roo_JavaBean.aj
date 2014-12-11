@@ -3,9 +3,6 @@
 
 package com.appspot.gardemallorie.domain;
 
-import com.appspot.gardemallorie.domain.BabySitter;
-import com.appspot.gardemallorie.domain.BabySitting;
-import com.appspot.gardemallorie.domain.Location;
 import java.util.Date;
 
 privileged aspect BabySitting_Roo_JavaBean {

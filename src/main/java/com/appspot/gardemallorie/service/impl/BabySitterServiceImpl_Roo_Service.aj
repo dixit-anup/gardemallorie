@@ -3,13 +3,14 @@
 
 package com.appspot.gardemallorie.service.impl;
 
-import com.appspot.gardemallorie.domain.BabySitter;
-import com.appspot.gardemallorie.repository.BabySitterRepository;
-import com.appspot.gardemallorie.service.impl.BabySitterServiceImpl;
 import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import com.appspot.gardemallorie.domain.BabySitter;
+import com.appspot.gardemallorie.repository.BabySitterRepository;
 
 privileged aspect BabySitterServiceImpl_Roo_Service {
     

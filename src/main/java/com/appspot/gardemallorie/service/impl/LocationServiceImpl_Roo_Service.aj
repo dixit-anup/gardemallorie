@@ -3,13 +3,14 @@
 
 package com.appspot.gardemallorie.service.impl;
 
-import com.appspot.gardemallorie.domain.Location;
-import com.appspot.gardemallorie.repository.LocationRepository;
-import com.appspot.gardemallorie.service.impl.LocationServiceImpl;
 import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import com.appspot.gardemallorie.domain.Location;
+import com.appspot.gardemallorie.repository.LocationRepository;
 
 privileged aspect LocationServiceImpl_Roo_Service {
     

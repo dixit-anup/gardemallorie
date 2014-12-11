@@ -3,9 +3,9 @@
 
 package com.appspot.gardemallorie.service;
 
-import com.appspot.gardemallorie.domain.CalendarEvent;
-import com.appspot.gardemallorie.service.CalendarEventService;
 import java.util.List;
+
+import com.appspot.gardemallorie.domain.CalendarEvent;
 
 privileged aspect CalendarEventService_Roo_Service {
     

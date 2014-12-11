@@ -3,11 +3,11 @@
 
 package com.appspot.gardemallorie.repository;
 
-import com.appspot.gardemallorie.domain.CalendarEvent;
-import com.appspot.gardemallorie.repository.CalendarEventRepository;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.stereotype.Repository;
+
+import com.appspot.gardemallorie.domain.CalendarEvent;
 
 privileged aspect CalendarEventRepository_Roo_Jpa_Repository {
     

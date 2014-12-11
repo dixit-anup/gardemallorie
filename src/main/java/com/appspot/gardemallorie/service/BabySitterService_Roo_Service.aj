@@ -3,9 +3,9 @@
 
 package com.appspot.gardemallorie.service;
 
-import com.appspot.gardemallorie.domain.BabySitter;
-import com.appspot.gardemallorie.service.BabySitterService;
 import java.util.List;
+
+import com.appspot.gardemallorie.domain.BabySitter;
 
 privileged aspect BabySitterService_Roo_Service {
     

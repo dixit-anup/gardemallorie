@@ -3,11 +3,11 @@
 
 package com.appspot.gardemallorie.repository;
 
-import com.appspot.gardemallorie.domain.Location;
-import com.appspot.gardemallorie.repository.LocationRepository;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.stereotype.Repository;
+
+import com.appspot.gardemallorie.domain.Location;
 
 privileged aspect LocationRepository_Roo_Jpa_Repository {
     

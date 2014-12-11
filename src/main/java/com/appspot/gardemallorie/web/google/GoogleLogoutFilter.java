@@ -1,5 +1,7 @@
 package com.appspot.gardemallorie.web.google;
 
+import static javax.servlet.http.HttpServletResponse.SC_UNAUTHORIZED;
+
 import java.io.IOException;
 
 import javax.servlet.Filter;
@@ -15,8 +17,6 @@ import org.slf4j.LoggerFactory;
 
 import com.appspot.gardemallorie.service.CalendarException;
 import com.google.api.client.googleapis.json.GoogleJsonResponseException;
-
-import static javax.servlet.http.HttpServletResponse.SC_UNAUTHORIZED;
 
 public class GoogleLogoutFilter implements Filter {
 	

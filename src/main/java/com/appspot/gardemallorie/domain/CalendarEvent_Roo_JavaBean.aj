@@ -3,9 +3,6 @@
 
 package com.appspot.gardemallorie.domain;
 
-import com.appspot.gardemallorie.domain.BabySitting;
-import com.appspot.gardemallorie.domain.CalendarEvent;
-import com.appspot.gardemallorie.domain.CalendarEventType;
 
 privileged aspect CalendarEvent_Roo_JavaBean {
     

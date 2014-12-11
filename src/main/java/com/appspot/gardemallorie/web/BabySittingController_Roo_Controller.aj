@@ -20,12 +20,16 @@ import org.springframework.web.util.WebUtils;
 
 import com.appspot.gardemallorie.domain.BabySitting;
 import com.appspot.gardemallorie.service.BabySitterService;
+import com.appspot.gardemallorie.service.BabySittingService;
 import com.appspot.gardemallorie.service.LocationService;
 
 privileged aspect BabySittingController_Roo_Controller {
     
     @Autowired
     BabySitterService BabySittingController.babySitterService;
+    
+    @Autowired
+    BabySittingService BabySittingController.babySittingService;
     
     @Autowired
     LocationService BabySittingController.locationService;

@@ -13,7 +13,6 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.roo.addon.web.mvc.controller.scaffold.RooWebScaffold;
@@ -25,7 +24,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.appspot.gardemallorie.domain.BabySitting;
-import com.appspot.gardemallorie.service.BabySittingService;
 
 @Controller
 @RequestMapping("/babysittings")
@@ -36,9 +34,6 @@ public class BabySittingController {
 	static private final String BABYSITTING_EXTRACHARGES_VIEW = "babysittings/extraCharges";
 	static private final String BABYSITTING_LIST_VIEW = "babysittings/list";
 
-    @Autowired
-    private BabySittingService babySittingService;
-    
 	@RequestMapping(method = RequestMethod.PUT, params = "copyUntil", produces = "text/html")
 	public String copyUntil(
 		@RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd") Date copyUntil,

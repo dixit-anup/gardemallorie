@@ -1,14 +1,15 @@
 package com.appspot.gardemallorie.domain;
-import org.springframework.roo.addon.javabean.RooJavaBean;
-import org.springframework.roo.addon.jpa.entity.RooJpaEntity;
-import org.springframework.roo.addon.tostring.RooToString;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.validation.constraints.NotNull;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
+
+import org.springframework.roo.addon.javabean.RooJavaBean;
+import org.springframework.roo.addon.jpa.entity.RooJpaEntity;
+import org.springframework.roo.addon.tostring.RooToString;
 
 @NamedQueries(
 	@NamedQuery(

@@ -3,9 +3,9 @@
 
 package com.appspot.gardemallorie.service;
 
-import com.appspot.gardemallorie.domain.Location;
-import com.appspot.gardemallorie.service.LocationService;
 import java.util.List;
+
+import com.appspot.gardemallorie.domain.Location;
 
 privileged aspect LocationService_Roo_Service {
     

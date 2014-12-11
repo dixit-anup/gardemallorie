@@ -3,7 +3,6 @@
 
 package com.appspot.gardemallorie.domain;
 
-import com.appspot.gardemallorie.domain.Location;
 
 privileged aspect Location_Roo_JavaBean {
     
