@@ -13,6 +13,7 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.roo.addon.web.mvc.controller.scaffold.RooWebScaffold;
@@ -120,13 +121,10 @@ public class BabySittingController {
 	{
 		response.setHeader("Cache-Control", "private, max-age=0, no-cache");
 		
-		int size = pageable.getPageSize();
-		float nrOfPages = (float) babySittingService.countNextBabySittings() / size;
-		List<BabySitting> babySittings = babySittingService.findNextBabySittings(pageable);
+		Page<BabySitting> babySittings = babySittingService.findNextBabySittings(pageable);
 
-		uiModel.addAttribute("babysittings", babySittings);
-        uiModel.addAttribute("maxPages", (int) ((nrOfPages > (int) nrOfPages || nrOfPages == 0.0) ? nrOfPages + 1 : nrOfPages));
-        
+		uiModel.addAttribute("babysittings", babySittings.getContent());
+        uiModel.addAttribute("maxPages", babySittings.getTotalPages());
         addDateTimeFormatPatterns(uiModel);
         
         return BABYSITTING_LIST_VIEW;
@@ -135,13 +133,10 @@ public class BabySittingController {
     @RequestMapping(produces = "text/html")
     public String list(Pageable pageable, Model uiModel) {
 
-		int size = pageable.getPageSize();
-		float nrOfPages = (float) babySittingService.countAllBabySittings() / size;
-		List<BabySitting> babySittings = babySittingService.findAllBabySittings(pageable);
+    	Page<BabySitting> babySittings = babySittingService.findAllBabySittings(pageable);
 
-		uiModel.addAttribute("babysittings", babySittings);
-        uiModel.addAttribute("maxPages", (int) ((nrOfPages > (int) nrOfPages || nrOfPages == 0.0) ? nrOfPages + 1 : nrOfPages));
-
+    	uiModel.addAttribute("babysittings", babySittings.getContent());
+        uiModel.addAttribute("maxPages", babySittings.getTotalPages());
         addDateTimeFormatPatterns(uiModel);
 
         return BABYSITTING_LIST_VIEW;

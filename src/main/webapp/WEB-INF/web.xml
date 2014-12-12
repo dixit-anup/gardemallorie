@@ -54,8 +54,8 @@
     	<filter-name>logoutFilter</filter-name>
     	<filter-class>com.appspot.gardemallorie.web.google.GoogleLogoutFilter</filter-class>
     	<init-param>
-    		<param-name>logoutRedirectURL</param-name>
-    		<param-value>/logout</param-value>
+    		<param-name>redirectURL</param-name>
+    		<param-value>/login</param-value>
     	</init-param>
     </filter>
     <filter-mapping>
@@ -117,10 +117,10 @@
 		<auth-constraint>
 			<role-name>admin</role-name>
 		</auth-constraint>
-		<user-data-constraint>
+<!-- 		<user-data-constraint>
 			<transport-guarantee>CONFIDENTIAL</transport-guarantee>
 		</user-data-constraint>
-	</security-constraint>
+ -->	</security-constraint>
 
     <session-config>
         <session-timeout>10</session-timeout>

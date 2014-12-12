@@ -14,19 +14,20 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.web.util.NestedServletException;
 
 import com.appspot.gardemallorie.service.CalendarException;
 import com.google.api.client.googleapis.json.GoogleJsonResponseException;
 
 public class GoogleLogoutFilter implements Filter {
 	
-	public static String LOGOUT_REDIRECT_URL_PARAM_NAME = "logoutRedirectURL";
+	public static String REDIRECT_URL_PARAM_NAME = "redirectURL";
+	private String redirectURL;
 	private final Logger logger = LoggerFactory.getLogger(getClass());
-	private String logoutRedirectURL;
 
 	@Override
 	public void init(FilterConfig filterConfig) throws ServletException {
-		logoutRedirectURL = filterConfig.getInitParameter(LOGOUT_REDIRECT_URL_PARAM_NAME);
+		redirectURL = filterConfig.getInitParameter(REDIRECT_URL_PARAM_NAME);
 	}
 
 	@Override
@@ -36,28 +37,28 @@ public class GoogleLogoutFilter implements Filter {
 		try {
 			chain.doFilter(request, response);
 		}
-		catch (CalendarException ce) {
-			logger.error("################## CalendarException:", ce);
-			Throwable t = ce.getCause();
-			logger.error("##################### CalendarException: {}, cause:", ce, t);
-			if ( (t instanceof GoogleJsonResponseException) ) {
-				int statusCode = ((GoogleJsonResponseException)t).getStatusCode();
-				logger.error("##################### statusCode: {}", statusCode);
-				if (statusCode == SC_UNAUTHORIZED ) {
-					logger.debug("Redirecting to {}", logoutRedirectURL);
-					((HttpServletResponse) response).sendRedirect(logoutRedirectURL);
+		catch (NestedServletException nse) {
+			logger.error("################## NestedServletException:", nse);
+			Throwable cause = nse.getCause();
+			boolean is401Error = false;
+			if (cause != null && cause instanceof CalendarException) {
+				cause = cause.getCause();
+				if ( cause instanceof GoogleJsonResponseException ) {
+					int statusCode = ((GoogleJsonResponseException) cause).getStatusCode();
+					logger.error("##################### statusCode: {}", statusCode);
+					if (statusCode == SC_UNAUTHORIZED ) {
+						is401Error = true;
+					}
 				}
 			}
-			else {
-				throw ce;
+
+			if (is401Error) {
+				logger.debug("Redirecting to {}", redirectURL);
+				((HttpServletResponse) response).sendRedirect(redirectURL);
 			}
-		}
-		catch (GoogleJsonResponseException e) {
-			logger.error("################## GoogleJsonResponseException:", e);
-		}
-		catch (Throwable t) {
-			logger.error("##################### Throwable:", t);
-			throw new ServletException(t);
+			else {
+				throw nse;
+			}
 		}
 
 	}

@@ -20,13 +20,13 @@ public class BabySitter {
 
     /**
      */
-    private String firstName;
-
-    /**
-     */
     @NotNull
     @Size(min = 3, max = 20)
     private String lastName;
+
+    /**
+     */
+    private String firstName;
 
     /**
      */

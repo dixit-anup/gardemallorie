@@ -5,12 +5,12 @@
     <page:list id="pl_com_appspot_gardemallorie_domain_BabySitter" items="${babysitters}" z="9f3OM0GvwEy/gh6D9WSCpJ7Rou4=">
         <table:table create="${isUserAdmin}" data="${babysitters}" delete="${isUserAdmin}"
         	id="l_com_appspot_gardemallorie_domain_BabySitter" path="/babysitters" update="${isUserAdmin}" z="user-managed">
-            <table:column id="c_com_appspot_gardemallorie_domain_BabySitter_firstName" property="firstName" z="rnnFBEVHQw47jSleHHBZH6pQt2I="/>
-            <table:column id="c_com_appspot_gardemallorie_domain_BabySitter_lastName" property="lastName" z="jLWbb4d95R484nwFURAa4glrXhg="/>
-            <table:column id="c_com_appspot_gardemallorie_domain_BabySitter_notification" property="notification" z="MjAj+m9meP1W1arVGnYT15N0wAw="/>
-            <table:column id="c_com_appspot_gardemallorie_domain_BabySitter_email" property="email" z="T8POMwFpmOj7IlL9GLXGw8dgeWs="/>
-            <table:column id="c_com_appspot_gardemallorie_domain_BabySitter_color" property="color" z="jGYveSj2VV3odsrhyslJ4r2Ox2U="/>
-            <table:column id="c_com_appspot_gardemallorie_domain_BabySitter_billing" property="billing" z="zzcOKIe9H32mRIc9Mu5fWNVBTK8="/>
+            <table:column id="c_com_appspot_gardemallorie_domain_BabySitter_lastName" property="lastName" sort="true" z="jLWbb4d95R484nwFURAa4glrXhg="/>
+            <table:column id="c_com_appspot_gardemallorie_domain_BabySitter_firstName" property="firstName" sort="true" z="rnnFBEVHQw47jSleHHBZH6pQt2I="/>
+            <table:column id="c_com_appspot_gardemallorie_domain_BabySitter_notification" property="notification" sort="true" z="MjAj+m9meP1W1arVGnYT15N0wAw="/>
+            <table:column id="c_com_appspot_gardemallorie_domain_BabySitter_email" property="email" sort="true" z="T8POMwFpmOj7IlL9GLXGw8dgeWs="/>
+            <table:column id="c_com_appspot_gardemallorie_domain_BabySitter_color" property="color" sort="true" z="jGYveSj2VV3odsrhyslJ4r2Ox2U="/>
+            <table:column id="c_com_appspot_gardemallorie_domain_BabySitter_billing" property="billing" sort="true" z="zzcOKIe9H32mRIc9Mu5fWNVBTK8="/>
         </table:table>
     </page:list>
 </jsp:root>
