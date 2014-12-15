@@ -16,6 +16,11 @@ public class BabySitterServiceImpl implements BabySitterService {
 
 	static private Sort SORT_BY_FIRST_NAME = new Sort("firstName");
 	
+	@Override
+	public void deleteBabySitter(Long id) {
+		babySitterRepository.delete(id);
+	}
+	
 	@Transactional(propagation = NOT_SUPPORTED)
     public List<BabySitter> findAllBabySitters() {
         return babySitterRepository.findAll(SORT_BY_FIRST_NAME);

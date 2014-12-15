@@ -19,11 +19,13 @@ public class BabySitterController {
 
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE, produces = "text/html")
     public String delete(@PathVariable("id") Long id, @RequestParam(value = "page", required = false) Integer page, @RequestParam(value = "size", required = false) Integer size, Model uiModel) {
-        BabySitter babySitter = babySitterService.findBabySitter(id);
-        babySitterService.deleteBabySitter(babySitter);
-        uiModel.asMap().clear();
+
+    	babySitterService.deleteBabySitter(id);
+        
+    	uiModel.asMap().clear();
         uiModel.addAttribute("page", (page == null) ? "0" : page.toString());
         uiModel.addAttribute("size", (size == null) ? "10" : size.toString());
+        
         return "redirect:/babysitters";
     }
     

@@ -14,6 +14,8 @@ public interface BabySittingService {
 
 	void copyBabySittingUntil(Date date, Long id);
 	
+	void deleteBabySitting(Long id);
+
 	Page<BabySitting> findAllBabySittings(Pageable pageable);
 
 	List<BabySitting> findExtraCharges();

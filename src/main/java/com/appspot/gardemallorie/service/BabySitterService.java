@@ -9,6 +9,8 @@ import com.appspot.gardemallorie.domain.BabySitter;
 @RooService(domainTypes = { BabySitter.class })
 public interface BabySitterService {
 	
+	void deleteBabySitter(Long id);
+
 	Page<BabySitter> findAllBabySitters(Pageable pageable);
 
 }

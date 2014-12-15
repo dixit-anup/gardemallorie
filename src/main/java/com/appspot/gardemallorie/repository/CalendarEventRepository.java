@@ -11,7 +11,7 @@ import com.appspot.gardemallorie.domain.CalendarEvent;
 @RooJpaRepository(domainType = CalendarEvent.class)
 public interface CalendarEventRepository {
 	
-	@Query("select calendarEvent from CalendarEvent calendarEvent where calendarEvent.babySitting = ?1")
+	@Query("SELECT calendarEvent FROM CalendarEvent calendarEvent WHERE calendarEvent.babySitting = ?1")
 	List<CalendarEvent> findByBabySitting(BabySitting babySitting);
 	
 }

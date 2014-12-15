@@ -1,12 +1,7 @@
 package com.appspot.gardemallorie.web;
 
-import static java.util.Calendar.DAY_OF_MONTH;
-import static java.util.Calendar.DAY_OF_WEEK;
-import static java.util.Calendar.SATURDAY;
-import static java.util.Calendar.SUNDAY;
 import static org.springframework.web.servlet.view.UrlBasedViewResolver.REDIRECT_URL_PREFIX;
 
-import java.util.Calendar;
 import java.util.Date;
 
 import javax.servlet.http.HttpServletResponse;
@@ -17,7 +12,6 @@ import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.roo.addon.web.mvc.controller.scaffold.RooWebScaffold;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -47,8 +41,7 @@ public class BabySittingController {
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE, produces = "text/html")
     public String delete(@PathVariable("id") Long id, @RequestParam(value = "page", required = false) Integer page, @RequestParam(value = "size", required = false) Integer size, Model uiModel) {
         
-    	BabySitting babySitting = babySittingService.findBabySitting(id);
-        babySittingService.deleteBabySitting(babySitting);
+        babySittingService.deleteBabySitting(id);
         
         uiModel.asMap().clear();
         uiModel.addAttribute("page", (page == null) ? "0" : page.toString());

@@ -64,11 +64,15 @@ public class BabySittingServiceImpl implements BabySittingService {
         
 	}
 	
+	@Override
+	public void deleteBabySitting(Long id) {
+		babySittingRepository.delete(id);
+	}
 
 	@Override
 	@Transactional(propagation = NOT_SUPPORTED)
 	public Page<BabySitting> findAllBabySittings(Pageable pageable) {
-		return babySittingRepository.findAll(pageable);
+		return babySittingRepository.pageAll(pageable);
 	}
 	
 	@Override
@@ -103,7 +107,6 @@ public class BabySittingServiceImpl implements BabySittingService {
 
 		return extraChargesList;
 	}
-	
 	
 	@Override
 	@Transactional(propagation = NOT_SUPPORTED)
