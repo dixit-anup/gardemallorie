@@ -76,16 +76,6 @@ privileged aspect BabySittingController_Roo_Controller {
         return "babysittings/update";
     }
     
-    @RequestMapping(value = "/{id}", method = RequestMethod.DELETE, produces = "text/html")
-    public String BabySittingController.delete(@PathVariable("id") Long id, @RequestParam(value = "page", required = false) Integer page, @RequestParam(value = "size", required = false) Integer size, Model uiModel) {
-        BabySitting babySitting = babySittingService.findBabySitting(id);
-        babySittingService.deleteBabySitting(babySitting);
-        uiModel.asMap().clear();
-        uiModel.addAttribute("page", (page == null) ? "1" : page.toString());
-        uiModel.addAttribute("size", (size == null) ? "10" : size.toString());
-        return "redirect:/babysittings";
-    }
-    
     void BabySittingController.addDateTimeFormatPatterns(Model uiModel) {
         uiModel.addAttribute("babySitting_day_date_format", "yyyy-MM-dd");
         uiModel.addAttribute("babySitting_plannedbeginning_date_format", "HH:mm");

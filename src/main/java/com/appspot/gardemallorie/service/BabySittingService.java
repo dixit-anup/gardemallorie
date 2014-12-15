@@ -12,12 +12,12 @@ import com.appspot.gardemallorie.domain.BabySitting;
 @RooService(domainTypes = { BabySitting.class })
 public interface BabySittingService {
 
-	long countBabySittingsByDayGreaterThanEquals(Date day);
-
+	void copyBabySittingUntil(Date date, Long id);
+	
 	Page<BabySitting> findAllBabySittings(Pageable pageable);
 
-	List<BabySitting> findAllBabySittingsOrderByDay();
-
+	List<BabySitting> findExtraCharges();
+	
 	Page<BabySitting> findNextBabySittings(Pageable pageable);
 
 }

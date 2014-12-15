@@ -9,6 +9,8 @@ import com.appspot.gardemallorie.domain.Location;
 @RooService(domainTypes = { Location.class })
 public interface LocationService {
 
+	void deleteLocation(Long id);
+	
 	Page<Location> findAllLocations(Pageable pageable);
 
 }

@@ -17,6 +17,11 @@ public class LocationServiceImpl implements LocationService {
 	static private Sort SORT_BY_NAME = new Sort("name");
 
 	@Override
+	public void deleteLocation(Long id) {
+		locationRepository.delete(id);
+	}
+	
+	@Override
 	@Transactional(propagation = NOT_SUPPORTED)
 	public List<Location> findAllLocations() {
         return locationRepository.findAll(SORT_BY_NAME);
