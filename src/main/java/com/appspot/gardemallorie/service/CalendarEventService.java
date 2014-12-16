@@ -1,6 +1,7 @@
 package com.appspot.gardemallorie.service;
 
 import java.util.Collection;
+import java.util.List;
 
 import org.springframework.roo.addon.layers.service.RooService;
 
@@ -14,6 +15,8 @@ public interface CalendarEventService {
 
 	CalendarEvent findCalendarEvent(Long id);
 	
+	List<CalendarEvent> findAllCalendarEvents();
+
 	Collection<CalendarEvent> findCalendarEventsByBabySitting(BabySitting babySitting);
 
 	void saveCalendarEvent(CalendarEvent calendarEvent);

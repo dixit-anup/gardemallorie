@@ -1,5 +1,6 @@
 package com.appspot.gardemallorie.service;
 
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -22,6 +23,8 @@ public interface BabySittingService {
 
 	List<BabySitting> findExtraCharges();
 	
+	Calendar findNextBabySittingDay();
+
 	Page<BabySitting> findNextBabySittings(Pageable pageable);
 
     void saveBabySitting(BabySitting babySitting);    

@@ -5,48 +5,48 @@ import static java.util.Calendar.DAY_OF_WEEK;
 import static java.util.Calendar.SATURDAY;
 import static java.util.Calendar.SUNDAY;
 import static org.springframework.data.domain.Sort.Direction.ASC;
-import static org.springframework.data.domain.Sort.Direction.DESC;
 
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.appspot.gardemallorie.domain.BabySitting;
 import com.appspot.gardemallorie.repository.BabySittingRepository;
 import com.appspot.gardemallorie.service.BabySittingService;
 
+@Service
 public class BabySittingServiceImpl implements BabySittingService {
 
 	static private final String DAY_PROPERTY = "day";
 	static private final Sort SORT_BY_DAY_ASC = new Sort(ASC, DAY_PROPERTY);
-	static private final Sort SORT_BY_DAY_DESC = new Sort(DESC, DAY_PROPERTY);
 	
     @Autowired
     BabySittingRepository babySittingRepository;
     
+	private final Logger logger = LoggerFactory.getLogger(getClass());
+
 	@Override
 	@Transactional
 	public void copyBabySittingUntil(Date date, Long id) {
 		
     	BabySitting babySitting = findBabySitting(id);
-        List<BabySitting> babySittings = babySittingRepository.findAll(SORT_BY_DAY_DESC);
-        Calendar currentDay = Calendar.getInstance();
+        Calendar currentDay = findNextBabySittingDay();
         Calendar endDay = Calendar.getInstance();
         
-        currentDay.setTime(babySittings.get(0).getDay());
-    	currentDay.add(DAY_OF_MONTH, 1);
-    	
-    	findNextBabySittingDay();
-
     	endDay.setTime(date);
+    	
+    	logger.debug("copying babySitting {} from {} to {}", babySitting, currentDay, endDay);
         
         while (currentDay.compareTo(endDay) <= 0) {
         	
@@ -88,6 +88,7 @@ public class BabySittingServiceImpl implements BabySittingService {
     }
     
 	@Override
+	@SuppressWarnings("deprecation")
 	public List<BabySitting> findExtraCharges() {
 
 		List<BabySitting> babySittings = babySittingRepository.findAll(new PageRequest(0, Integer.MAX_VALUE, SORT_BY_DAY_ASC)).getContent();
@@ -119,8 +120,9 @@ public class BabySittingServiceImpl implements BabySittingService {
 		return extraChargesList;
 	}
 	
-	//@Override
+	@Override
 	public Calendar findNextBabySittingDay() {
+		
 		Calendar calendar = Calendar.getInstance();
 		calendar.setTime(babySittingRepository.findLastDay());
 		calendar.add(DAY_OF_MONTH, 1);
@@ -143,4 +145,5 @@ public class BabySittingServiceImpl implements BabySittingService {
     public BabySitting updateBabySitting(BabySitting babySitting) {
         return babySittingRepository.save(babySitting);
     }
+
 }

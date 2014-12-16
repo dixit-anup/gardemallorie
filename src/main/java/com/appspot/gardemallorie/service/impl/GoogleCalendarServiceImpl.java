@@ -9,6 +9,7 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.TimeZone;
 
@@ -79,6 +80,7 @@ public class GoogleCalendarServiceImpl implements CalendarService, GoogleCalenda
 
 	@Override
 	public Calendar createCalendarClient() throws IOException {
+		
 		Credential credential = googleOauth2Service.getCurrentUserCredential();
 		return new Calendar.Builder(httpTransport, jsonFactory, credential).setApplicationName(applicationName).build();
 	}
@@ -99,8 +101,6 @@ public class GoogleCalendarServiceImpl implements CalendarService, GoogleCalenda
 
 				Void result = calendar.events().delete(calendarId, actualEvent.getExternalId()).setSendNotifications(true).execute();
 				
-				calendarEventService.deleteCalendarEvent(actualEvent);
-				
 				return result;
 			}
 
@@ -108,6 +108,41 @@ public class GoogleCalendarServiceImpl implements CalendarService, GoogleCalenda
 		
 	}
 	
+	@Override
+	public void deleteOrphanEvents() {
+		
+		Calendar calendar;
+		String calendarId = googleOauth2Service.getCurrentUserEmail();
+		List<CalendarEvent> calendarEvents = calendarEventService.findAllCalendarEvents();
+		
+		try {
+			calendar = createCalendarClient();
+		}
+		catch (IOException e) {
+			throw new CalendarException(e);
+		}
+		
+		for (CalendarEvent calendarEvent : calendarEvents) {
+			
+			BabySitting babySitting = null;
+			try {
+				babySitting = calendarEvent.getBabySitting();
+			}
+			catch (Throwable t) {
+				logger.warn("Unable to fetch calendarEvent #{} babySitting:", calendarEvent.getId(), t);
+			}
+			if (babySitting == null) {
+
+				calendarEventService.deleteCalendarEvent(calendarEvent);
+				try {
+					calendar.events().delete(calendarId, calendarEvent.getExternalId()).setSendNotifications(true).execute();
+				} catch (IOException e) {
+					logger.warn("Unable to remove event #{}:", calendarEvent.getExternalId(), e);
+				}			}
+		}
+		
+	}
+
 	protected <T> void execute(BabySitting babySitting, CalendarCallback<T> callback) {
 		
 		Collection<CalendarEvent> actualEvents = calendarEventService.findCalendarEventsByBabySitting(babySitting);

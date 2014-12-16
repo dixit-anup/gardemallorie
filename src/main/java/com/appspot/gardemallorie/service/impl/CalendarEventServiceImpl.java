@@ -1,5 +1,7 @@
 package com.appspot.gardemallorie.service.impl;
+
 import java.util.Collection;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -10,7 +12,7 @@ import com.appspot.gardemallorie.domain.CalendarEvent;
 import com.appspot.gardemallorie.repository.CalendarEventRepository;
 import com.appspot.gardemallorie.service.CalendarEventService;
 
-@Service()
+@Service
 public class CalendarEventServiceImpl implements CalendarEventService {
 
     @Autowired
@@ -37,5 +39,10 @@ public class CalendarEventServiceImpl implements CalendarEventService {
     public void saveCalendarEvent(CalendarEvent calendarEvent) {
         calendarEventRepository.save(calendarEvent);
     }
-    
+
+	@Override
+	public List<CalendarEvent> findAllCalendarEvents() {
+		return calendarEventRepository.findAll();
+	}
+
 }

@@ -44,12 +44,6 @@ privileged aspect BabySittingController_Roo_Controller {
         return "redirect:/babysittings/" + encodeUrlPathSegment(babySitting.getId().toString(), httpServletRequest);
     }
     
-    @RequestMapping(params = "form", produces = "text/html")
-    public String BabySittingController.createForm(Model uiModel) {
-        populateEditForm(uiModel, new BabySitting());
-        return "babysittings/create";
-    }
-    
     @RequestMapping(value = "/{id}", produces = "text/html")
     public String BabySittingController.show(@PathVariable("id") Long id, Model uiModel) {
         addDateTimeFormatPatterns(uiModel);

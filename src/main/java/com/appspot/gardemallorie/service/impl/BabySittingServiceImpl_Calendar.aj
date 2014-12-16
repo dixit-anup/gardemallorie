@@ -25,14 +25,16 @@ privileged aspect BabySittingServiceImpl_Calendar {
 		return result;
 	}
 	
-	void around(BabySittingServiceImpl babySittingService, BabySitting babySitting):
-        args(babySitting)
-        && execution( public void BabySittingServiceImpl.deleteBabySitting(BabySitting) )
+	void around(BabySittingServiceImpl babySittingService, Long id):
+        args(id)
+        && execution( public void BabySittingServiceImpl.deleteBabySitting(Long) )
 		&& target(babySittingService)
     {
+		BabySitting babySitting = babySittingService.findBabySitting(id);
+		
 		babySittingService.calendarService.deleteEvents(babySitting);
 
-		proceed(babySittingService, babySitting);
+		proceed(babySittingService, id);
 	}
 	
 }

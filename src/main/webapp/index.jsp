@@ -1,3 +1,3 @@
 <%
-	response.sendRedirect("/babysittings?find=Next&size=31&sort=day,asc");
+	response.sendRedirect("/babysittings?find=Next&sort=day,asc");
 %>

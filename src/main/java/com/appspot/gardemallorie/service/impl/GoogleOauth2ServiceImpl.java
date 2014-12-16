@@ -27,7 +27,6 @@ import com.google.api.services.calendar.CalendarScopes;
 import com.google.appengine.api.users.UserServiceFactory;
 
 @Service
-@Transactional
 public class GoogleOauth2ServiceImpl implements GoogleOauth2Service {
 
 	@Value("${calendar.clientId}")
@@ -65,19 +64,20 @@ public class GoogleOauth2ServiceImpl implements GoogleOauth2Service {
 	}
 
 	@Override
+	@Transactional
 	public AuthorizationCodeFlow createAuthorizationCodeFlow() throws IOException {
 
 		CustomCredentialRefreshListener customCredentialRefreshListener = new CustomCredentialRefreshListener();
 		GoogleAuthorizationCodeFlow flow = new GoogleAuthorizationCodeFlow.Builder(
-			httpTransport,
-			jsonFactory,
-			clientId,
-			clientSecret,
-			Collections.singleton(CalendarScopes.CALENDAR)
-		)
-		.setDataStoreFactory(dataStoreFactory)
-		.addRefreshListener(customCredentialRefreshListener)
-		.build();
+				httpTransport,
+				jsonFactory,
+				clientId,
+				clientSecret,
+				Collections.singleton(CalendarScopes.CALENDAR)
+			)
+			.setDataStoreFactory(dataStoreFactory)
+			.addRefreshListener(customCredentialRefreshListener)
+			.build();
 		
 		customCredentialRefreshListener.setAuthorizationCodeFlow(flow);
 		
@@ -87,7 +87,9 @@ public class GoogleOauth2ServiceImpl implements GoogleOauth2Service {
 	}
 
 	@Override
+	@Transactional
 	public void removeCurrentUserCredential() throws IOException {
+		
 		String currentUserEmail = getCurrentUserEmail();
 		logger.debug("Removing Credential for {}", currentUserEmail);
 		StoredCredential.getDefaultDataStore(dataStoreFactory).delete(currentUserEmail);

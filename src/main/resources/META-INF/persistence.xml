@@ -16,7 +16,7 @@
             <property name="datanucleus.validateConstraints" value="true"/>
             <property name="datanucleus.jpa.addClassTransformer" value="false"/>
             <!-- Google Appengine -->
-			<property name="datanucleus.appengine.datastoreEnableXGTransactions"	value="false"/>
+			<property name="datanucleus.appengine.datastoreEnableXGTransactions"	value="true"/>
             <property name="datanucleus.appengine.query.inMemoryWhenUnsupported"	value="true"/>
             <property name="datanucleus.appengine.relationDefault"					value="unowned"/>
         </properties>

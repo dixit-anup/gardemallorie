@@ -17,7 +17,7 @@ import com.appspot.gardemallorie.domain.Location;
 public class LocationController {
 
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE, produces = "text/html")
-    public String delete(@PathVariable("id") Long id, Pageable pageable, Model uiModel) {
+    public String delete(@PathVariable("id") Long id, Model uiModel, Pageable pageable) {
 
         locationService.deleteLocation(id);
 
@@ -32,7 +32,7 @@ public class LocationController {
     }
     
     @RequestMapping(produces = "text/html")
-    public String list(Pageable pageable, Model uiModel) {
+    public String list(Model uiModel, Pageable pageable) {
     	
     	Page<Location> locations = locationService.findAllLocations(pageable);
 

@@ -30,9 +30,10 @@ public class BabySitting {
     private Date day;
 
     /**
+     * Google Datastore does not support eager fetching.
      */
     @Column(nullable = true)
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.LAZY)
     private BabySitter babySitter;
 
     @Column(nullable = true)
@@ -41,9 +42,10 @@ public class BabySitting {
     private Date plannedBeginning;
 
     /**
+     * Google Datastore does not support eager fetching.
      */
     @Column(nullable = true)
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.LAZY)
     private BabySitter go;
 
     /**
@@ -54,9 +56,10 @@ public class BabySitting {
     private Date plannedEnd;
 
     /**
+     * Google Datastore does not support eager fetching.
      */
     @Column(nullable = true)
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.LAZY)
     private BabySitter back;
 
     /**
