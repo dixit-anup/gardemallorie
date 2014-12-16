@@ -29,7 +29,7 @@ public class BabySittingController {
 	static private final String INDEX_VIEW = REDIRECT_URL_PREFIX + '/';
 
 	@RequestMapping(method = RequestMethod.PUT, params = "copyUntil", produces = "text/html")
-	public String copyUntil(@RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd") Date date, BabySitting babySitting, Model uiModel) {
+	public String copyUntil(@RequestParam("copyUntil") @DateTimeFormat(pattern = "yyyy-MM-dd") Date date, BabySitting babySitting, Model uiModel) {
         
 		babySittingService.copyBabySittingUntil(date, babySitting.getId());
         

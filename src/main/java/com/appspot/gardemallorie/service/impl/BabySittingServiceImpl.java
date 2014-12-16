@@ -4,7 +4,6 @@ import static java.util.Calendar.DAY_OF_MONTH;
 import static java.util.Calendar.DAY_OF_WEEK;
 import static java.util.Calendar.SATURDAY;
 import static java.util.Calendar.SUNDAY;
-import static org.springframework.transaction.annotation.Propagation.NOT_SUPPORTED;
 import static org.springframework.data.domain.Sort.Direction.ASC;
 import static org.springframework.data.domain.Sort.Direction.DESC;
 
@@ -13,6 +12,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -20,6 +20,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.appspot.gardemallorie.domain.BabySitting;
+import com.appspot.gardemallorie.repository.BabySittingRepository;
 import com.appspot.gardemallorie.service.BabySittingService;
 
 public class BabySittingServiceImpl implements BabySittingService {
@@ -28,7 +29,11 @@ public class BabySittingServiceImpl implements BabySittingService {
 	static private final Sort SORT_BY_DAY_ASC = new Sort(ASC, DAY_PROPERTY);
 	static private final Sort SORT_BY_DAY_DESC = new Sort(DESC, DAY_PROPERTY);
 	
+    @Autowired
+    BabySittingRepository babySittingRepository;
+    
 	@Override
+	@Transactional
 	public void copyBabySittingUntil(Date date, Long id) {
 		
     	BabySitting babySitting = findBabySitting(id);
@@ -38,6 +43,8 @@ public class BabySittingServiceImpl implements BabySittingService {
         
         currentDay.setTime(babySittings.get(0).getDay());
     	currentDay.add(DAY_OF_MONTH, 1);
+    	
+    	findNextBabySittingDay();
 
     	endDay.setTime(date);
         
@@ -65,18 +72,22 @@ public class BabySittingServiceImpl implements BabySittingService {
 	}
 	
 	@Override
+	@Transactional
 	public void deleteBabySitting(Long id) {
 		babySittingRepository.delete(id);
 	}
 
 	@Override
-	@Transactional(propagation = NOT_SUPPORTED)
 	public Page<BabySitting> findAllBabySittings(Pageable pageable) {
-		return babySittingRepository.pageAll(pageable);
+		return babySittingRepository.findAll(pageable);
 	}
 	
 	@Override
-	@Transactional(propagation = NOT_SUPPORTED)
+    public BabySitting findBabySitting(Long id) {
+        return babySittingRepository.findOne(id);
+    }
+    
+	@Override
 	public List<BabySitting> findExtraCharges() {
 
 		List<BabySitting> babySittings = babySittingRepository.findAll(new PageRequest(0, Integer.MAX_VALUE, SORT_BY_DAY_ASC)).getContent();
@@ -108,10 +119,28 @@ public class BabySittingServiceImpl implements BabySittingService {
 		return extraChargesList;
 	}
 	
+	//@Override
+	public Calendar findNextBabySittingDay() {
+		Calendar calendar = Calendar.getInstance();
+		calendar.setTime(babySittingRepository.findLastDay());
+		calendar.add(DAY_OF_MONTH, 1);
+    	return calendar;
+	}
+	
 	@Override
-	@Transactional(propagation = NOT_SUPPORTED)
 	public Page<BabySitting> findNextBabySittings(Pageable pageable) {
 		return babySittingRepository.findByDayGreaterThanEqual(new Date(), pageable);
 	}
 
+	@Override
+	@Transactional
+    public void saveBabySitting(BabySitting babySitting) {
+        babySittingRepository.save(babySitting);
+    }
+    
+	@Override
+	@Transactional
+    public BabySitting updateBabySitting(BabySitting babySitting) {
+        return babySittingRepository.save(babySitting);
+    }
 }

@@ -83,6 +83,4 @@
 
 	<bean class="com.appspot.gardemallorie.web.ApplicationConversionServiceFactoryBean" id="applicationConversionService"/>
 
-	<bean class="org.springframework.data.web.config.SpringDataWebConfiguration" />
-
 </beans>

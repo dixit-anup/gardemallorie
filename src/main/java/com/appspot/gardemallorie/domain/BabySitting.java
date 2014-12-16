@@ -32,7 +32,7 @@ public class BabySitting {
     /**
      */
     @Column(nullable = true)
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     private BabySitter babySitter;
 
     @Column(nullable = true)
@@ -43,7 +43,7 @@ public class BabySitting {
     /**
      */
     @Column(nullable = true)
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     private BabySitter go;
 
     /**
@@ -56,7 +56,7 @@ public class BabySitting {
     /**
      */
     @Column(nullable = true)
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     private BabySitter back;
 
     /**

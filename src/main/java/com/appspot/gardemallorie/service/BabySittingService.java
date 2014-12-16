@@ -18,8 +18,14 @@ public interface BabySittingService {
 
 	Page<BabySitting> findAllBabySittings(Pageable pageable);
 
+	BabySitting findBabySitting(Long id);
+
 	List<BabySitting> findExtraCharges();
 	
 	Page<BabySitting> findNextBabySittings(Pageable pageable);
+
+    void saveBabySitting(BabySitting babySitting);    
+
+    BabySitting updateBabySitting(BabySitting babySitting);    
 
 }

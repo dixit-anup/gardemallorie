@@ -12,8 +12,8 @@ import com.appspot.gardemallorie.domain.BabySitting;
 @RooJpaRepository(domainType = BabySitting.class)
 public interface BabySittingRepository {
 
-	@Query("SELECT babySitting FROM BabySitting babySitting")
-	Page<BabySitting> pageAll(Pageable pageable);
+	@Query("SELECT max(babySitting.day) FROM BabySitting babySitting")
+	Date findLastDay();
 
 	Page<BabySitting> findByDayGreaterThanEqual(Date day, Pageable pageable);
 

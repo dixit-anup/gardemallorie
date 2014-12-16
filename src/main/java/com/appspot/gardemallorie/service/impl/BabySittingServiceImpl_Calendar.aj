@@ -7,8 +7,6 @@ import com.appspot.gardemallorie.service.CalendarService;
 
 privileged aspect BabySittingServiceImpl_Calendar {
     
-	declare precedence: com.appspot.gardemallorie.service.impl.BabySittingServiceImpl_Roo_Service;
-
 	@Autowired
 	private CalendarService BabySittingServiceImpl.calendarService;
 
