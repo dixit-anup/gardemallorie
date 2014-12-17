@@ -37,7 +37,6 @@ public class BabySittingServiceImpl implements BabySittingService {
 	private final Logger logger = LoggerFactory.getLogger(getClass());
 
 	@Override
-	@Transactional
 	public void copyBabySittingUntil(Date date, Long id) {
 		
     	BabySitting babySitting = findBabySitting(id);
@@ -46,9 +45,9 @@ public class BabySittingServiceImpl implements BabySittingService {
         
     	endDay.setTime(date);
     	
-    	logger.debug("copying babySitting {} from {} to {}", babySitting, currentDay, endDay);
+    	logger.debug("copying babySitting {} from {} to {}", babySitting, currentDay.getTime(), endDay.getTime());
         
-        while (currentDay.compareTo(endDay) <= 0) {
+        while (currentDay.compareTo(endDay) < 0) {
         	
         	currentDay.add(DAY_OF_MONTH, 1);
         	int currentDayOfWeek = currentDay.get(DAY_OF_WEEK);
@@ -66,6 +65,7 @@ public class BabySittingServiceImpl implements BabySittingService {
         	copy.setLocation(babySitting.getLocation());
         	copy.setPlannedBeginning(babySitting.getPlannedBeginning());
         	copy.setPlannedEnd(babySitting.getPlannedEnd());
+			logger.debug("copying babySitting {}", currentDay.getTime());
         	saveBabySitting(copy);
         }
         

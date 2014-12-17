@@ -1,5 +1,8 @@
 package com.appspot.gardemallorie.web;
 
+import static org.springframework.http.MediaType.TEXT_HTML_VALUE;
+import static org.springframework.web.bind.annotation.RequestMethod.DELETE;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.roo.addon.web.mvc.controller.scaffold.RooWebScaffold;
@@ -7,16 +10,15 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.appspot.gardemallorie.domain.BabySitter;
 
 @Controller
-@RequestMapping("/babysitters")
+@RequestMapping(produces = TEXT_HTML_VALUE, value = "/babysitters")
 @RooWebScaffold(path = "babysitters", formBackingObject = BabySitter.class)
 public class BabySitterController {
 
-    @RequestMapping(value = "/{id}", method = RequestMethod.DELETE, produces = "text/html")
+    @RequestMapping(value = "/{id}", method = DELETE)
     public String delete(@PathVariable("id") Long id, Pageable pageable, Model uiModel) {
 
     	babySitterService.deleteBabySitter(id);
@@ -28,7 +30,7 @@ public class BabySitterController {
         return "redirect:/babysitters";
     }
     
-    @RequestMapping(produces = "text/html")
+    @RequestMapping()
     public String list(Pageable pageable, Model uiModel) {
     	
     	Page<BabySitter> babySitters = babySitterService.findAllBabySitters(pageable);

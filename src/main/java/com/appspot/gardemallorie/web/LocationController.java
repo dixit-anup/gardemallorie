@@ -1,5 +1,10 @@
 package com.appspot.gardemallorie.web;
 
+import static org.springframework.http.MediaType.TEXT_HTML_VALUE;
+import static org.springframework.web.bind.annotation.RequestMethod.DELETE;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.roo.addon.web.mvc.controller.scaffold.RooWebScaffold;
@@ -7,19 +12,22 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.appspot.gardemallorie.domain.Location;
 
 @Controller
-@RequestMapping("/locations")
+@RequestMapping(produces = TEXT_HTML_VALUE, value = "/locations")
 @RooWebScaffold(path = "locations", formBackingObject = Location.class)
 public class LocationController {
+	
+	private final Logger logger = LoggerFactory.getLogger(getClass());
 
-    @RequestMapping(value = "/{id}", method = RequestMethod.DELETE, produces = "text/html")
+    @RequestMapping(method = DELETE, value = "/{id}")
     public String delete(@PathVariable("id") Long id, Model uiModel, Pageable pageable) {
 
         locationService.deleteLocation(id);
+        
+        logger.debug("uiModel.class: {}, uiModel: {}", uiModel.getClass(), uiModel);
 
         uiModel.asMap().clear();
         uiModel.addAttribute("page", pageable.getPageNumber());
@@ -31,13 +39,13 @@ public class LocationController {
         return "redirect:/locations";
     }
     
-    @RequestMapping(produces = "text/html")
+    @RequestMapping
     public String list(Model uiModel, Pageable pageable) {
     	
-    	Page<Location> locations = locationService.findAllLocations(pageable);
+    	Page<Location> page = locationService.findAllLocations(pageable);
 
-    	uiModel.addAttribute("locations", locations.getContent());
-        uiModel.addAttribute("maxPages", locations.getTotalPages());
+    	uiModel.addAttribute("locations", page.getContent());
+        uiModel.addAttribute("maxPages", page.getTotalPages());
 
         return "locations/list";
     }
