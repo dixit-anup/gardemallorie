@@ -13,7 +13,7 @@
 		</c:if>
 
 		<c:if test="${empty size || size lt 1}">
-			<c:set var="size" value="10" />
+			<c:set var="size" value="20" />
 		</c:if>
 
 		<spring:url value="" var="queryUrl">
