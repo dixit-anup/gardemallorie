@@ -25,7 +25,7 @@ import com.appspot.gardemallorie.domain.BabySitting;
 import com.appspot.gardemallorie.domain.CalendarEvent;
 import com.appspot.gardemallorie.domain.CalendarEventType;
 import com.appspot.gardemallorie.domain.Location;
-import com.appspot.gardemallorie.service.CalendarEventService;
+import com.appspot.gardemallorie.repository.CalendarEventRepository;
 import com.appspot.gardemallorie.service.CalendarException;
 import com.appspot.gardemallorie.service.CalendarService;
 import com.appspot.gardemallorie.service.GoogleCalendarService;
@@ -48,8 +48,8 @@ public class GoogleCalendarServiceImpl implements CalendarService, GoogleCalenda
 	@Value("${calendar.applicationName}")
 	private String applicationName;
 	
-	@Autowired
-	private CalendarEventService calendarEventService;
+    @Autowired
+    CalendarEventRepository calendarEventRepository;
 	
 	@Value("${calendar.defaultTimeZone}")
 	private TimeZone defaultTimeZone;
@@ -113,7 +113,7 @@ public class GoogleCalendarServiceImpl implements CalendarService, GoogleCalenda
 		
 		Calendar calendar;
 		String calendarId = googleOauth2Service.getCurrentUserEmail();
-		List<CalendarEvent> calendarEvents = calendarEventService.findAllCalendarEvents();
+		List<CalendarEvent> calendarEvents = calendarEventRepository.findAll();
 		
 		try {
 			calendar = createCalendarClient();
@@ -133,7 +133,7 @@ public class GoogleCalendarServiceImpl implements CalendarService, GoogleCalenda
 			}
 			if (babySitting == null) {
 
-				calendarEventService.deleteCalendarEvent(calendarEvent);
+				calendarEventRepository.delete(calendarEvent);
 				try {
 					calendar.events().delete(calendarId, calendarEvent.getExternalId()).setSendNotifications(true).execute();
 				} catch (IOException e) {
@@ -145,7 +145,7 @@ public class GoogleCalendarServiceImpl implements CalendarService, GoogleCalenda
 
 	protected <T> void execute(BabySitting babySitting, CalendarCallback<T> callback) {
 		
-		Collection<CalendarEvent> actualEvents = calendarEventService.findCalendarEventsByBabySitting(babySitting);
+		Collection<CalendarEvent> actualEvents = calendarEventRepository.findByBabySitting(babySitting);
 		Calendar calendar;
 		String calendarId = googleOauth2Service.getCurrentUserEmail();
 		Map<CalendarEventType, Event> events = new HashMap<CalendarEventType, Event>(3);
@@ -217,7 +217,7 @@ public class GoogleCalendarServiceImpl implements CalendarService, GoogleCalenda
 					calendarEvent.setBabySitting(babySitting);
 					calendarEvent.setExternalId(resultEvent.getId());
 					calendarEvent.setType(actualEventType);
-					calendarEventService.saveCalendarEvent(calendarEvent);					
+					calendarEventRepository.save(calendarEvent);					
 				}
 				// Update event
 				else {

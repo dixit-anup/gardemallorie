@@ -17,4 +17,7 @@ public interface BabySittingRepository {
 
 	Page<BabySitting> findByDayGreaterThanEqual(Date day, Pageable pageable);
 
+	@Query("SELECT babySitting FROM BabySitting babySitting")
+	Page<BabySitting> findAll(Pageable pageable);
+
 }
